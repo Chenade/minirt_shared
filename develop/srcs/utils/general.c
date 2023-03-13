@@ -62,8 +62,8 @@ int	check_filename(const char *name, const char *ext)
 {
 	int	x;
 
-	x = ft_strlen(name) - 3;
-	if (ft_strncmp(name + x, ext, 3))
+	x = ft_strlen(name) - ft_strlen(ext);
+	if (ft_strncmp(name + x, ext, ft_strlen(ext)))
 		return (0);
 	return (1);
 }
