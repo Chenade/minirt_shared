@@ -21,7 +21,7 @@ int	fdf(char *filename)
 	ft_printf("mlx init successfully\n");
 	if (read_file(&d, filename))
 		return (1);
-	ft_printf("map height: %d, map width: %d\n", d.map_h, d.map_w);
+	// ft_printf("map height: %d, map width: %d\n", d.map_h, d.map_w);
 	draw_imgs(&d);
 	mlx_loop_hook(d.mlx_ptr, render_frame, &d);
 	mlx_hook(d.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &d);

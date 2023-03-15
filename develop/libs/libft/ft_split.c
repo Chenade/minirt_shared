@@ -59,7 +59,7 @@ char	**ft_split(char const *s, char c)
 		if (!tab[i])
 			return (NULL);
 		j = 0;
-		while (*s && *s != c)
+		while (*s && *s != c && *s != '\n')
 			tab[i][j++] = *s++;
 		tab[i++][j] = '\0';
 	}

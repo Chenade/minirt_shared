@@ -34,9 +34,13 @@ int	encode_rgb(t_color c)
 	return (c.r << 16 | c.g << 8 | c.b);
 }
 
+// return (y * d->map_w + x);
 int	xy_to_x(t_data *d, int x, int y)
 {
-	return (y * d->map_w + x);
+	(void) d;
+	(void) x;
+	(void) y;
+	return (1);
 }
 
 int	init_vector(t_vector *v, int x, int y, int z)

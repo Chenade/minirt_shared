@@ -12,21 +12,21 @@
 
 #include "minirt.h"
 
-void	free_cord_map(t_data *d)
-{
-	int	i;
+// void	free_cord_map(t_data *d)
+// {
+// 	int	i;
 
-	i = -1;
-	while (d->map && d->map[++i])
-	{
-		if (d->map_2d[i])
-			free(d->map_2d[i]);
-		if (d->map_3d[i])
-			free(d->map_3d[i]);
-	}
-	free(d->map_2d);
-	free(d->map_3d);
-}
+// 	i = -1;
+// 	while (d->map && d->map[++i])
+// 	{
+// 		if (d->map_2d[i])
+// 			free(d->map_2d[i]);
+// 		if (d->map_3d[i])
+// 			free(d->map_3d[i]);
+// 	}
+// 	free(d->map_2d);
+// 	free(d->map_3d);
+// }
 
 void	free_data(t_data *d)
 {
@@ -40,15 +40,7 @@ void	free_data(t_data *d)
 		mlx_destroy_display(d->mlx_ptr);
 	free(d->mlx_ptr);
 	free(d->buf);
-	free(d->u);
-	free(d->v);
-	free(d->rot);
-	free(d->center);
 	i = -1;
-	free_cord_map(d);
-	while (d->map && d->map[++i])
-		free(d->map[i]);
-	free(d->map);
 }
 
 void	print_err(const char *err_msg, t_data *d)

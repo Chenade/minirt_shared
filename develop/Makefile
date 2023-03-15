@@ -56,19 +56,18 @@ INCS_DIR	=	incs
 
 OBJS_DIR	=	objs
 
-SRCS_GEN	=	utils/general.c		\
-				utils/tools.c		\
-				utils/helper.c		\
+SRCS_GEN	=	utils/general.c			\
+				utils/tools.c			\
+				utils/helper.c			\
 
 
-SRCS_PAR	=	parsing/init.c		\
+SRCS_PAR	=	parsing/init.c			\
+				parsing/setup.c			\
+				parsing/map_checker.c	\
 				parsing/parse.c
 
-SRCS_MLX	=	graphic/draw.c		\
-				graphic/matrix.c	\
-				graphic/projection.c\
-				graphic/keyboard.c	\
-				graphic/mlx_setup.c
+SRCS_MLX	=	graphic/mlx_setup.c		\
+				graphic/keyboard.c
 
 SRCS		=	$(SRCS_GEN)
 SRCS		+=	$(SRCS_PAR)

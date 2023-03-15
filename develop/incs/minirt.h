@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ykuo <ykuo@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/13 16:14:04 by ykuo              #+#    #+#             */
-/*   Updated: 2022/11/13 16:14:05 by ykuo             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -22,6 +10,7 @@
 # include <math.h>
 # include "mlx.h"
 # include "libft.h"
+# include "structure.h"
 
 # define WIDTH 1600
 # define HEIGHT 1200
@@ -31,58 +20,6 @@
 # define COLOR_WHITE 0x00FFFFFF
 # define COLOR_TEXT 0xEAEAEA
 
-typedef struct s_color
-{
-	int	r;
-	int	g;
-	int	b;
-	int	rgb;
-}	t_color;
-
-typedef struct s_vector
-{
-	int	x;
-	int	y;
-	int	z;
-	int	c;
-}	t_vector;
-
-typedef struct s_img
-{
-	void	*mlx_img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-	int		w;
-	int		h;
-}	t_img;
-
-typedef struct s_data
-{
-	void		*win_ptr;
-	void		*mlx_ptr;
-	t_img		img;
-	char		*buf;
-	int			size;
-	t_vector	*u;
-	t_vector	*v;
-	int			w;
-	int			h;
-
-	int			map_h;
-	int			map_w;
-	char		**map;
-	t_vector	**map_3d;
-	t_vector	**map_2d;
-	int			line_length;
-	int			height;
-	int			height2;
-	t_vector	*center;
-	t_vector	*rot;
-	int			projection;
-}	t_data;
-
 // main.c
 int			fdf(char *filename);
 
@@ -90,6 +27,9 @@ int			fdf(char *filename);
 int			init_map(t_data *d);
 int			init_setup(t_data *d);
 int			init_var(t_data *d);
+int			set_vector(t_vector *v, char *str);
+int			set_orientation(t_vector *v, char *str);
+int			set_color(t_color *c, char *str);
 
 //mlx_setup.c
 int			init_mlx(t_data *d);
@@ -101,6 +41,13 @@ int			handle_keypress(int keysym, t_data *data);
 // parse.c
 int			map_width(t_data *d, char **line);
 int			read_file(t_data *d, char *name);
+int			map_check_cam(t_data *d, char **line, int index);
+int			map_check_ambient(t_data *d, char **line, int index);
+int			map_check_light(t_data *d, char **line, int index);
+int			map_check_sphere(t_data *d, char **line, int index);
+int			map_check_plane(t_data *d, char **line, int index);
+int			map_check_cylinder(t_data *d, char **line, int index);
+
 int			init_map(t_data *d);
 int			init_var(t_data *d);
 

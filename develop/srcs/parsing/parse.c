@@ -1,57 +1,76 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ykuo <ykuo@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/13 16:12:56 by ykuo              #+#    #+#             */
-/*   Updated: 2022/11/13 16:12:58 by ykuo             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minirt.h"
 
-int	map_width(t_data *d, char **line)
+int	map_check_cam(t_data *d, char **line, int index)
 {
 	int		i;
-	int		o;
-	char	**res;
+	double	fov;
 
-	res = ft_split(*line, 32);
-	i = -1;
-	o = 0;
-	while (res[++i])
-	{
-		if (res[i][0] == 10)
-			o = -1;
-		free(res[i]);
-	}
-	free (res);
-	if (d->map_h != 0 && d->map_w != i + o)
+	i = 0;
+	if (set_vector(&d->objs[index].cord, line[1]))
 		return (1);
-	d->map_w = i + o;
+	if(d->objs[index].cord.x == 0 && d->objs[index].cord.y == 0 &&
+		d->objs[index].cord.z == 0)
+		return (1);
+	if (set_orientation(&d->objs[index].orientation, line[2]))
+		return (1);
+	fov = ft_strtod(line[3]);
+	if (fov < 0 || fov > 180)
+		return (1);
+	d->objs[index].fov = fov;
+	if (line[4])
+		return (1);
 	return (0);
 }
 
-// ft_printf("read line %d successfully\n", d->map_h);
+int	define_obj(t_data *d, char	**tmp, int index)
+{
+	int	i;
+	int	status;
+
+	i = 0;
+	status = 0;
+	printf("%s\n", tmp[0]);
+	if (ft_strcmp(tmp[0], "C") == 0)
+		status = map_check_cam(d, tmp, index);
+	else if (ft_strcmp(tmp[0], "A") == 0)
+		status = map_check_ambient (d, tmp, index);
+	else if (ft_strcmp(tmp[0], "L") == 0)
+		status = map_check_light (d, tmp, index);
+	else if (ft_strcmp(tmp[0], "sp") == 0)
+		status = map_check_sphere (d, tmp, index);
+	else if (ft_strcmp(tmp[0], "pl") == 0)
+		status = map_check_plane (d, tmp, index);
+	else if (ft_strcmp(tmp[0], "cy") == 0)
+		status = map_check_cylinder (d, tmp, index);
+	if (status)
+		return (print_err("Error: Invalid Map.", d), 1);
+	return (0);
+}
+
 int	process_file(t_data *d, int fd)
 {
 	char	*l;
+	int		i;
+	char	**tmp;
 
 	while (42)
 	{
 		l = get_next_line (fd);
 		if (!l)
 			break ;
-		if (map_width(d, &l))
-		{
-			free (l);
-			print_err("Error: Invalid Map.", d);
-		}
-		d->buf = ft_strjoin(d->buf, l);
-		d->map_h += 1;
+		if (*l != '\n')
+			ft_array_push(&d->raw, l);
+		d->nbr_objs += 1;
 		free (l);
+	}
+	d->objs = ft_calloc(sizeof(t_objs), d->nbr_objs);
+	if (!d->objs)
+		return (print_err("Error: Malloc failed.", d), 1);
+	i = 0;
+	while (d->raw[i])
+	{
+		tmp = ft_split(d->raw[i++], '\t');
+		define_obj(d, tmp, i);
 	}
 	return (0);
 }
@@ -63,9 +82,9 @@ int	read_file(t_data *d, char *name)
 	fd = open(name, O_RDONLY);
 	process_file (d, fd);
 	close(fd);
-	if (d->map_h == 0)
+	if (d->nbr_objs == 0)
 		print_err("Error: Empty Map.", d);
-	d->map = ft_split(d->buf, 32);
-	init_var(d);
+	printf("Map init successfully.\n");
+	// init_var(d);
 	return (0);
 }
