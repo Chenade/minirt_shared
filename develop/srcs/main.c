@@ -12,16 +12,15 @@
 
 #include "minirt.h"
 
-int	fdf(char *filename)
+int	minirt(char *filename)
 {
 	t_data	d;
 
 	ft_bzero(&d, sizeof(d));
-	init_mlx(&d);
-	ft_printf("mlx init successfully\n");
 	if (read_file(&d, filename))
 		return (1);
-	// ft_printf("map height: %d, map width: %d\n", d.map_h, d.map_w);
+	init_mlx(&d);
+	ft_printf("mlx init successfully\n");
 	draw_imgs(&d);
 	mlx_loop_hook(d.mlx_ptr, render_frame, &d);
 	mlx_hook(d.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &d);
@@ -43,7 +42,7 @@ int	main(int argc, char **argv)
 	else if (fd < 0 || read(fd, 0, 0))
 		ft_printf("Error: Cannot open file.\n");
 	else
-		status = fdf(argv[1]);
+		status = minirt(argv[1]);
 	close (fd);
 	return (status);
 }

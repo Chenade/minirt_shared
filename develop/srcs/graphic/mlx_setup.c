@@ -14,18 +14,14 @@
 
 int	init_mlx(t_data *d)
 {
-	d->size = 100000;
-	d->buf = (char *)ft_malloc(d, d->size);
-	d->w = WIDTH;
-	d->h = HEIGHT;
 	{
 		d->mlx_ptr = mlx_init();
 		if (!d->mlx_ptr)
 			print_err("Failed init window.", d);
-		d->win_ptr = mlx_new_window(d->mlx_ptr, d->w, d->h, "fdf");
+		d->win_ptr = mlx_new_window(d->mlx_ptr, WIDTH, HEIGHT, "fdf");
 		if (!d->win_ptr)
 			print_err("Failed to launch window.", d);
-		d->img.mlx_img = mlx_new_image(d->mlx_ptr, d->w, d->h);
+		d->img.mlx_img = mlx_new_image(d->mlx_ptr, WIDTH, HEIGHT);
 		if (!d->img.mlx_img)
 			print_err("mlx new image error", d);
 		d->img.addr = mlx_get_data_addr(d->img.mlx_img, &d->img.bpp,
@@ -36,11 +32,21 @@ int	init_mlx(t_data *d)
 
 void	draw_imgs(t_data *d)
 {
+	int		i;
+	int		j;
+
 	ft_bzero(d->img.addr, d->img.line_len * HEIGHT);
-	// if (d->projection > 0)
-	// 	projection_isometric(d);
-	// else
-	// 	projection_first_angel(d);
+	i = 0;
+	while (i < HEIGHT)
+	{
+		j = 0;
+		while (j < WIDTH)
+		{
+			img_pix_put(d, j, i, ray_tracing(d, j, i));
+			j++;
+		}
+		i++;
+	}
 }
 
 int	render_frame(t_data *d)

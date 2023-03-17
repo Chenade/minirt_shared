@@ -61,13 +61,14 @@ SRCS_GEN	=	utils/general.c			\
 				utils/helper.c			\
 
 
-SRCS_PAR	=	parsing/init.c			\
-				parsing/setup.c			\
+SRCS_PAR	=	parsing/setup.c			\
 				parsing/map_checker.c	\
 				parsing/parse.c
 
 SRCS_MLX	=	graphic/mlx_setup.c		\
-				graphic/keyboard.c
+				graphic/keyboard.c		\
+				graphic/collision.c		\
+				graphic/ray_tracing.c
 
 SRCS		=	$(SRCS_GEN)
 SRCS		+=	$(SRCS_PAR)

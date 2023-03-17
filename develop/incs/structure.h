@@ -1,3 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structure.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/17 19:35:09 by ykuo              #+#    #+#             */
+/*   Updated: 2023/03/17 19:35:09 by ykuo             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef STRUCTURE_H
+# define STRUCTURE_H
 
 typedef struct s_color
 {
@@ -12,7 +26,6 @@ typedef struct s_vector
 	double	x;
 	double	y;
 	double	z;
-	int	c;
 }	t_vector;
 
 typedef struct s_img
@@ -26,10 +39,19 @@ typedef struct s_img
 	int		h;
 }	t_img;
 
+typedef struct s_pixel
+{
+	t_vector	pos;
+	t_color		color;
+}	t_pixel;
+
+typedef struct s_data	t_data;
+typedef struct s_objs	t_objs;
+
 typedef struct s_objs
 {
 	char		*type;
-	void		*checker;
+	t_pixel		*(*collision_func)(struct s_objs *, struct s_data *);
 	t_vector	cord;
 	t_vector	orientation;
 	t_color		color;
@@ -37,54 +59,17 @@ typedef struct s_objs
 	double		ratio;
 	double		diameter;
 	double		height;
-} t_objs;
-
+}	t_objs;
 
 typedef struct s_data
 {
-	void		*win_ptr;
-	void		*mlx_ptr;
-	t_img		img;
+	void			*win_ptr;
+	void			*mlx_ptr;
+	t_img			img;
 
-
-	char		*buf;
-	int			size;
-	int			w;
-	int			h;
-
-	int			nbr_objs;
-	char		**raw;
+	int				nbr_objs;
+	char			**raw;
 	struct s_objs	*objs;
 }	t_data;
 
-
-// typedef struct s_data
-// {
-// 	void		*win_ptr;
-// 	void		*mlx_ptr;
-// 	t_img		img;
-
-
-// 	char		*buf;
-// 	int			size;
-// 	t_vector	*u;
-// 	t_vector	*v;
-// 	int			w;
-// 	int			h;
-
-// 	int			map_h;
-// 	int			map_w;
-// 	char		**map;
-// 	t_vector	**map_3d;
-// 	t_vector	**map_2d;
-// 	int			line_length;
-// 	int			height;
-// 	int			height2;
-// 	t_vector	*center;
-// 	t_vector	*rot;
-// 	int			projection;
-
-// 	int			nbr_objs;
-// 	char		**raw;
-// 	struct s_objs	*objs;
-// }	t_data;
+#endif

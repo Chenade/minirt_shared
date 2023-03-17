@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/17 19:33:05 by ykuo              #+#    #+#             */
+/*   Updated: 2023/03/17 19:33:06 by ykuo             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -12,8 +24,8 @@
 # include "libft.h"
 # include "structure.h"
 
-# define WIDTH 1600
-# define HEIGHT 1200
+# define WIDTH 540
+# define HEIGHT 320
 
 # define BASE "0123456789abcdef"
 
@@ -50,6 +62,12 @@ int			map_check_cylinder(t_data *d, char **line, int index);
 
 int			init_map(t_data *d);
 int			init_var(t_data *d);
+
+// collision.c
+t_pixel		*collosion_sphere(struct s_objs *obj, struct s_data *d);
+t_pixel		*collosion_plane(struct s_objs *obj, struct s_data *d);
+t_pixel		*collosion_cylinder(struct s_objs *obj, struct s_data *d);
+int			ray_tracing(t_data *d, int x, int y);
 
 // draw.c
 void		ft_lines_draw(t_data *d, t_vector f, t_vector s);

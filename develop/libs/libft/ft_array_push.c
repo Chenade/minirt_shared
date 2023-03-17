@@ -36,7 +36,7 @@ int	ft_array_push(char ***array, char *str)
 	}
 	tmp[i] = ft_strdup(str);
 	tmp[i + 1] = NULL;
-	ft_free_matrix(*array);
+	ft_free_array(*array);
 	*array = tmp;
 	return (0);
 }

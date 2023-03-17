@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/17 19:32:05 by ykuo              #+#    #+#             */
+/*   Updated: 2023/03/17 19:32:06 by ykuo             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 int	map_check_cam(t_data *d, char **line, int index)
@@ -8,8 +20,8 @@ int	map_check_cam(t_data *d, char **line, int index)
 	i = 0;
 	if (set_vector(&d->objs[index].cord, line[1]))
 		return (1);
-	if(d->objs[index].cord.x == 0 && d->objs[index].cord.y == 0 &&
-		d->objs[index].cord.z == 0)
+	if (d->objs[index].cord.x == 0 && d->objs[index].cord.y == 0
+		&& d->objs[index].cord.z == 0)
 		return (1);
 	if (set_orientation(&d->objs[index].orientation, line[2]))
 		return (1);
@@ -42,6 +54,7 @@ int	define_obj(t_data *d, char	**tmp, int index)
 		status = map_check_plane (d, tmp, index);
 	else if (ft_strcmp(tmp[0], "cy") == 0)
 		status = map_check_cylinder (d, tmp, index);
+	ft_free_array(tmp);
 	if (status)
 		return (print_err("Error: Invalid Map.", d), 1);
 	return (0);
@@ -75,6 +88,7 @@ int	process_file(t_data *d, int fd)
 	return (0);
 }
 
+	// init_var(d);
 int	read_file(t_data *d, char *name)
 {
 	int	fd;
@@ -85,6 +99,5 @@ int	read_file(t_data *d, char *name)
 	if (d->nbr_objs == 0)
 		print_err("Error: Empty Map.", d);
 	printf("Map init successfully.\n");
-	// init_var(d);
 	return (0);
 }
