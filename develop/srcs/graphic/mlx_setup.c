@@ -47,6 +47,7 @@ void	draw_imgs(t_data *d)
 		}
 		i++;
 	}
+	ft_printf("mlx draw image successfully\n");
 }
 
 int	render_frame(t_data *d)
@@ -62,5 +63,21 @@ int	handle_exit(t_data *d)
 {
 	mlx_destroy_window(d->mlx_ptr, d->win_ptr);
 	d->win_ptr = NULL;
+	return (0);
+}
+
+int	handle_keypress(int keysym, t_data *d)
+{
+	if (keysym == XK_Escape)
+	{
+		mlx_destroy_window(d->mlx_ptr, d->win_ptr);
+		d->win_ptr = NULL;
+	}
+	else if (keysym == XK_Tab)
+		d->index = (d->index + 1) % (d->nbr_objs);
+	else
+		if (((int (*)(t_data *, int))
+			(d->objs[d->index].keyboard_func))(d, keysym))
+			draw_imgs(d);
 	return (0);
 }

@@ -25,7 +25,7 @@ t_pixel	hit_light(struct s_objs *obj, struct s_data *d, t_pixel pixel)
 {
 	(void)obj;
 	(void)d;
-	printf("%s\n", __func__);
+	// printf("%s\n", __func__);
 	return (pixel);
 }
 

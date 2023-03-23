@@ -22,7 +22,7 @@ t_pixel	hit_sphere(struct s_objs *obj, struct s_data *d, int x, int y)
 	(void)y;
 	set_vector(&pixel.pos, "1,1,1");
 	set_color(&pixel.color, "255,255,255");
-	printf("%s\n", __func__);
+	// printf("%s\n", __func__);
 	return (pixel);
 }
 
@@ -36,7 +36,7 @@ t_pixel	hit_plane(struct s_objs *obj, struct s_data *d, int x, int y)
 	(void)y;
 	set_vector(&pixel.pos, "1,1,1");
 	set_color(&pixel.color, "255,255,255");
-	printf("%s\n", __func__);
+	// printf("%s\n", __func__);
 	return (pixel);
 }
 
@@ -50,6 +50,6 @@ t_pixel	hit_cylinder(struct s_objs *obj, struct s_data *d, int x, int y)
 	(void)y;
 	set_vector(&pixel.pos, "1,1,1");
 	set_color(&pixel.color, "255,255,255");
-	printf("%s\n", __func__);
+	// printf("%s\n", __func__);
 	return (pixel);
 }

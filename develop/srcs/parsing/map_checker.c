@@ -27,6 +27,7 @@ int	map_check_ambient(t_data *d, char **line, int index)
 	d->objs[index].ratio = ratio;
 	if (set_color(&d->objs[index].color, line[2]))
 		return (1);
+	d->objs[index].keyboard_func = key_light;
 	return (0);
 }
 
@@ -46,6 +47,7 @@ int	map_check_light(t_data *d, char **line, int index)
 		return (1);
 	if (set_color(&d->objs[index].color, line[3]))
 		return (1);
+	d->objs[index].keyboard_func = key_light;
 	return (0);
 }
 
@@ -63,6 +65,7 @@ int	map_check_sphere(t_data *d, char **line, int index)
 	if (set_color(&d->objs[index].color, line[3]))
 		return (1);
 	d->objs[index].collision_func = hit_sphere;
+	d->objs[index].keyboard_func = key_sphere;
 	return (0);
 }
 
@@ -77,6 +80,7 @@ int	map_check_plane(t_data *d, char **line, int index)
 	if (set_color(&d->objs[index].color, line[3]))
 		return (1);
 	d->objs[index].collision_func = hit_plane;
+	d->objs[index].keyboard_func = key_plane;
 	return (0);
 }
 
@@ -100,5 +104,6 @@ int	map_check_cylinder(t_data *d, char **line, int index)
 	if (set_color(&d->objs[index].color, line[4]))
 		return (1);
 	d->objs[index].collision_func = hit_cylinder;
+	d->objs[index].keyboard_func = key_cylinder;
 	return (0);
 }

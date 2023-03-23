@@ -57,6 +57,14 @@ t_pixel		hit_plane(struct s_objs *obj, struct s_data *d, int x, int y);
 t_pixel		hit_cylinder(struct s_objs *obj, struct s_data *d, int x, int y);
 int			ray_tracing(t_data *d, int x, int y);
 
+// keyboard.c
+int	key_sphere(t_data *d, int keysym);
+int	key_plane(t_data *d, int keysym);
+int	key_cylinder(t_data *d, int keysym);
+int	key_camera(t_data *d, int keysym);
+int	key_light(t_data *d, int keysym);
+
+
 // draw_gui.c
 int			draw_gui(t_data *d);
 
