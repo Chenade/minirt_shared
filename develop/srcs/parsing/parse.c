@@ -18,6 +18,9 @@ int	map_check_cam(t_data *d, char **line, int index)
 	double	fov;
 
 	i = 0;
+	if (d->nbr_camera != 0)
+		return (1);
+	d->nbr_camera += 1;
 	if (ft_array_len(line) != 4)
 		return (1);
 	if (set_vector(&d->objs[index].cord, line[1]))
@@ -88,7 +91,6 @@ int	process_file(t_data *d, int fd)
 	return (0);
 }
 
-	// init_var(d);
 int	read_file(t_data *d, char *name)
 {
 	int	fd;

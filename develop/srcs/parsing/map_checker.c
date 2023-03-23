@@ -16,6 +16,9 @@ int	map_check_ambient(t_data *d, char **line, int index)
 {
 	double	ratio;
 
+	if (d->nbr_ambient != 0)
+		return (1);
+	d->nbr_ambient += 1;
 	if (ft_array_len(line) != 3)
 		return (1);
 	ratio = ft_strtod(line[1]);
@@ -31,6 +34,9 @@ int	map_check_light(t_data *d, char **line, int index)
 {
 	double	ratio;
 
+	if (d->nbr_light != 0)
+		return (1);
+	d->nbr_light += 1;
 	if (ft_array_len(line) != 4)
 		return (1);
 	if (set_vector(&d->objs[index].cord, line[1]))

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "minirt.h"
-// t_pixel	*collosion_sphere(t_objs obj, t_data *d)
+
 t_pixel	collosion_sphere(struct s_objs *obj, struct s_data *d)
 {
 	t_pixel	pixel;
@@ -24,7 +24,6 @@ t_pixel	collosion_sphere(struct s_objs *obj, struct s_data *d)
 	return (pixel);
 }
 
-// t_pixel	*collosion_plane(t_objs obj, t_data *d)
 t_pixel	collosion_plane(struct s_objs *obj, struct s_data *d)
 {
 	t_pixel	pixel;
@@ -37,7 +36,6 @@ t_pixel	collosion_plane(struct s_objs *obj, struct s_data *d)
 	return (pixel);
 }
 
-// t_pixel	*collosion_cylinder(t_objs obj, t_data *d)
 t_pixel	collosion_cylinder(struct s_objs *obj, struct s_data *d)
 {
 	t_pixel	pixel;

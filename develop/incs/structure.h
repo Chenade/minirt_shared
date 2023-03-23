@@ -28,17 +28,6 @@ typedef struct s_vector
 	double	z;
 }	t_vector;
 
-typedef struct s_img
-{
-	void	*mlx_img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-	int		w;
-	int		h;
-}	t_img;
-
 typedef struct s_pixel
 {
 	t_vector	pos;
@@ -50,7 +39,7 @@ typedef struct s_objs	t_objs;
 
 typedef struct s_objs
 {
-	t_pixel		(*collision_func)(struct s_objs *, struct s_data *);
+	void		*collision_func;
 	t_vector	cord;
 	t_vector	orientation;
 	t_color		color;
@@ -60,15 +49,29 @@ typedef struct s_objs
 	double		height;
 }	t_objs;
 
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	int		w;
+	int		h;
+}	t_img;
+
 typedef struct s_data
 {
-	void			*win_ptr;
-	void			*mlx_ptr;
-	t_img			img;
+	void				*win_ptr;
+	void				*mlx_ptr;
+	t_img				img;
 
-	int				nbr_objs;
-	char			**raw;
-	struct s_objs	*objs;
+	char				**raw;
+	int					nbr_camera;
+	int					nbr_light;
+	int					nbr_ambient;
+	int					nbr_objs;
+	struct s_objs		*objs;
 }	t_data;
 
 #endif

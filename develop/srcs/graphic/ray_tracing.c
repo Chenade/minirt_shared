@@ -36,7 +36,9 @@ int	ray_tracing(t_data *d, int x, int y)
 	{
 		objs = d->objs[i];
 		if (objs.collision_func)
-			pixel = min_objects(i, pixel, (objs.collision_func(&objs, d)));
+			pixel = min_objects(i, pixel,
+					((t_pixel (*)(struct s_objs *, struct s_data *))
+						objs.collision_func)(&objs, d));
 		i ++;
 	}
 	color = encode_rgb(pixel.color);
