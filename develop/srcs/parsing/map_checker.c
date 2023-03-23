@@ -24,7 +24,6 @@ int	map_check_ambient(t_data *d, char **line, int index)
 		return (1);
 	if (line[3])
 		return (1);
-	d->objs[index].collision_func = NULL;
 	return (0);
 }
 
@@ -39,7 +38,6 @@ int	map_check_light(t_data *d, char **line, int index)
 		return (1);
 	if (set_color(&d->objs[index].color, line[3]))
 		return (1);
-	d->objs[index].collision_func = NULL;
 	return (0);
 }
 
@@ -56,7 +54,7 @@ int	map_check_sphere(t_data *d, char **line, int index)
 		return (1);
 	if (line[4])
 		return (1);
-	d->objs[index].collision_func = &collosion_sphere;
+	d->objs[index].collision_func = collosion_sphere;
 	return (0);
 }
 
@@ -70,7 +68,7 @@ int	map_check_plane(t_data *d, char **line, int index)
 		return (1);
 	if (line[4])
 		return (1);
-	d->objs[index].collision_func = &collosion_plane;
+	d->objs[index].collision_func = collosion_plane;
 	return (0);
 }
 
@@ -93,6 +91,6 @@ int	map_check_cylinder(t_data *d, char **line, int index)
 		return (1);
 	if (line[5])
 		return (1);
-	d->objs[index].collision_func = &collosion_cylinder;
+	d->objs[index].collision_func = collosion_cylinder;
 	return (0);
 }

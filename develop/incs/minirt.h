@@ -64,9 +64,9 @@ int			init_map(t_data *d);
 int			init_var(t_data *d);
 
 // collision.c
-t_pixel		*collosion_sphere(struct s_objs *obj, struct s_data *d);
-t_pixel		*collosion_plane(struct s_objs *obj, struct s_data *d);
-t_pixel		*collosion_cylinder(struct s_objs *obj, struct s_data *d);
+t_pixel		collosion_sphere(struct s_objs *obj, struct s_data *d);
+t_pixel		collosion_plane(struct s_objs *obj, struct s_data *d);
+t_pixel		collosion_cylinder(struct s_objs *obj, struct s_data *d);
 int			ray_tracing(t_data *d, int x, int y);
 
 // draw.c

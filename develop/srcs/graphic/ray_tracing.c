@@ -12,14 +12,12 @@
 
 #include "minirt.h"
 
-t_pixel	*min_objects(t_pixel *p1, t_pixel *p2)
+t_pixel	min_objects(int i, t_pixel p1, t_pixel p2)
 {
-	if (p1 && p1->pos.z < p2->pos.z)
+	if (i == 0 && p1.pos.z < p2.pos.z)
 	{
-		free(p2);
 		return (p1);
 	}
-	free(p1);
 	return (p2);
 }
 
@@ -27,21 +25,21 @@ int	ray_tracing(t_data *d, int x, int y)
 {
 	int		i;
 	t_objs	objs;
-	t_pixel	*pixel;
+	t_pixel	pixel;
 	int		color;
 
 	(void)x;
 	(void)y;
 	i = 0;
-	pixel = NULL;
+	ft_bzero(&pixel, sizeof(t_pixel));
 	while (i < d->nbr_objs)
 	{
 		objs = d->objs[i];
 		if (objs.collision_func)
-			pixel = min_objects(pixel, objs.collision_func(&objs, d));
+			pixel = min_objects(i, pixel, (objs.collision_func(&objs, d)));
 		i ++;
 	}
-	color = encode_rgb(pixel->color);
-	free(pixel);
+	color = encode_rgb(pixel.color);
+	// free(pixel);
 	return (color);
 }
