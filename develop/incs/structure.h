@@ -43,7 +43,6 @@ typedef struct s_objs
 	t_vector	cord;
 	t_vector	orientation;
 	t_color		color;
-	double		fov;
 	double		ratio;
 	double		diameter;
 	double		height;
@@ -66,6 +65,7 @@ typedef struct s_data
 	void				*mlx_ptr;
 	t_img				img;
 
+	double				fov;
 	char				**raw;
 	int					nbr_camera;
 	int					nbr_light;

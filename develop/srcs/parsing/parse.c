@@ -33,7 +33,7 @@ int	map_check_cam(t_data *d, char **line, int index)
 	fov = ft_strtod(line[3]);
 	if (fov < 0 || fov > 180)
 		return (1);
-	d->objs[index].fov = fov;
+	d->fov = fov;
 	return (0);
 }
 
