@@ -1,4 +1,4 @@
-/objs/*
+*/objs/*
 libft.a
-libmix.a
-libmix_Linux.a
+libmlx.a
+libmlx_Linux.a
