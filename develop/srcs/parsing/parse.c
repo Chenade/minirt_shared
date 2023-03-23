@@ -18,19 +18,19 @@ int	map_check_cam(t_data *d, char **line, int index)
 	double	fov;
 
 	i = 0;
+	if (ft_array_len(line) != 4)
+		return (1);
 	if (set_vector(&d->objs[index].cord, line[1]))
 		return (1);
-	if (d->objs[index].cord.x == 0 && d->objs[index].cord.y == 0
-		&& d->objs[index].cord.z == 0)
-		return (1);
 	if (set_orientation(&d->objs[index].orientation, line[2]))
+		return (1);
+	if (d->objs[index].orientation.x == 0 && d->objs[index].orientation.y == 0
+		&& d->objs[index].orientation.z == 0)
 		return (1);
 	fov = ft_strtod(line[3]);
 	if (fov < 0 || fov > 180)
 		return (1);
 	d->objs[index].fov = fov;
-	if (line[4])
-		return (1);
 	return (0);
 }
 

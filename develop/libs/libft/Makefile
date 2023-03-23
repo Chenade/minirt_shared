@@ -22,7 +22,7 @@ SRCS 		=	ft_abs.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strchr.c\
 				ft_putnbr_fd.c get_next_line.c ft_printf.c ft_put.c ft_puthex.c\
 				ft_min.c ft_max.c ft_swap.c ft_strcmp.c\
 				ft_free_array.c ft_close.c ft_dupnclose.c ft_array_push.c \
-				ft_strtod.c
+				ft_strtod.c ft_array_len.c
 
 BONUS_SRCS	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c\
 				ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c

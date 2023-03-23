@@ -40,6 +40,5 @@ int	ray_tracing(t_data *d, int x, int y)
 		i ++;
 	}
 	color = encode_rgb(pixel.color);
-	// free(pixel);
 	return (color);
 }

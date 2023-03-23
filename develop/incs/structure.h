@@ -50,7 +50,6 @@ typedef struct s_objs	t_objs;
 
 typedef struct s_objs
 {
-	char		*type;
 	t_pixel		(*collision_func)(struct s_objs *, struct s_data *);
 	t_vector	cord;
 	t_vector	orientation;

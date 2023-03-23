@@ -99,4 +99,5 @@ void	ft_free_array(char **str);
 void	ft_close(int fd);
 void	dupnclose(int oldfd, int newfd);
 int		ft_array_push(char ***array, char *str);
+int		ft_array_len(char **array);
 #endif
