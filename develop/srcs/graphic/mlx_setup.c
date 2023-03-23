@@ -18,7 +18,7 @@ int	init_mlx(t_data *d)
 		d->mlx_ptr = mlx_init();
 		if (!d->mlx_ptr)
 			print_err("Failed init window.", d);
-		d->win_ptr = mlx_new_window(d->mlx_ptr, WIDTH, HEIGHT, "fdf");
+		d->win_ptr = mlx_new_window(d->mlx_ptr, WIDTH, HEIGHT, "miniRT");
 		if (!d->win_ptr)
 			print_err("Failed to launch window.", d);
 		d->img.mlx_img = mlx_new_image(d->mlx_ptr, WIDTH, HEIGHT);
@@ -54,6 +54,7 @@ int	render_frame(t_data *d)
 	if (d->win_ptr == NULL)
 		return (1);
 	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, d->img.mlx_img, 0, 0);
+	draw_gui(d);
 	return (0);
 }
 

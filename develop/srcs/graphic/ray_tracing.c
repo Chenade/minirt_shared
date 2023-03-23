@@ -21,6 +21,14 @@ t_pixel	min_objects(int i, t_pixel p1, t_pixel p2)
 	return (p2);
 }
 
+t_pixel	hit_light(struct s_objs *obj, struct s_data *d, t_pixel pixel)
+{
+	(void)obj;
+	(void)d;
+	printf("%s\n", __func__);
+	return (pixel);
+}
+
 int	ray_tracing(t_data *d, int x, int y)
 {
 	int		i;
@@ -39,6 +47,7 @@ int	ray_tracing(t_data *d, int x, int y)
 						objs.collision_func)(&objs, d, x, y));
 		i ++;
 	}
+	pixel = hit_light(&objs, d, pixel);
 	color = encode_rgb(pixel.color);
 	return (color);
 }
