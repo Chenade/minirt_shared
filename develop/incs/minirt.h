@@ -27,7 +27,7 @@
 # define WIDTH 540
 # define HEIGHT 320
 
-# define PI 3.141593f
+# define PI 3.14159265358979
 
 # define BASE "0123456789abcdef"
 

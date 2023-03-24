@@ -13,6 +13,18 @@
 #include "minirt.h"
 
 /*
+direction vector for pixel 0,0 :
+z = cam_len;
+x = WIDTH / 2;
+y = HEIGHT / 2;
+
+for each pixel we only need to increment the vector by 1 in x for the lines and
+1 in y for the collumns to get every direction vector;
+
+don't forget to normalize;
+*/
+
+/*
 sphere formula : (v = direction vector, p = point of origin (0,0,0 probably),
 r = radius of sphere)
 a = vx^2 + vy^2 + vz^2;

@@ -44,10 +44,13 @@ int	init_vector(t_vector *v, int x, int y, int z)
 
 /*
 |tan(180 - fov/2) * WIDTH/2|
+
 -> |tan(pi - fov(rad)/2) * WIDTH/2|
+
+rad trans -> deg * pi / 180
 */
 
 void	get_cam_len(t_data *d)
 {
-	d->cam_len = fabs(tan(PI - ((PI / 2) / 2)) * (WIDTH / 2));
+	d->cam_len = fabs(tan(PI / 2 - ((d->fov * PI / 180) / 2)) * (WIDTH / 2));
 }
