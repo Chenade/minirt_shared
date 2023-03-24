@@ -85,7 +85,7 @@ int	process_file(t_data *d, int fd)
 	i = 0;
 	while (d->raw[i])
 	{
-		tmp = ft_split(d->raw[i++], '\t');
+		tmp = ft_split(d->raw[i++], ' ');
 		define_obj(d, tmp, i);
 	}
 	return (0);

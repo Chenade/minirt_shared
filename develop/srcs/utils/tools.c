@@ -41,3 +41,13 @@ int	init_vector(t_vector *v, int x, int y, int z)
 	v->z = z;
 	return (0);
 }
+
+/*
+|tan(180 - fov/2) * WIDTH/2|
+-> |tan(pi - fov(rad)/2) * WIDTH/2|
+*/
+
+void	get_cam_len(t_data *d)
+{
+	d->cam_len = fabs(tan(PI - ((PI / 2) / 2)) * (WIDTH / 2));
+}

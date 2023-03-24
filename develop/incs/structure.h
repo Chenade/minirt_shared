@@ -66,6 +66,7 @@ typedef struct s_data
 	t_img				img;
 
 	double				fov;
+	double				cam_len;
 	char				**raw;
 	int					nbr_camera;
 	int					nbr_light;

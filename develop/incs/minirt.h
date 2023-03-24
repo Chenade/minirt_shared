@@ -27,6 +27,8 @@
 # define WIDTH 540
 # define HEIGHT 320
 
+# define PI 3.141593f
+
 # define BASE "0123456789abcdef"
 
 # define COLOR_WHITE 0x00FFFFFF
@@ -102,4 +104,5 @@ int			getpixelcolor(t_img *img, int x, int y);
 int			encode_rgb(t_color c);
 int			xy_to_x(t_data *d, int x, int y);
 int			init_vector(t_vector *v, int x, int y, int z);
+void		get_cam_len(t_data *d);
 #endif
