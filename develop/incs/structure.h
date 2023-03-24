@@ -39,6 +39,7 @@ typedef struct s_objs	t_objs;
 
 typedef struct s_objs
 {
+	// int			type;
 	void		*collision_func;
 	t_vector	cord;
 	t_vector	orientation;

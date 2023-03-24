@@ -24,8 +24,13 @@
 # include "libft.h"
 # include "structure.h"
 
-# define WIDTH 540
-# define HEIGHT 320
+# define WIDTH 1080
+# define HEIGHT 640
+
+# define PL 0
+# define SP 1
+# define CYL 2
+# define CO	3
 
 # define PI 3.14159265358979
 
@@ -97,6 +102,10 @@ void		print_img_data(t_img *i);
 int			print_info(char *name);
 int			print_map(t_data *d, t_vector **map);
 void		*ft_malloc(t_data *d, size_t size);
+
+//math.c
+double		check_solutions(t_objs *obj, t_data *d, double x, double y);
+double		calculate_time(t_objs *obj, t_data *d, double x, double y);
 
 // tools.c
 void		img_pix_put(t_data *d, int x, int y, int color);

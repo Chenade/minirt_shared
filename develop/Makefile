@@ -58,6 +58,7 @@ OBJS_DIR	=	objs
 
 SRCS_GEN	=	utils/general.c			\
 				utils/tools.c			\
+				utils/math.c			\
 				utils/helper.c			\
 
 

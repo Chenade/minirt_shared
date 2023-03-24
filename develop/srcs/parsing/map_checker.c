@@ -60,6 +60,7 @@ int	map_check_sphere(t_data *d, char **line, int index)
 	diameter = ft_strtod(line[2]);
 	if (diameter > 1000)
 		return (1);
+	d->objs[index].diameter = diameter;
 	if (set_color(&d->objs[index].color, line[3]))
 		return (1);
 	d->objs[index].collision_func = hit_sphere;
@@ -92,6 +93,7 @@ int	map_check_cylinder(t_data *d, char **line, int index)
 	diameter = ft_strtod(line[2]);
 	if (diameter > 1000)
 		return (1);
+	d->objs[index].diameter = diameter;
 	height = ft_strtod(line[3]);
 	if (height > 1000)
 		return (1);
