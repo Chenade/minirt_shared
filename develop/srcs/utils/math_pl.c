@@ -63,8 +63,9 @@ double	calculate_scaler_pl2(t_objs *obj, t_data *d, double x, double y)
 	v.x = (-WIDTH / 2 + x) / norm1;
 	v.y = (HEIGHT / 2 - y) / norm1;
 	v.z = (d->cam.cam_len) / norm1;
-	t = (-obj->orientation.x * (0 - obj->cord.x) - obj->orientation.y \
-		* (0 - obj->cord.y) - obj->orientation.z * (0 - obj->cord.z)) / \
+	t = (-obj->orientation.x * (d->cam.cord.x - obj->cord.x) \
+		- obj->orientation.y * (d->cam.cord.y - obj->cord.y) \
+		- obj->orientation.z * (d->cam.cord.z - obj->cord.z)) / \
 		(obj->orientation.x * v.x + obj->orientation.y * v.y + \
 		obj->orientation.z * v.z);
 	return (t);
