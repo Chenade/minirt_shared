@@ -31,7 +31,9 @@ typedef struct s_vector
 typedef struct s_pixel
 {
 	t_vector	pos;
+	t_vector	norm;
 	t_color		color;
+	double		scaler;
 }	t_pixel;
 
 typedef struct s_data	t_data;
@@ -56,6 +58,13 @@ typedef struct s_cam
 	t_vector	cord;
 	t_vector	orientation;
 }	t_cam;
+
+typedef struct s_light
+{
+	t_vector	pos;
+	double		ratio;
+	t_color		color;
+}	t_light;
 
 typedef struct s_img
 {
@@ -84,6 +93,7 @@ typedef struct s_data
 	int				nbr_objs;
 	struct s_objs	*objs;
 	struct s_cam	cam;
+	struct s_light	light;
 	t_pixel			cur_p;
 }	t_data;
 

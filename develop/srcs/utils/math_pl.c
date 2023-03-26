@@ -38,14 +38,13 @@ check that (a * vx + b * vy + c * vz) != 0;
 
 double	check_vn2(t_objs *obj, t_data *d, double x, double y)
 {
-	double		norm1;
 	double		vn;
 	t_vector	v;
 
-	norm1 = get_norm(-WIDTH / 2 + x, HEIGHT / 2 - y, d->cam.cam_len);
-	v.x = (-WIDTH / 2 + x) / norm1;
-	v.y = (HEIGHT / 2 - y) / norm1;
-	v.z = (d->cam.cam_len) / norm1;
+	(void)x;
+	(void)y;
+	v = d->cur_p.pos;
+	// normalize_vect(&obj->orientation);
 	vn = (obj->orientation.x * v.x + obj->orientation.y * v.y + \
 		obj->orientation.z * v.z);
 	return (vn);
@@ -55,14 +54,13 @@ double	check_vn2(t_objs *obj, t_data *d, double x, double y)
 
 double	calculate_scaler_pl2(t_objs *obj, t_data *d, double x, double y)
 {
-	double		norm1;
 	double		t;
 	t_vector	v;
 
-	norm1 = get_norm(-WIDTH / 2 + x, HEIGHT / 2 - y, d->cam.cam_len);
-	v.x = (-WIDTH / 2 + x) / norm1;
-	v.y = (HEIGHT / 2 - y) / norm1;
-	v.z = (d->cam.cam_len) / norm1;
+	(void)x;
+	(void)y;
+	v = d->cur_p.pos;
+	// normalize_vect(&obj->orientation);
 	t = (-obj->orientation.x * (d->cam.cord.x - obj->cord.x) \
 		- obj->orientation.y * (d->cam.cord.y - obj->cord.y) \
 		- obj->orientation.z * (d->cam.cord.z - obj->cord.z)) / \

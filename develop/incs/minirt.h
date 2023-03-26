@@ -90,6 +90,7 @@ void		*ft_malloc(t_data *d, size_t size);
 //math_sp.c
 double		check_solutions(t_objs *obj, t_data *d, double x, double y);
 double		calculate_scaler_sp(t_objs *obj, t_data *d, double x, double y);
+t_vector	calculate_sp_norm(t_vector center, t_vector hit_point);
 
 //math_pl.c
 double		check_vn(t_objs *obj, t_data *d, double x, double y);
@@ -101,6 +102,12 @@ double		calculate_scaler_pl2(t_objs *obj, t_data *d, double x, double y);
 int			init_vector(t_vector *v, int x, int y, int z);
 double		get_norm(double x, double y, double z);
 double		cross_product(t_vector v1, t_vector v2);
+double		dot_product(t_vector v1, t_vector v2);
+t_vector	normalize_vect(t_vector v);
+void		get_cur_vec(t_data *d, int x, int y);
+t_vector	vec_sub(t_vector v1, t_vector v2);
+t_vector	vec_sum(t_vector v1, t_vector v2);
+t_vector	vec_scale(t_vector w, double scaler);
 
 // tools.c
 void		img_pix_put(t_data *d, int x, int y, int color);

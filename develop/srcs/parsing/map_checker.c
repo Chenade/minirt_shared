@@ -42,11 +42,14 @@ int	map_check_light(t_data *d, char **line, int index)
 		return (1);
 	if (set_vector(&d->objs[index].cord, line[1]))
 		return (1);
+	d->light.pos = d->objs[index].cord;
 	ratio = ft_strtod(line[2]);
 	if (ratio < 0 || ratio > 1)
 		return (1);
+	d->light.ratio = ratio;
 	if (set_color(&d->objs[index].color, line[3]))
 		return (1);
+	d->light.color = d->objs[index].color;
 	d->objs[index].keyboard_func = key_light;
 	return (0);
 }
