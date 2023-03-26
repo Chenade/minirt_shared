@@ -10,7 +10,8 @@ RM			=	rm -rf
 
 CC			=	cc
 
-CFLAGS		=	-Wall -Werror -Wextra
+CFLAGS		=	-Wall -Werror -Wextra 
+CFLAGS		+=	-Ofast -flto
 CFLAGS		+=	-I $(INCS_DIR) -I $(LIBFT_DIR) -I ${MLX_DIR}
 CFLAGS		+=	-g3 -MMD
 
