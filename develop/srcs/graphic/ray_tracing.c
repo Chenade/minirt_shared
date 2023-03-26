@@ -40,9 +40,9 @@ void	get_color(t_pixel *p, t_data *d)
 	if (norm1 == 0 || norm2 == 0)
 		return ;
 	angle = acos(dot_product(v, p->norm) / (norm1 * norm2));
-	printf("angle = %f\n", angle * 180 / PI);
-	if (angle < 0)
-		printf("NEGATIVE\n");
+	// printf("angle = %f\n", angle * 180 / PI);
+	// if (angle < 0)
+		// printf("NEGATIVE\n");
 	if (angle > PI / 2)
 		angle = PI / 2;
 	// printf("angle : %f\n", angle);

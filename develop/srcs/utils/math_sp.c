@@ -49,7 +49,7 @@ else
 
 t_vector	calculate_sp_norm(t_vector center, t_vector hit_point)
 {
-	printf("hit point : %f, %f, %f\n", hit_point.x, hit_point.y, hit_point.z);
+	// printf("hit point : %f, %f, %f\n", hit_point.x, hit_point.y, hit_point.z);
 	return (normalize_vect(vec_sub(hit_point, center)));
 }
 

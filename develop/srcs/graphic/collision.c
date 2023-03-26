@@ -18,8 +18,8 @@ t_pixel	hit_sphere(struct s_objs *obj, struct s_data *d, int x, int y)
 	double	scaler;
 	t_pixel	pixel;
 
-	printf("center : %f, %f, %f\n", obj->cord.x, obj->cord.y, obj->cord.z);
-	printf("light : %f, %f, %f\n", d->light.pos.x, d->light.pos.y, d->light.pos.z);
+	// printf("center : %f, %f, %f\n", obj->cord.x, obj->cord.y, obj->cord.z);
+	// printf("light : %f, %f, %f\n", d->light.pos.x, d->light.pos.y, d->light.pos.z);
 	delta = check_solutions(obj, d, x, y);
 	if (delta < 0)
 	{
