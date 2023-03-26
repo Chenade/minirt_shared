@@ -14,7 +14,7 @@
 
 t_pixel	min_objects(int i, t_pixel p1, t_pixel p2)
 {
-	if (i == 0 && p1.pos.z < p2.pos.z)
+	if (i != 0 && p1.pos.z < p2.pos.z)
 	{
 		return (p1);
 	}
@@ -30,15 +30,17 @@ int	ray_tracing(t_data *d, int x, int y)
 
 	i = 0;
 	ft_bzero(&pixel, sizeof(t_pixel));
+	set_color(&pixel.color, "0,0,0");
+	set_vector(&pixel.pos, "1,1,1");
 	while (i < d->nbr_objs)
 	{
 		objs = d->objs[i];
 		if (objs.collision_func)
+		{
 			pixel = min_objects(i, pixel,
 					((t_pixel (*)(struct s_objs *, struct s_data *, int, int))
 						objs.collision_func)(&objs, d, x, y));
-			// pixel = (((t_pixel (*)(struct s_objs *, struct s_data *, int, int))
-			// 			objs.collision_func)(&objs, d, x, y));
+		}
 		i++;
 	}
 	color = encode_rgb(pixel.color);

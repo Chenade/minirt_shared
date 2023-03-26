@@ -105,7 +105,7 @@ void		*ft_malloc(t_data *d, size_t size);
 
 //math.c
 double		check_solutions(t_objs *obj, t_data *d, double x, double y);
-double		calculate_time(t_objs *obj, t_data *d, double x, double y);
+double		calculate_scaler(t_objs *obj, t_data *d, double x, double y);
 
 // tools.c
 void		img_pix_put(t_data *d, int x, int y, int color);

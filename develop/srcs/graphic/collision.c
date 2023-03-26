@@ -14,17 +14,15 @@
 
 t_pixel	hit_sphere(struct s_objs *obj, struct s_data *d, int x, int y)
 {
+	double	delta;
 	t_pixel	pixel;
 
-	if (check_solutions(obj, d, x, y) < 0)
-	{
-		set_vector(&pixel.pos, "1,1,1");
-		printf("%s : 255, 255, 255\n", __func__);
-		return (set_color(&pixel.color, "0,0,0"), pixel);
-	}
-	calculate_time(obj, d, x, y);
+	delta = check_solutions(obj, d, x, y);
+	if (delta < 0)
+		return (set_vector(&pixel.pos, "10000,10000,10000"), pixel);
+	calculate_scaler(obj, d, x, y);
 	set_vector(&pixel.pos, "1,1,1");
-	set_color(&pixel.color, "255,0,255");
+	pixel.color = obj->color;
 	// printf("%s : 255, 0, 255\n", __func__);
 	return (pixel);
 }

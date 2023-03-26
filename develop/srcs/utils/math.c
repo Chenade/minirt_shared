@@ -52,9 +52,8 @@ double	get_norm(double x, double y, double z)
 	return (sqrt(x * x + y * y + z * z));
 }
 
-double	quadratic_disrciminant(double a, double b, double c)
+double	quadratic_discriminant(double a, double b, double c)
 {
-	printf("d: %f\n", b * b - 4 * (a * c));
 	return (b * b - 4 * (a * c));
 }
 
@@ -64,7 +63,7 @@ double	quadratic_solve(double a, double b, double c)
 	double	s1;
 	double	s2;
 
-	delta = quadratic_disrciminant(a, b, c);
+	delta = quadratic_discriminant(a, b, c);
 	if (delta > 0)
 	{
 		s1 = (-b - sqrt(delta)) / (2 * a);
@@ -95,10 +94,10 @@ double	check_solutions(t_objs *obj, t_data *d, double x, double y)
 		* (0 - obj->cord.y) + (0 - obj->cord.z) * (0 - obj->cord.z) \
 		- (obj->diameter / 2) * (obj->diameter / 2);
 	// need to replace 0 by the coordinates of the camera !!!
-	return (quadratic_disrciminant(a, b, c));
+	return (quadratic_discriminant(a, b, c));
 }
 
-double	calculate_time(t_objs *obj, t_data *d, double x, double y)
+double	calculate_scaler(t_objs *obj, t_data *d, double x, double y)
 {
 	double		a;
 	double		b;
