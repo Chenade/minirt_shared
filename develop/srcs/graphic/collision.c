@@ -31,19 +31,15 @@ t_pixel	hit_sphere(struct s_objs *obj, struct s_data *d, int x, int y)
 t_pixel	hit_plane(struct s_objs *obj, struct s_data *d, int x, int y)
 {
 	t_pixel	pixel;
+	double	vn;
 	double	scaler;
 
-	// (void)obj;
-	// (void)d;
-	// (void)x;
-	// (void)y;
-	if (check_vn(obj, d, x, y) == 0)
+	vn = check_vn2(obj, d, x, y);
+	if (vn >= -0.00001 && vn <= 0.00001)
 	{
-		// printf("vn null\n");
 		return (set_vector(&pixel.pos, "10000,10000,10000"), pixel);
 	}
-	scaler = calculate_scaler_pl(obj, d, x, y);
-	// printf("scaler : %f\n", scaler);
+	scaler = calculate_scaler_pl2(obj, d, x, y);
 	if (scaler < 0)
 		return (set_vector(&pixel.pos, "10000,10000,10000"), pixel);
 	set_vector(&pixel.pos, "1,1,1");

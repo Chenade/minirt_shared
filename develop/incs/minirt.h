@@ -93,7 +93,9 @@ double		calculate_scaler_sp(t_objs *obj, t_data *d, double x, double y);
 
 //math_pl.c
 double		check_vn(t_objs *obj, t_data *d, double x, double y);
+double		check_vn2(t_objs *obj, t_data *d, double x, double y);
 double		calculate_scaler_pl(t_objs *obj, t_data *d, double x, double y);
+double		calculate_scaler_pl2(t_objs *obj, t_data *d, double x, double y);
 
 //vectors.c
 int			init_vector(t_vector *v, int x, int y, int z);
