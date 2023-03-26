@@ -12,24 +12,42 @@
 
 #include "minirt.h"
 
-int	key_trigger(t_data *d, int keysym)
+int	key_sphere(t_data *d, int keysym)
 {
 	(void) d;
 	(void) keysym;
+	printf("%s: %d\n", __func__, d->index);
 	return (0);
 }
 
-int	handle_keypress(int keysym, t_data *d)
+int	key_plane(t_data *d, int keysym)
 {
-	if (keysym == XK_Escape)
-	{
-		mlx_destroy_window(d->mlx_ptr, d->win_ptr);
-		d->win_ptr = NULL;
-	}
-	else
-	{
-		if (key_trigger(d, keysym))
-			draw_imgs(d);
-	}
+	(void) d;
+	(void) keysym;
+	printf("%s: %d\n", __func__, d->index);
+	return (0);
+}
+
+int	key_cylinder(t_data *d, int keysym)
+{
+	(void) d;
+	(void) keysym;
+	printf("%s: %d\n", __func__, d->index);
+	return (0);
+}
+
+int	key_camera(t_data *d, int keysym)
+{
+	(void) d;
+	(void) keysym;
+	printf("%s: %d\n", __func__, d->index);
+	return (0);
+}
+
+int	key_light(t_data *d, int keysym)
+{
+	(void) d;
+	(void) keysym;
+	printf("%s: %d\n", __func__, d->index);
 	return (0);
 }

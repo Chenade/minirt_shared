@@ -71,7 +71,8 @@ SRCS_PAR	=	parsing/setup.c			\
 SRCS_MLX	=	graphic/mlx_setup.c		\
 				graphic/keyboard.c		\
 				graphic/collision.c		\
-				graphic/ray_tracing.c
+				graphic/ray_tracing.c	\
+				graphic/draw_gui.c
 
 SRCS		=	$(SRCS_GEN)
 SRCS		+=	$(SRCS_PAR)

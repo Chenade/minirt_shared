@@ -35,12 +35,12 @@ typedef struct s_pixel
 }	t_pixel;
 
 typedef struct s_data	t_data;
-typedef struct s_objs	t_objs;
 
 typedef struct s_objs
 {
 	// int			type;
 	void		*collision_func;
+	void		*keyboard_func;
 	t_vector	cord;
 	t_vector	orientation;
 	t_color		color;
@@ -62,18 +62,19 @@ typedef struct s_img
 
 typedef struct s_data
 {
-	void				*win_ptr;
-	void				*mlx_ptr;
-	t_img				img;
+	void			*win_ptr;
+	void			*mlx_ptr;
+	t_img			img;
 
-	double				fov;
-	double				cam_len;
-	char				**raw;
-	int					nbr_camera;
-	int					nbr_light;
-	int					nbr_ambient;
-	int					nbr_objs;
-	struct s_objs		*objs;
+	double			fov;
+	double			cam_len;
+	int				index;
+	char			**raw;
+	int				nbr_camera;
+	int				nbr_light;
+	int				nbr_ambient;
+	int				nbr_objs;
+	struct s_objs	*objs;
 }	t_data;
 
 #endif

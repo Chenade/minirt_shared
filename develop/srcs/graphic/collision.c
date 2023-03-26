@@ -60,7 +60,7 @@ t_pixel	hit_cylinder(struct s_objs *obj, struct s_data *d, int x, int y)
 	(void)d;
 	(void)x;
 	(void)y;
-	set_vector(&pixel.pos, "1,1,1");
+	set_vector(&pixel.pos, "10000,10000,10000");
 	set_color(&pixel.color, "0,0,0");
 	// printf("%s\n", __func__);
 	return (pixel);
