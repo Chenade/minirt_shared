@@ -18,8 +18,6 @@ t_pixel	hit_sphere(struct s_objs *obj, struct s_data *d, int x, int y)
 	double	scaler;
 	t_pixel	pixel;
 
-	// printf("center : %f, %f, %f\n", obj->cord.x, obj->cord.y, obj->cord.z);
-	// printf("light : %f, %f, %f\n", d->light.pos.x, d->light.pos.y, d->light.pos.z);
 	delta = check_solutions(obj, d, x, y);
 	if (delta < 0)
 	{
@@ -27,10 +25,10 @@ t_pixel	hit_sphere(struct s_objs *obj, struct s_data *d, int x, int y)
 		return (pixel);
 	}
 	scaler = calculate_scaler_sp(obj, d, x, y);
-	// set_vector(&pixel.pos, "1,1,1");
 	pixel.pos = d->cur_p.pos;
 	pixel.scaler = scaler;
-	pixel.norm = calculate_sp_norm(obj->cord, vec_sum(d->cam.cord, vec_scale(pixel.pos, pixel.scaler)));
+	pixel.norm = calculate_sp_norm(obj->cord, vec_sum(d->cam.cord, \
+	vec_scale(pixel.pos, pixel.scaler)));
 	pixel.color = obj->color;
 	// printf("%s : 255, 0, 255\n", __func__);
 	return (pixel);
@@ -55,7 +53,6 @@ t_pixel	hit_plane(struct s_objs *obj, struct s_data *d, int x, int y)
 		pixel.scaler = -1;
 		return (pixel);
 	}
-	// set_vector(&pixel.pos, "2,2,2");
 	pixel.pos = d->cur_p.pos;
 	pixel.scaler = scaler;
 	pixel.norm = obj->orientation;
