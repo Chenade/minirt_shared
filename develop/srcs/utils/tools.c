@@ -34,14 +34,6 @@ int	encode_rgb(t_color c)
 	return (c.r << 16 | c.g << 8 | c.b);
 }
 
-int	init_vector(t_vector *v, int x, int y, int z)
-{
-	v->x = x;
-	v->y = y;
-	v->z = z;
-	return (0);
-}
-
 /*
 |tan(180 - fov/2) * WIDTH/2|
 

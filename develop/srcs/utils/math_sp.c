@@ -47,11 +47,6 @@ else
 	no solution;
 */
 
-double	get_norm(double x, double y, double z)
-{
-	return (sqrt(x * x + y * y + z * z));
-}
-
 double	quadratic_discriminant(double a, double b, double c)
 {
 	return (b * b - 4 * (a * c));
@@ -97,7 +92,7 @@ double	check_solutions(t_objs *obj, t_data *d, double x, double y)
 	return (quadratic_discriminant(a, b, c));
 }
 
-double	calculate_scaler(t_objs *obj, t_data *d, double x, double y)
+double	calculate_scaler_sp(t_objs *obj, t_data *d, double x, double y)
 {
 	double		a;
 	double		b;

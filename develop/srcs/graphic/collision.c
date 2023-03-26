@@ -15,12 +15,13 @@
 t_pixel	hit_sphere(struct s_objs *obj, struct s_data *d, int x, int y)
 {
 	double	delta;
+	double	scaler;
 	t_pixel	pixel;
 
 	delta = check_solutions(obj, d, x, y);
 	if (delta < 0)
 		return (set_vector(&pixel.pos, "10000,10000,10000"), pixel);
-	calculate_scaler(obj, d, x, y);
+	scaler = calculate_scaler_sp(obj, d, x, y);
 	set_vector(&pixel.pos, "1,1,1");
 	pixel.color = obj->color;
 	// printf("%s : 255, 0, 255\n", __func__);
@@ -30,13 +31,23 @@ t_pixel	hit_sphere(struct s_objs *obj, struct s_data *d, int x, int y)
 t_pixel	hit_plane(struct s_objs *obj, struct s_data *d, int x, int y)
 {
 	t_pixel	pixel;
+	double	scaler;
 
-	(void)obj;
-	(void)d;
-	(void)x;
-	(void)y;
+	// (void)obj;
+	// (void)d;
+	// (void)x;
+	// (void)y;
+	if (check_vn(obj, d, x, y) == 0)
+	{
+		// printf("vn null\n");
+		return (set_vector(&pixel.pos, "10000,10000,10000"), pixel);
+	}
+	scaler = calculate_scaler_pl(obj, d, x, y);
+	// printf("scaler : %f\n", scaler);
+	if (scaler < 0)
+		return (set_vector(&pixel.pos, "10000,10000,10000"), pixel);
 	set_vector(&pixel.pos, "1,1,1");
-	set_color(&pixel.color, "0,0,0");
+	pixel.color = obj->color;
 	// printf("%s\n", __func__);
 	return (pixel);
 }
