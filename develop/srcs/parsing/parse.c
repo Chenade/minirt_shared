@@ -42,7 +42,7 @@ int	define_obj(t_data *d, char	**tmp, int index)
 {
 	int	status;
 
-	status = 0;
+	status = 1;
 	printf("%s\n", tmp[0]);
 	if (ft_strcmp(tmp[0], "C") == 0)
 		status = map_check_cam(d, tmp, index);
@@ -56,6 +56,8 @@ int	define_obj(t_data *d, char	**tmp, int index)
 		status = map_check_plane (d, tmp, index);
 	else if (ft_strcmp(tmp[0], "cy") == 0)
 		status = map_check_cylinder (d, tmp, index);
+	else if (ft_strcmp(tmp[0], "#") == 0)
+		return (0);
 	ft_free_array(tmp);
 	if (status)
 		return (print_err("Error: Invalid Map.", d), 1);
@@ -73,12 +75,12 @@ int	process_file(t_data *d, int fd)
 		l = get_next_line (fd);
 		if (!l)
 			break ;
-		if (*l != '\n')
+		if (*l != '\n' && *l != '#')
 			ft_array_push(&d->raw, l);
 		free (l);
 	}
 	d->nbr_objs = ft_array_len(d->raw);
-	// printf("nbr_objs: %d\n", d->nbr_objs);
+	printf("nbr_objs: %d\n", d->nbr_objs);
 	d->objs = ft_calloc(sizeof(t_objs), d->nbr_objs);
 	if (!d->objs)
 		return (print_err("Error: Malloc failed.", d), 1);

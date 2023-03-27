@@ -27,6 +27,8 @@
 # define WIDTH 1080
 # define HEIGHT 640
 
+# define STEP 5
+
 # define DEF 0
 # define PL 1
 # define SP 2
