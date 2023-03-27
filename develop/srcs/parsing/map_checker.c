@@ -28,9 +28,10 @@ int	map_check_ambient(t_data *d, char **line, int index)
 	if (set_color(&d->objs[index].color, line[2]))
 		return (1);
 	// d->objs[index].type = DEF;
-	d->ambient.color = d->objs[index].color;
-	d->ambient.ratio = d->objs[index].ratio;
+	d->objs[index].color = d->objs[index].color;
+	d->objs[index].ratio = d->objs[index].ratio;
 	d->objs[index].keyboard_func = key_light;
+	d->ambient = &d->objs[index];
 	return (0);
 }
 
@@ -45,16 +46,13 @@ int	map_check_light(t_data *d, char **line, int index)
 		return (1);
 	if (set_vector(&d->objs[index].cord, line[1]))
 		return (1);
-	// d->light.pos = d->objs[index].cord;
 	ratio = ft_strtod(line[2]);
 	if (ratio < 0 || ratio > 1)
 		return (1);
 	d->objs[index].ratio = ratio;
-	// d->light.ratio = ratio;
 	if (set_color(&d->objs[index].color, line[3]))
 		return (1);
 	// d->objs[index].type = DEF;
-	// d->light.color = d->objs[index].color;
 	d->objs[index].diameter = 10;
 	d->objs[index].collision_func = hit_light;
 	d->objs[index].keyboard_func = key_light;

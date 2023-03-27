@@ -80,7 +80,7 @@ int	key_camera(t_data *d, int keysym)
 	int	i;
 
 	i = ft_move(&d->objs[d->index], keysym);
-	i = ft_orientation(&d->objs[d->index], keysym);
+	// i = ft_orientation(&d->objs[d->index], keysym);
 	printf("%s: %d, %d\n", __func__, d->index, i);
 	return (i);
 }

@@ -33,7 +33,7 @@ void	get_color(t_pixel *p, t_data *d)
 	double		norm2;
 	double		angle;
 
-	v = vec_sub(d->light->cord, vec_sum(d->cam.cord, \
+	v = vec_sub(d->light->cord, vec_sum(d->cam->cord, \
 	vec_scale(p->pos, p->scaler)));
 	v = normalize_vect(v);
 	norm1 = get_norm(v.x, v.y, v.z);

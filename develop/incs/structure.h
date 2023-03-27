@@ -52,21 +52,6 @@ typedef struct s_objs
 	double		height;
 }	t_objs;
 
-typedef struct s_cam
-{
-	double		fov;
-	double		cam_len;
-	t_vector	cord;
-	t_vector	orientation;
-}	t_cam;
-
-typedef struct s_light
-{
-	t_vector	pos;
-	double		ratio;
-	t_color		color;
-}	t_light;
-
 typedef struct s_img
 {
 	void	*mlx_img;
@@ -84,8 +69,8 @@ typedef struct s_data
 	void			*mlx_ptr;
 	t_img			img;
 
-	// double			fov;
-	// double			cam_len;
+	double			fov;
+	double			cam_len;
 	int				index;
 	char			**raw;
 	int				nbr_camera;
@@ -93,9 +78,9 @@ typedef struct s_data
 	int				nbr_ambient;
 	int				nbr_objs;
 	struct s_objs	*objs;
-	struct s_cam	cam;
+	struct s_objs	*cam;
 	struct s_objs	*light;
-	struct s_light	ambient;
+	struct s_objs	*ambient;
 	t_pixel			cur_p;
 }	t_data;
 
