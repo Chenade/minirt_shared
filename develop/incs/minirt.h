@@ -77,6 +77,17 @@ int			key_plane(t_data *d, int keysym);
 int			key_cylinder(t_data *d, int keysym);
 int			key_camera(t_data *d, int keysym);
 int			key_light(t_data *d, int keysym);
+int			key_saved(t_data *d);
+
+// print.c
+void		print_vector(t_vector v, int fd);
+void		print_color(t_color c, int fd);
+void		print_sphere(t_data *d, int index, int fd);
+void		print_plane(t_data *d, int index, int fd);
+void		print_cylinder(t_data *d, int index, int fd);
+void		print_camera(t_data *d, int index, int fd);
+void		print_light(t_data *d, int index, int fd);
+void		print_ambient(t_data *d, int index, int fd);
 
 // draw_gui.c
 int			draw_gui(t_data *d);
@@ -90,7 +101,6 @@ int			check_filename(const char *name, const char *ext);
 long int	findSize(char file_name[]);
 void		print_img_data(t_img *i);
 int			print_info(char *name);
-int			print_map(t_data *d, t_vector **map);
 void		*ft_malloc(t_data *d, size_t size);
 
 //math_sp.c

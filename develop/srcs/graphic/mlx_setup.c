@@ -39,12 +39,9 @@ void	draw_imgs(t_data *d)
 	i = 0;
 	while (i < HEIGHT)
 	{
-		j = 0;
-		while (j < WIDTH)
-		{
+		j = -1;
+		while (++j < WIDTH)
 			img_pix_put(d, j, i, ray_tracing(d, j, i));
-			j++;
-		}
 		i++;
 	}
 	ft_printf("mlx draw image successfully\n");
@@ -74,7 +71,13 @@ int	handle_keypress(int keysym, t_data *d)
 		d->win_ptr = NULL;
 	}
 	else if (keysym == XK_Tab)
+	{
 		d->index = (d->index + 1) % (d->nbr_objs);
+		printf("%s: %d\n", __func__, d->index);
+		draw_gui(d);
+	}
+	else if (keysym == XK_p)
+		key_saved(d);
 	else
 		if (((int (*)(t_data *, int))
 			(d->objs[d->index].keyboard_func))(d, keysym))

@@ -42,15 +42,16 @@ typedef struct s_data	t_data;
 typedef struct s_objs
 {
 	int			type;
-	void		*collision_func;
-	void		*keyboard_func;
-	void		*gui_func;
 	t_vector	cord;
 	t_vector	orientation;
 	t_color		color;
 	double		ratio;
 	double		diameter;
 	double		height;
+	void		*collision_func;
+	void		*keyboard_func;
+	void		*gui_func;
+	void		*print_func;
 }	t_objs;
 
 typedef struct s_img

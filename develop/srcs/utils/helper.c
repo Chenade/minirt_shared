@@ -6,7 +6,7 @@
 /*   By: ykuo <ykuo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:13:37 by ykuo              #+#    #+#             */
-/*   Updated: 2022/11/13 16:13:38 by ykuo             ###   ########.fr       */
+/*   Updated: 2023/03/27 23:57:36 by ykuo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,26 +44,6 @@ int	print_info(char *name)
 	ft_printf("size of file %ld bytes\n", size);
 	return (size);
 }
-
-// int	print_map(t_data *d, t_vector **map)
-// {
-// 	int	x;
-// 	int	y;
-
-// 	y = -1;
-// 	while (++y < d->map_h)
-// 	{
-// 		x = -1;
-// 		while (++x < d->map_w)
-// 		{
-// 			ft_printf("(%d, %d, %d)  ", map[xy_to_x(d, x, y)]->x,
-// 				map[xy_to_x(d, x, y)]->y, map[xy_to_x(d, x, y)]->z);
-// 		}
-// 		ft_printf("\n");
-// 	}
-// 	ft_printf("\n");
-// 	return (0);
-// }
 
 void	*ft_malloc(t_data *d, size_t size)
 {

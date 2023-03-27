@@ -64,7 +64,6 @@ SRCS_GEN	=	utils/general.c			\
 				utils/vectors.c			\
 				utils/helper.c			\
 
-
 SRCS_PAR	=	parsing/setup.c			\
 				parsing/map_env.c	\
 				parsing/map_obj.c	\
@@ -73,6 +72,8 @@ SRCS_PAR	=	parsing/setup.c			\
 SRCS_MLX	=	graphic/mlx_setup.c		\
 				graphic/keyboard_env.c		\
 				graphic/keyboard_obj.c		\
+				graphic/print_env.c		\
+				graphic/print_obj.c		\
 				graphic/collision.c		\
 				graphic/ray_tracing.c	\
 				graphic/draw_gui.c
