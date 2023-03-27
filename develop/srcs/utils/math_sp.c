@@ -47,9 +47,10 @@ else
 	no solution;
 */
 
-double	get_norm(double x, double y, double z)
+t_vector	calculate_sp_norm(t_vector center, t_vector hit_point)
 {
-	return (sqrt(x * x + y * y + z * z));
+	// printf("hit point : %f, %f, %f\n", hit_point.x, hit_point.y, hit_point.z);
+	return (normalize_vect(vec_sub(hit_point, center)));
 }
 
 double	quadratic_discriminant(double a, double b, double c)
@@ -68,6 +69,7 @@ double	quadratic_solve(double a, double b, double c)
 	{
 		s1 = (-b - sqrt(delta)) / (2 * a);
 		s2 = (-b + sqrt(delta)) / (2 * a);
+		// printf("s1, s2 : %f, %f\n", s1, s2);
 		if (s1 < s2)
 			return (s1);
 		return (s2); // check for the smallest !! -> positive <- !!;
@@ -80,41 +82,64 @@ double	check_solutions(t_objs *obj, t_data *d, double x, double y)
 	double		a;
 	double		b;
 	double		c;
-	double		norm;
 	t_vector	v;
 
-	norm = get_norm(-WIDTH / 2 + x, HEIGHT / 2 - y, d->cam_len);
-	v.x = (-WIDTH / 2 + x) / norm;
-	v.y = (HEIGHT / 2 - y) / norm;
-	v.z = (d->cam_len) / norm;
+	(void)x;
+	(void)y;
+	v = d->cur_p.pos;
 	a = v.x * v.x + v.y * v.y + v.z * v.z;
-	b = 2 * (0 - v.x * obj->cord.x + 0 - v.y * \
-		obj->cord.y + 0 - v.z * obj->cord.z);
-	c = (0 - obj->cord.x) * (0 - obj->cord.x) + (0 - obj->cord.y) \
-		* (0 - obj->cord.y) + (0 - obj->cord.z) * (0 - obj->cord.z) \
-		- (obj->diameter / 2) * (obj->diameter / 2);
-	// need to replace 0 by the coordinates of the camera !!!
+	b = 2 * (d->cam.cord.x * v.x - v.x * obj->cord.x + \
+		d->cam.cord.y * v.y - v.y * obj->cord.y + \
+		d->cam.cord.z * v.z - v.z * obj->cord.z);
+	c = (d->cam.cord.x - obj->cord.x) * (d->cam.cord.x - obj->cord.x) + \
+		(d->cam.cord.y - obj->cord.y) * (d->cam.cord.y - obj->cord.y) + \
+		(d->cam.cord.z - obj->cord.z) * (d->cam.cord.z - obj->cord.z) - \
+		(obj->diameter / 2) * (obj->diameter / 2);
 	return (quadratic_discriminant(a, b, c));
 }
 
-double	calculate_scaler(t_objs *obj, t_data *d, double x, double y)
+double	calculate_scaler_sp(t_objs *obj, t_data *d, double x, double y)
 {
 	double		a;
 	double		b;
 	double		c;
-	double		norm;
 	t_vector	v;
 
-	norm = get_norm(-WIDTH / 2 + x, HEIGHT / 2 - y, d->cam_len);
-	v.x = (-WIDTH / 2 + x) / norm;
-	v.y = (HEIGHT / 2 - y) / norm;
-	v.z = (d->cam_len) / norm;
+	(void)x;
+	(void)y;
+	v = d->cur_p.pos;
 	a = v.x * v.x + v.y * v.y + v.z * v.z;
-	b = 2 * (0 - v.x * obj->cord.x + 0 - v.y * \
-		obj->cord.y + 0 - v.z * obj->cord.z);
-	c = (0 - obj->cord.x) * (0 - obj->cord.x) + (0 - obj->cord.y) \
-		* (0 - obj->cord.y) + (0 - obj->cord.z) * (0 - obj->cord.z) \
-		- (obj->diameter / 2) * (obj->diameter / 2);
-	// need to replace 0 by the coordinates of the camera !!!
+	b = 2 * (d->cam.cord.x * v.x - v.x * obj->cord.x + \
+		d->cam.cord.y * v.y - v.y * obj->cord.y + \
+		d->cam.cord.z * v.z - v.z * obj->cord.z);
+	c = (d->cam.cord.x - obj->cord.x) * (d->cam.cord.x - obj->cord.x) + \
+		(d->cam.cord.y - obj->cord.y) * (d->cam.cord.y - obj->cord.y) + \
+		(d->cam.cord.z - obj->cord.z) * (d->cam.cord.z - obj->cord.z) - \
+		(obj->diameter / 2) * (obj->diameter / 2);
 	return (quadratic_solve(a, b, c));
 }
+
+/*
+NEW
+a = v.x * v.x + v.y * v.y + v.z * v.z;
+
+b = 2(d->cam.cord.x * v.x - vx * obj->cord.x + \
+	d->cam.cord.y * v.y - vy * obj->cord.y + \
+	d->cam.cord.z * v.z - vz * obj->cord.z)
+
+c = (d->cam.cord.x - obj->cord.x) * (d->cam.cord.x - obj->cord.x) + \
+	(d->cam.cord.y - obj->cord.y) * (d->cam.cord.y - obj->cord.y) + \
+	(d->cam.cord.z - obj->cord.z) * (d->cam.cord.z - obj->cord.z) - \
+	(obj->diameter / 2) * (obj->diameter / 2);
+*/
+
+/*
+OLD
+
+a = v.x * v.x + v.y * v.y + v.z * v.z;
+b = 2 * (0 - v.x * obj->cord.x + 0 - v.y * \
+	obj->cord.y + 0 - v.z * obj->cord.z);
+c = (0 - obj->cord.x) * (0 - obj->cord.x) + (0 - obj->cord.y) \
+	* (0 - obj->cord.y) + (0 - obj->cord.z) * (0 - obj->cord.z) \
+	- (obj->diameter / 2) * (obj->diameter / 2);
+*/

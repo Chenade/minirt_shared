@@ -34,14 +34,6 @@ int	encode_rgb(t_color c)
 	return (c.r << 16 | c.g << 8 | c.b);
 }
 
-int	init_vector(t_vector *v, int x, int y, int z)
-{
-	v->x = x;
-	v->y = y;
-	v->z = z;
-	return (0);
-}
-
 /*
 |tan(180 - fov/2) * WIDTH/2|
 
@@ -52,5 +44,6 @@ rad trans -> deg * pi / 180
 
 void	get_cam_len(t_data *d)
 {
-	d->cam_len = fabs(tan(PI / 2 - ((d->fov * PI / 180) / 2)) * (WIDTH / 2));
+	d->cam.cam_len = fabs(tan(PI / 2 - \
+	((d->cam.fov * PI / 180) / 2)) * (WIDTH / 2));
 }

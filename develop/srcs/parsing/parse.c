@@ -23,15 +23,17 @@ int	map_check_cam(t_data *d, char **line, int index)
 		return (1);
 	if (set_vector(&d->objs[index].cord, line[1]))
 		return (1);
+	d->cam.cord = d->objs[index].cord;
 	if (set_orientation(&d->objs[index].orientation, line[2]))
 		return (1);
+	d->cam.orientation = d->objs[index].orientation;
 	if (d->objs[index].orientation.x == 0 && d->objs[index].orientation.y == 0
 		&& d->objs[index].orientation.z == 0)
 		return (1);
 	fov = ft_strtod(line[3]);
 	if (fov < 0 || fov > 180)
 		return (1);
-	d->fov = fov;
+	d->cam.fov = fov;
 	d->objs[index].keyboard_func = key_camera;
 	return (0);
 }
@@ -76,7 +78,7 @@ int	process_file(t_data *d, int fd)
 		free (l);
 	}
 	d->nbr_objs = ft_array_len(d->raw);
-	printf("nbr_objs: %d\n", d->nbr_objs);
+	// printf("nbr_objs: %d\n", d->nbr_objs);
 	d->objs = ft_calloc(sizeof(t_objs), d->nbr_objs);
 	if (!d->objs)
 		return (print_err("Error: Malloc failed.", d), 1);
