@@ -33,7 +33,8 @@ void	get_color(t_pixel *p, t_data *d)
 	double		norm2;
 	double		angle;
 
-	v = vec_sub(d->light.pos, vec_scale(p->pos, p->scaler));
+	v = vec_sub(d->light.pos, vec_sum(d->cam.cord, \
+	vec_scale(p->pos, p->scaler)));
 	v = normalize_vect(v);
 	norm1 = get_norm(v.x, v.y, v.z);
 	norm2 = get_norm(p->norm.x, p->norm.y, p->norm.z);
@@ -43,9 +44,9 @@ void	get_color(t_pixel *p, t_data *d)
 	if (angle > PI / 2)
 		angle = PI / 2;
 	angle = 1 - (angle / (PI / 2));
-	p->color.r *= angle;
-	p->color.g *= angle;
-	p->color.b *= angle;
+	p->color.r *= (d->light.color.r * d->light.ratio / 255) * angle;
+	p->color.g *= (d->light.color.g * d->light.ratio / 255) * angle;
+	p->color.b *= (d->light.color.b * d->light.ratio / 255) * angle;
 }
 
 t_pixel	min_scaler(int i, t_pixel p1, t_pixel p2)
@@ -59,13 +60,13 @@ t_pixel	min_scaler(int i, t_pixel p1, t_pixel p2)
 	return (p1);
 }
 
-t_pixel	hit_light(struct s_objs *obj, struct s_data *d, t_pixel pixel)
-{
-	(void)obj;
-	(void)d;
-	// printf("%s\n", __func__);
-	return (pixel);
-}
+// t_pixel	hit_light(struct s_objs *obj, struct s_data *d, t_pixel pixel)
+// {
+// 	(void)obj;
+// 	(void)d;
+// 	// printf("%s\n", __func__);
+// 	return (pixel);
+// }
 
 int	ray_tracing(t_data *d, int x, int y)
 {
@@ -78,6 +79,7 @@ int	ray_tracing(t_data *d, int x, int y)
 	ft_bzero(&pixel, sizeof(t_pixel));
 	set_color(&pixel.color, "0,0,0");
 	pixel.scaler = -1;
+	pixel.is_light = 0;
 	get_cur_vec(d, x, y);
 	while (i < d->nbr_objs)
 	{
@@ -90,8 +92,9 @@ int	ray_tracing(t_data *d, int x, int y)
 		}
 		i++;
 	}
-	get_color(&pixel, d);
-	pixel = hit_light(&objs, d, pixel);
+	if (pixel.is_light == 0)
+		get_color(&pixel, d);
+	// pixel = hit_light(&objs, d, pixel);
 	color = encode_rgb(pixel.color);
 	return (color);
 }

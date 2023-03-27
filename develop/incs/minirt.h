@@ -27,10 +27,11 @@
 # define WIDTH 1080
 # define HEIGHT 640
 
-# define PL 0
-# define SP 1
-# define CYL 2
-# define CO	3
+# define DEF 0
+# define PL 1
+# define SP 2
+# define CYL 3
+# define CO	4
 
 # define PI 3.14159265358979
 
@@ -62,6 +63,7 @@ int			map_check_cylinder(t_data *d, char **line, int index);
 t_pixel		hit_sphere(struct s_objs *obj, struct s_data *d, int x, int y);
 t_pixel		hit_plane(struct s_objs *obj, struct s_data *d, int x, int y);
 t_pixel		hit_cylinder(struct s_objs *obj, struct s_data *d, int x, int y);
+t_pixel		hit_light(struct s_objs *obj, struct s_data *d, int x, int y);
 int			ray_tracing(t_data *d, int x, int y);
 
 // keyboard.c
