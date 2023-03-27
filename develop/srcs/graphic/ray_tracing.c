@@ -33,7 +33,7 @@ void	get_color(t_pixel *p, t_data *d)
 	double		norm2;
 	double		angle;
 
-	v = vec_sub(d->light.pos, vec_sum(d->cam.cord, \
+	v = vec_sub(d->light->cord, vec_sum(d->cam.cord, \
 	vec_scale(p->pos, p->scaler)));
 	v = normalize_vect(v);
 	norm1 = get_norm(v.x, v.y, v.z);
@@ -44,9 +44,9 @@ void	get_color(t_pixel *p, t_data *d)
 	if (angle > PI / 2)
 		angle = PI / 2;
 	angle = 1 - (angle / (PI / 2));
-	p->color.r *= (d->light.color.r * d->light.ratio / 255) * angle;
-	p->color.g *= (d->light.color.g * d->light.ratio / 255) * angle;
-	p->color.b *= (d->light.color.b * d->light.ratio / 255) * angle;
+	p->color.r *= (d->light->color.r * d->light->ratio / 255) * angle;
+	p->color.g *= (d->light->color.g * d->light->ratio / 255) * angle;
+	p->color.b *= (d->light->color.b * d->light->ratio / 255) * angle;
 }
 
 t_pixel	min_scaler(int i, t_pixel p1, t_pixel p2)
