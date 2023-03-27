@@ -44,6 +44,7 @@ typedef struct s_objs
 	int			type;
 	void		*collision_func;
 	void		*keyboard_func;
+	void		*gui_func;
 	t_vector	cord;
 	t_vector	orientation;
 	t_color		color;
@@ -72,11 +73,12 @@ typedef struct s_data
 	double			fov;
 	double			cam_len;
 	int				index;
+
 	char			**raw;
+	int				nbr_objs;
 	int				nbr_camera;
 	int				nbr_light;
 	int				nbr_ambient;
-	int				nbr_objs;
 	struct s_objs	*objs;
 	struct s_objs	*cam;
 	struct s_objs	*light;

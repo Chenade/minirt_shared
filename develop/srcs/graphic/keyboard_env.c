@@ -1,0 +1,66 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   keyboard.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ykuo <ykuo@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/13 16:13:03 by ykuo              #+#    #+#             */
+/*   Updated: 2022/11/13 16:13:06 by ykuo             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minirt.h"
+
+int	ft_move(t_objs *obj, int keysym)
+{
+	if (keysym == XK_Left)
+		return (obj->cord.x -= STEP, 1);
+	else if (keysym == XK_Right)
+		return (obj->cord.x += STEP, 1);
+	else if (keysym == XK_Up)
+		return (obj->cord.y += STEP, 1);
+	else if (keysym == XK_Down)
+		return (obj->cord.y += STEP, 1);
+	else if (keysym == XK_z)
+		return (obj->cord.z += STEP, 1);
+	else if (keysym == XK_x)
+		return (obj->cord.z -= STEP, 1);
+	return (0);
+}
+
+int	ft_orientation(t_objs *obj, int keysym)
+{
+	if (keysym == XK_KP_7)
+		return (obj->orientation.x -= 1, 1);
+	else if (keysym == XK_KP_4)
+		return (obj->orientation.x += 1, 1);
+	else if (keysym == XK_KP_8)
+		return (obj->orientation.y += 1, 1);
+	else if (keysym == XK_KP_5)
+		return (obj->orientation.y += 1, 1);
+	else if (keysym == XK_KP_9)
+		return (obj->orientation.z += 1, 1);
+	else if (keysym == XK_KP_6)
+		return (obj->orientation.z += 1, 1);
+	return (0);
+}
+
+int	key_camera(t_data *d, int keysym)
+{
+	int	i;
+
+	i = ft_move(&d->objs[d->index], keysym);
+	i = (i || ft_orientation(&d->objs[d->index], keysym));
+	printf("%s: %d, %d\n", __func__, d->index, i);
+	return (i);
+}
+
+int	key_light(t_data *d, int keysym)
+{
+	int	i;
+
+	i = ft_move(&d->objs[d->index], keysym);
+	printf("%s: %d, %d\n", __func__, d->index, i);
+	return (i);
+}

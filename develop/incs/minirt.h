@@ -25,6 +25,7 @@
 # include "structure.h"
 
 # define WIDTH 1080
+# define WIN_HEIGHT 840
 # define HEIGHT 640
 
 # define STEP 5
@@ -69,12 +70,13 @@ t_pixel		hit_light(struct s_objs *obj, struct s_data *d, int x, int y);
 int			ray_tracing(t_data *d, int x, int y);
 
 // keyboard.c
-int	key_sphere(t_data *d, int keysym);
-int	key_plane(t_data *d, int keysym);
-int	key_cylinder(t_data *d, int keysym);
-int	key_camera(t_data *d, int keysym);
-int	key_light(t_data *d, int keysym);
-
+int			ft_move(t_objs *obj, int keysym);
+int			ft_orientation(t_objs *obj, int keysym);
+int			key_sphere(t_data *d, int keysym);
+int			key_plane(t_data *d, int keysym);
+int			key_cylinder(t_data *d, int keysym);
+int			key_camera(t_data *d, int keysym);
+int			key_light(t_data *d, int keysym);
 
 // draw_gui.c
 int			draw_gui(t_data *d);
