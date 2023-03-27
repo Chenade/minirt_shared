@@ -95,7 +95,7 @@ typedef struct s_data
 	struct s_objs	*objs;
 	struct s_cam	cam;
 	struct s_objs	*light;
-	struct s_light	ambient;
+	struct s_objs	*ambient;
 	t_pixel			cur_p;
 }	t_data;
 
