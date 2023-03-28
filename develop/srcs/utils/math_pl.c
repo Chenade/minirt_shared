@@ -36,13 +36,11 @@ check that (a * vx + b * vy + c * vz) != 0;
 	also need the cam info in data or smth;
 */
 
-double	check_vn2(t_objs *obj, t_data *d, double x, double y)
+double	check_vn2(t_objs *obj, t_data *d)
 {
 	double		vn;
 	t_vector	v;
 
-	(void)x;
-	(void)y;
 	v = d->cur_p.pos;
 	// normalize_vect(&obj->orientation);
 	vn = (obj->orientation.x * v.x + obj->orientation.y * v.y + \
@@ -52,13 +50,11 @@ double	check_vn2(t_objs *obj, t_data *d, double x, double y)
 
 
 
-double	calculate_scaler_pl2(t_objs *obj, t_data *d, double x, double y)
+double	calculate_scaler_pl2(t_objs *obj, t_data *d)
 {
 	double		t;
 	t_vector	v;
 
-	(void)x;
-	(void)y;
 	v = d->cur_p.pos;
 	// normalize_vect(&obj->orientation);
 	t = (-obj->orientation.x * (d->cam.cord.x - obj->cord.x) \

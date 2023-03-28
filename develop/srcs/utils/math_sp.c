@@ -77,15 +77,13 @@ double	quadratic_solve(double a, double b, double c)
 	return (-b / (2 * a));
 }
 
-double	check_solutions(t_objs *obj, t_data *d, double x, double y)
+double	check_solutions(t_objs *obj, t_data *d)
 {
 	double		a;
 	double		b;
 	double		c;
 	t_vector	v;
 
-	(void)x;
-	(void)y;
 	v = d->cur_p.pos;
 	a = v.x * v.x + v.y * v.y + v.z * v.z;
 	b = 2 * (d->cam.cord.x * v.x - v.x * obj->cord.x + \
@@ -98,15 +96,13 @@ double	check_solutions(t_objs *obj, t_data *d, double x, double y)
 	return (quadratic_discriminant(a, b, c));
 }
 
-double	calculate_scaler_sp(t_objs *obj, t_data *d, double x, double y)
+double	calculate_scaler_sp(t_objs *obj, t_data *d)
 {
 	double		a;
 	double		b;
 	double		c;
 	t_vector	v;
 
-	(void)x;
-	(void)y;
 	v = d->cur_p.pos;
 	a = v.x * v.x + v.y * v.y + v.z * v.z;
 	b = 2 * (d->cam.cord.x * v.x - v.x * obj->cord.x + \

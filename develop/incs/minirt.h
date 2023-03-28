@@ -60,10 +60,10 @@ int			map_check_plane(t_data *d, char **line, int index);
 int			map_check_cylinder(t_data *d, char **line, int index);
 
 // collision.c
-t_pixel		hit_sphere(struct s_objs *obj, struct s_data *d, int x, int y);
-t_pixel		hit_plane(struct s_objs *obj, struct s_data *d, int x, int y);
+t_pixel		hit_sphere(struct s_objs *obj, struct s_data *d);
+t_pixel		hit_plane(struct s_objs *obj, struct s_data *d);
 t_pixel		hit_cylinder(struct s_objs *obj, struct s_data *d, int x, int y);
-t_pixel		hit_light(struct s_objs *obj, struct s_data *d, int x, int y);
+t_pixel		hit_light(struct s_objs *obj, struct s_data *d);
 int			ray_tracing(t_data *d, int x, int y);
 
 // keyboard.c
@@ -90,15 +90,15 @@ int			print_map(t_data *d, t_vector **map);
 void		*ft_malloc(t_data *d, size_t size);
 
 //math_sp.c
-double		check_solutions(t_objs *obj, t_data *d, double x, double y);
-double		calculate_scaler_sp(t_objs *obj, t_data *d, double x, double y);
+double		check_solutions(t_objs *obj, t_data *d);
+double		calculate_scaler_sp(t_objs *obj, t_data *d);
 t_vector	calculate_sp_norm(t_vector center, t_vector hit_point);
 
 //math_pl.c
 double		check_vn(t_objs *obj, t_data *d, double x, double y);
-double		check_vn2(t_objs *obj, t_data *d, double x, double y);
+double		check_vn2(t_objs *obj, t_data *d);
 double		calculate_scaler_pl(t_objs *obj, t_data *d, double x, double y);
-double		calculate_scaler_pl2(t_objs *obj, t_data *d, double x, double y);
+double		calculate_scaler_pl2(t_objs *obj, t_data *d);
 
 //vectors.c
 int			init_vector(t_vector *v, int x, int y, int z);

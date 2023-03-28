@@ -12,19 +12,19 @@
 
 #include "minirt.h"
 
-t_pixel	hit_sphere(struct s_objs *obj, struct s_data *d, int x, int y)
+t_pixel	hit_sphere(struct s_objs *obj, struct s_data *d)
 {
 	double	delta;
 	double	scaler;
 	t_pixel	pixel;
 
-	delta = check_solutions(obj, d, x, y);
+	delta = check_solutions(obj, d);
 	if (delta < 0)
 	{
 		pixel.scaler = -1;
 		return (pixel);
 	}
-	scaler = calculate_scaler_sp(obj, d, x, y);
+	scaler = calculate_scaler_sp(obj, d);
 	pixel.pos = d->cur_p.pos;
 	pixel.scaler = scaler;
 	pixel.norm = calculate_sp_norm(obj->cord, vec_sum(d->cam.cord, \
@@ -34,21 +34,21 @@ t_pixel	hit_sphere(struct s_objs *obj, struct s_data *d, int x, int y)
 	return (pixel);
 }
 
-t_pixel	hit_plane(struct s_objs *obj, struct s_data *d, int x, int y)
+t_pixel	hit_plane(struct s_objs *obj, struct s_data *d)
 {
 	t_pixel	pixel;
 	double	vn;
 	double	scaler;
 
 	obj->orientation = normalize_vect(obj->orientation);
-	vn = check_vn2(obj, d, x, y);
+	vn = check_vn2(obj, d);
 	if (vn >= -0.00001 && vn <= 0.00001)
 	{
 		pixel.scaler = -1;
 		return (pixel);
 		//need to fix this cause its weird;
 	}
-	scaler = calculate_scaler_pl2(obj, d, x, y);
+	scaler = calculate_scaler_pl2(obj, d);
 	if (scaler < 0)
 	{
 		pixel.scaler = -1;
@@ -78,19 +78,19 @@ t_pixel	hit_cylinder(struct s_objs *obj, struct s_data *d, int x, int y)
 	return (pixel);
 }
 
-t_pixel	hit_light(struct s_objs *obj, struct s_data *d, int x, int y)
+t_pixel	hit_light(struct s_objs *obj, struct s_data *d)
 {
 	double	delta;
 	double	scaler;
 	t_pixel	pixel;
 
-	delta = check_solutions(obj, d, x, y);
+	delta = check_solutions(obj, d);
 	if (delta < 0)
 	{
 		pixel.scaler = -1;
 		return (pixel);
 	}
-	scaler = calculate_scaler_sp(obj, d, x, y);
+	scaler = calculate_scaler_sp(obj, d);
 	pixel.pos = d->cur_p.pos;
 	pixel.scaler = scaler;
 	pixel.norm = calculate_sp_norm(obj->cord, vec_sum(d->cam.cord, \
