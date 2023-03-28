@@ -44,7 +44,7 @@ void	draw_imgs(t_data *d)
 			img_pix_put(d, j, i, ray_tracing(d, j, i));
 		i++;
 	}
-	ft_printf("mlx draw image successfully\n");
+	// ft_printf("mlx draw image successfully\n");
 }
 
 int	render_frame(t_data *d)

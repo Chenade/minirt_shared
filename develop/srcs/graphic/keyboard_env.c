@@ -40,7 +40,7 @@ int	ft_move(t_objs *obj, int keysym)
 	else if (keysym == XK_Up)
 		return (obj->cord.y += STEP, 1);
 	else if (keysym == XK_Down)
-		return (obj->cord.y += STEP, 1);
+		return (obj->cord.y -= STEP, 1);
 	else if (keysym == XK_z)
 		return (obj->cord.z += STEP, 1);
 	else if (keysym == XK_x)
