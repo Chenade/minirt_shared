@@ -85,4 +85,9 @@ t_vector	vec_scale(t_vector v, double scaler)
 	w.z = v.z * scaler;
 	return (w);
 }
+
+// t_vector	vec_incr(t_vecto v, double i)
+// {
+
+// }
 // void	set_point_param(t_data *d, )
