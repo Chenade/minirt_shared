@@ -27,7 +27,7 @@ t_pixel	hit_sphere(struct s_objs *obj, struct s_data *d)
 	scaler = calculate_scaler_sp(obj, d);
 	pixel.pos = d->cur_p.pos;
 	pixel.scaler = scaler;
-	pixel.norm = calculate_sp_norm(obj->cord, vec_sum(d->cam.cord, \
+	pixel.norm = calculate_sp_norm(obj->cord, vec_sum(d->cam->cord, \
 	vec_scale(pixel.pos, pixel.scaler)));
 	pixel.color = obj->color;
 	pixel.is_light = 0;
@@ -93,7 +93,7 @@ t_pixel	hit_light(struct s_objs *obj, struct s_data *d)
 	scaler = calculate_scaler_sp(obj, d);
 	pixel.pos = d->cur_p.pos;
 	pixel.scaler = scaler;
-	pixel.norm = calculate_sp_norm(obj->cord, vec_sum(d->cam.cord, \
+	pixel.norm = calculate_sp_norm(obj->cord, vec_sum(d->cam->cord, \
 	vec_scale(pixel.pos, pixel.scaler)));
 	pixel.color = obj->color;
 	pixel.is_light = 1;

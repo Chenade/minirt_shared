@@ -52,7 +52,7 @@ void	get_cur_vec(t_data *d, int x, int y)
 {
 	d->cur_p.pos.x = (-WIDTH / 2 + x);
 	d->cur_p.pos.y = (HEIGHT / 2 - y);
-	d->cur_p.pos.z = (d->cam.cam_len);
+	d->cur_p.pos.z = (d->cam_len);
 	d->cur_p.pos = normalize_vect(d->cur_p.pos);
 }
 
