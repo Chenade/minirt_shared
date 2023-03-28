@@ -12,29 +12,76 @@
 
 #include "minirt.h"
 
-t_pixel	hit_sphere(struct s_objs *obj, struct s_data *d)
+t_pixel	hit_sphere(struct s_objs *obj, struct s_data *d, t_vector p)
 {
 	double	delta;
 	double	scaler;
 	t_pixel	pixel;
 
-	delta = check_solutions(obj, d);
+	delta = check_solutions(obj, d, p);
+	pixel.is_light = 0;
 	if (delta < 0)
 	{
 		pixel.scaler = -1;
 		return (pixel);
 	}
-	scaler = calculate_scaler_sp(obj, d);
-	pixel.pos = d->cur_p.pos;
+	scaler = calculate_scaler_sp(obj, d, p);
 	pixel.scaler = scaler;
+	pixel.pos = d->cur_p.pos;
 	pixel.norm = calculate_sp_norm(obj->cord, vec_sum(d->cam->cord, \
 	vec_scale(pixel.pos, pixel.scaler)));
 	pixel.color = obj->color;
-	pixel.is_light = 0;
 	return (pixel);
 }
 
-t_pixel	hit_plane(struct s_objs *obj, struct s_data *d)
+t_pixel	sphere_shadow(struct s_objs *obj, struct s_data *d, t_vector p)
+{
+	double	delta;
+	double	scaler;
+	t_pixel	pixel;
+
+	delta = check_solutions(obj, d, p);
+	if (delta < 0)
+	{
+		pixel.scaler = -1;
+		return (pixel);
+	}
+	scaler = calculate_scaler_sp(obj, d, p);
+	pixel.scaler = scaler;
+	// printf("%s\n", __func__);
+	return (pixel);
+}
+
+t_pixel	hit_plane(struct s_objs *obj, struct s_data *d, t_vector p)
+{
+	t_pixel	pixel;
+	double	vn;
+	double	scaler;
+
+	obj->orientation = normalize_vect(obj->orientation);
+	vn = check_vn2(obj, d);
+	pixel.is_light = 0;
+	if (vn >= -0.00001 && vn <= 0.00001)
+	{
+		pixel.scaler = -1;
+		return (pixel);
+		//need to fix this cause its weird;
+	}
+	scaler = calculate_scaler_pl2(obj, d, p);
+	if (scaler < 0)
+	{
+		pixel.scaler = -1;
+		return (pixel);
+	}
+	pixel.scaler = scaler;
+	pixel.pos = d->cur_p.pos;
+	pixel.norm = obj->orientation;
+	pixel.color = obj->color;
+	// printf("%s\n", __func__);
+	return (pixel);
+}
+
+t_pixel	plane_shadow(struct s_objs *obj, struct s_data *d, t_vector p)
 {
 	t_pixel	pixel;
 	double	vn;
@@ -48,17 +95,13 @@ t_pixel	hit_plane(struct s_objs *obj, struct s_data *d)
 		return (pixel);
 		//need to fix this cause its weird;
 	}
-	scaler = calculate_scaler_pl2(obj, d);
+	scaler = calculate_scaler_pl2(obj, d, p);
 	if (scaler < 0)
 	{
 		pixel.scaler = -1;
 		return (pixel);
 	}
-	pixel.pos = d->cur_p.pos;
 	pixel.scaler = scaler;
-	pixel.norm = obj->orientation;
-	pixel.color = obj->color;
-	pixel.is_light = 0;
 	// printf("%s\n", __func__);
 	return (pixel);
 }
@@ -78,24 +121,24 @@ t_pixel	hit_cylinder(struct s_objs *obj, struct s_data *d, int x, int y)
 	return (pixel);
 }
 
-t_pixel	hit_light(struct s_objs *obj, struct s_data *d)
+t_pixel	hit_light(struct s_objs *obj, struct s_data *d, t_vector p)
 {
 	double	delta;
 	double	scaler;
 	t_pixel	pixel;
 
-	delta = check_solutions(obj, d);
+	delta = check_solutions(obj, d, p);
+	pixel.is_light = 1;
 	if (delta < 0)
 	{
 		pixel.scaler = -1;
 		return (pixel);
 	}
-	scaler = calculate_scaler_sp(obj, d);
+	scaler = calculate_scaler_sp(obj, d, p);
 	pixel.pos = d->cur_p.pos;
 	pixel.scaler = scaler;
 	pixel.norm = calculate_sp_norm(obj->cord, vec_sum(d->cam->cord, \
 	vec_scale(pixel.pos, pixel.scaler)));
 	pixel.color = obj->color;
-	pixel.is_light = 1;
 	return (pixel);
 }

@@ -77,7 +77,7 @@ double	quadratic_solve(double a, double b, double c)
 	return (-b / (2 * a));
 }
 
-double	check_solutions(t_objs *obj, t_data *d)
+double	check_solutions(t_objs *obj, t_data *d, t_vector p)
 {
 	double		a;
 	double		b;
@@ -86,17 +86,17 @@ double	check_solutions(t_objs *obj, t_data *d)
 
 	v = d->cur_p.pos;
 	a = v.x * v.x + v.y * v.y + v.z * v.z;
-	b = 2 * (d->cam->cord.x * v.x - v.x * obj->cord.x + \
-		d->cam->cord.y * v.y - v.y * obj->cord.y + \
-		d->cam->cord.z * v.z - v.z * obj->cord.z);
-	c = (d->cam->cord.x - obj->cord.x) * (d->cam->cord.x - obj->cord.x) + \
-		(d->cam->cord.y - obj->cord.y) * (d->cam->cord.y - obj->cord.y) + \
-		(d->cam->cord.z - obj->cord.z) * (d->cam->cord.z - obj->cord.z) - \
+	b = 2 * (p.x * v.x - v.x * obj->cord.x + \
+		p.y * v.y - v.y * obj->cord.y + \
+		p.z * v.z - v.z * obj->cord.z);
+	c = (p.x - obj->cord.x) * (p.x - obj->cord.x) + \
+		(p.y - obj->cord.y) * (p.y - obj->cord.y) + \
+		(p.z - obj->cord.z) * (p.z - obj->cord.z) - \
 		(obj->diameter / 2) * (obj->diameter / 2);
 	return (quadratic_discriminant(a, b, c));
 }
 
-double	calculate_scaler_sp(t_objs *obj, t_data *d)
+double	calculate_scaler_sp(t_objs *obj, t_data *d, t_vector p)
 {
 	double		a;
 	double		b;
@@ -105,12 +105,12 @@ double	calculate_scaler_sp(t_objs *obj, t_data *d)
 
 	v = d->cur_p.pos;
 	a = v.x * v.x + v.y * v.y + v.z * v.z;
-	b = 2 * (d->cam->cord.x * v.x - v.x * obj->cord.x + \
-		d->cam->cord.y * v.y - v.y * obj->cord.y + \
-		d->cam->cord.z * v.z - v.z * obj->cord.z);
-	c = (d->cam->cord.x - obj->cord.x) * (d->cam->cord.x - obj->cord.x) + \
-		(d->cam->cord.y - obj->cord.y) * (d->cam->cord.y - obj->cord.y) + \
-		(d->cam->cord.z - obj->cord.z) * (d->cam->cord.z - obj->cord.z) - \
+	b = 2 * (p.x * v.x - v.x * obj->cord.x + \
+		p.y * v.y - v.y * obj->cord.y + \
+		p.z * v.z - v.z * obj->cord.z);
+	c = (p.x - obj->cord.x) * (p.x - obj->cord.x) + \
+		(p.y - obj->cord.y) * (p.y - obj->cord.y) + \
+		(p.z - obj->cord.z) * (p.z - obj->cord.z) - \
 		(obj->diameter / 2) * (obj->diameter / 2);
 	return (quadratic_solve(a, b, c));
 }
@@ -119,13 +119,13 @@ double	calculate_scaler_sp(t_objs *obj, t_data *d)
 NEW
 a = v.x * v.x + v.y * v.y + v.z * v.z;
 
-b = 2(d->cam->cord.x * v.x - vx * obj->cord.x + \
-	d->cam->cord.y * v.y - vy * obj->cord.y + \
-	d->cam->cord.z * v.z - vz * obj->cord.z)
+b = 2(p.x * v.x - vx * obj->cord.x + \
+	p.y * v.y - vy * obj->cord.y + \
+	p.z * v.z - vz * obj->cord.z)
 
-c = (d->cam->cord.x - obj->cord.x) * (d->cam->cord.x - obj->cord.x) + \
-	(d->cam->cord.y - obj->cord.y) * (d->cam->cord.y - obj->cord.y) + \
-	(d->cam->cord.z - obj->cord.z) * (d->cam->cord.z - obj->cord.z) - \
+c = (p.x - obj->cord.x) * (p.x - obj->cord.x) + \
+	(p.y - obj->cord.y) * (p.y - obj->cord.y) + \
+	(p.z - obj->cord.z) * (p.z - obj->cord.z) - \
 	(obj->diameter / 2) * (obj->diameter / 2);
 */
 

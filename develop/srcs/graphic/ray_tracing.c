@@ -26,6 +26,28 @@
 - get_norm;
 */
 
+t_pixel	min_scaler(int i, t_pixel p1, t_pixel p2)
+{
+	if (i != 0 && (fabs(p1.scaler)) < (fabs(p2.scaler)) && p1.scaler > 0)
+	{
+		return (p1);
+	}
+	if (p2.scaler > 0)
+		return (p2);
+	return (p1);
+}
+
+t_pixel	max_scaler(int i, t_pixel p1, t_pixel p2)
+{
+	if (i != 0 && (fabs(p1.scaler)) > (fabs(p2.scaler)) && p1.scaler > 0)
+	{
+		return (p1);
+	}
+	if (p2.scaler > 0)
+		return (p2);
+	return (p1);
+}
+
 void	get_color(t_pixel *p, t_data *d)
 {
 	t_vector	v;
@@ -49,16 +71,50 @@ void	get_color(t_pixel *p, t_data *d)
 	p->color.b *= (d->light->color.b * d->light->ratio / 255) * angle;
 }
 
-t_pixel	min_scaler(int i, t_pixel p1, t_pixel p2)
+void	trace_shadow(t_pixel *p, t_data *d, t_vector v, double d_to_l)
 {
-	if (i != 0 && (fabs(p1.scaler)) < (fabs(p2.scaler)) && p1.scaler > 0)
+	int		i;
+	t_objs	objs;
+	t_pixel	pixel;
+
+	if (p->scaler < 0)
+		set_color(&p->color, "0,0,0");
+	i = 0;
+	ft_bzero(&pixel, sizeof(t_pixel));
+	set_color(&pixel.color, "0,0,0");
+	pixel.scaler = -1;
+	d->cur_p.pos = v;
+	while (i < d->nbr_objs)
 	{
-		return (p1);
+		objs = d->objs[i];
+		if (objs.shadow_func)
+		{
+			pixel = min_scaler(i, pixel,
+					((t_pixel (*)(struct s_objs *, struct s_data *, t_vector p))
+						objs.shadow_func)(&objs, d, vec_sum(d->cam->cord, \
+						vec_scale(p->pos, p->scaler))));
+		}
+		i++;
 	}
-	if (p2.scaler > 0)
-		return (p2);
-	return (p1);
+	if (pixel.scaler < d_to_l && pixel.scaler > 0)
+		set_color(&p->color, "0,0,0");
+	get_color(p, d);
 }
+
+void	get_shadow(t_pixel *p, t_data *d)
+{
+	t_vector	v;
+	double		d_to_l;
+
+	v = vec_sub(d->light->cord, vec_sum(d->cam->cord, \
+	vec_scale(p->pos, p->scaler)));
+	d_to_l = get_norm(v.x, v.y, v.z);
+	v = normalize_vect(v);
+	// calculate scaler; -> collision function;
+	trace_shadow(p, d, v, d_to_l);
+}
+
+
 
 // t_pixel	hit_light(struct s_objs *obj, struct s_data *d, t_pixel pixel)
 // {
@@ -87,14 +143,13 @@ int	ray_tracing(t_data *d, int x, int y)
 		if (objs.collision_func)
 		{
 			pixel = min_scaler(i, pixel,
-					((t_pixel (*)(struct s_objs *, struct s_data *, int, int))
-						objs.collision_func)(&objs, d, x, y));
+					((t_pixel (*)(struct s_objs *, struct s_data *, t_vector p))
+						objs.collision_func)(&objs, d, d->cam->cord));
 		}
 		i++;
 	}
-	if (pixel.is_light == 0)
-		get_color(&pixel, d);
-	// pixel = hit_light(&objs, d, pixel);
+	if (pixel.scaler > 0 && pixel.is_light == 0)
+		get_shadow(&pixel, d);
 	color = encode_rgb(pixel.color);
 	return (color);
 }

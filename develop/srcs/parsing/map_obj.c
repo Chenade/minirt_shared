@@ -26,8 +26,9 @@ int	map_check_sphere(t_data *d, char **line, int index)
 	d->objs[index].diameter = diameter;
 	if (set_color(&d->objs[index].color, line[3]))
 		return (1);
-	// d->objs[index].type = SP;
+	d->objs[index].type = SP;
 	d->objs[index].collision_func = hit_sphere;
+	d->objs[index].shadow_func = sphere_shadow;
 	d->objs[index].keyboard_func = key_sphere;
 	d->objs[index].gui_func = gui_sphere;
 	d->objs[index].print_func = print_sphere;
@@ -44,8 +45,9 @@ int	map_check_plane(t_data *d, char **line, int index)
 		return (1);
 	if (set_color(&d->objs[index].color, line[3]))
 		return (1);
-	// d->objs[index].type = PL;
+	d->objs[index].type = PL;
 	d->objs[index].collision_func = hit_plane;
+	d->objs[index].shadow_func = plane_shadow;
 	d->objs[index].keyboard_func = key_plane;
 	d->objs[index].gui_func = gui_plane;
 	d->objs[index].print_func = print_plane;
@@ -72,8 +74,9 @@ int	map_check_cylinder(t_data *d, char **line, int index)
 		return (1);
 	if (set_color(&d->objs[index].color, line[4]))
 		return (1);
-	// d->objs[index].type = CYL;
+	d->objs[index].type = CYL;
 	d->objs[index].collision_func = hit_cylinder;
+	// d->objs[index].shadow_func = cylinder_shadow;
 	d->objs[index].keyboard_func = key_cylinder;
 	d->objs[index].gui_func = gui_cylinder;
 	d->objs[index].print_func = print_cylinder;

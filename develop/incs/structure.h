@@ -49,6 +49,7 @@ typedef struct s_objs
 	double		diameter;
 	double		height;
 	void		*collision_func;
+	void		*shadow_func;
 	void		*keyboard_func;
 	void		*gui_func;
 	void		*print_func;
