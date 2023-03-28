@@ -61,9 +61,9 @@ double	calculate_scaler_pl2(t_objs *obj, t_data *d, double x, double y)
 	(void)y;
 	v = d->cur_p.pos;
 	// normalize_vect(&obj->orientation);
-	t = (-obj->orientation.x * (d->cam.cord.x - obj->cord.x) \
-		- obj->orientation.y * (d->cam.cord.y - obj->cord.y) \
-		- obj->orientation.z * (d->cam.cord.z - obj->cord.z)) / \
+	t = (-obj->orientation.x * (d->cam->cord.x - obj->cord.x) \
+		- obj->orientation.y * (d->cam->cord.y - obj->cord.y) \
+		- obj->orientation.z * (d->cam->cord.z - obj->cord.z)) / \
 		(obj->orientation.x * v.x + obj->orientation.y * v.y + \
 		obj->orientation.z * v.z);
 	return (t);

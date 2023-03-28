@@ -18,10 +18,10 @@ int	init_mlx(t_data *d)
 		d->mlx_ptr = mlx_init();
 		if (!d->mlx_ptr)
 			print_err("Failed init window.", d);
-		d->win_ptr = mlx_new_window(d->mlx_ptr, WIDTH, HEIGHT, "miniRT");
+		d->win_ptr = mlx_new_window(d->mlx_ptr, WIDTH, WIN_HEIGHT, "miniRT");
 		if (!d->win_ptr)
 			print_err("Failed to launch window.", d);
-		d->img.mlx_img = mlx_new_image(d->mlx_ptr, WIDTH, HEIGHT);
+		d->img.mlx_img = mlx_new_image(d->mlx_ptr, WIDTH, WIN_HEIGHT);
 		if (!d->img.mlx_img)
 			print_err("mlx new image error", d);
 		d->img.addr = mlx_get_data_addr(d->img.mlx_img, &d->img.bpp,
@@ -35,16 +35,13 @@ void	draw_imgs(t_data *d)
 	int		i;
 	int		j;
 
-	ft_bzero(d->img.addr, d->img.line_len * HEIGHT);
+	ft_bzero(d->img.addr, d->img.line_len * WIN_HEIGHT);
 	i = 0;
 	while (i < HEIGHT)
 	{
-		j = 0;
-		while (j < WIDTH)
-		{
+		j = -1;
+		while (++j < WIDTH)
 			img_pix_put(d, j, i, ray_tracing(d, j, i));
-			j++;
-		}
 		i++;
 	}
 	ft_printf("mlx draw image successfully\n");
@@ -74,7 +71,12 @@ int	handle_keypress(int keysym, t_data *d)
 		d->win_ptr = NULL;
 	}
 	else if (keysym == XK_Tab)
+	{
 		d->index = (d->index + 1) % (d->nbr_objs);
+		draw_gui(d);
+	}
+	else if (keysym == XK_p)
+		key_saved(d);
 	else
 		if (((int (*)(t_data *, int))
 			(d->objs[d->index].keyboard_func))(d, keysym))

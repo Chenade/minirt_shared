@@ -25,7 +25,11 @@
 # include "structure.h"
 
 # define WIDTH 1080
+# define WIN_HEIGHT 840
 # define HEIGHT 640
+# define GUI_HEIGHT 700
+
+# define STEP 5
 
 # define DEF 0
 # define PL 1
@@ -67,15 +71,34 @@ t_pixel		hit_light(struct s_objs *obj, struct s_data *d, int x, int y);
 int			ray_tracing(t_data *d, int x, int y);
 
 // keyboard.c
-int	key_sphere(t_data *d, int keysym);
-int	key_plane(t_data *d, int keysym);
-int	key_cylinder(t_data *d, int keysym);
-int	key_camera(t_data *d, int keysym);
-int	key_light(t_data *d, int keysym);
+int			ft_move(t_objs *obj, int keysym);
+int			ft_orientation(t_objs *obj, int keysym);
+int			key_sphere(t_data *d, int keysym);
+int			key_plane(t_data *d, int keysym);
+int			key_cylinder(t_data *d, int keysym);
+int			key_camera(t_data *d, int keysym);
+int			key_light(t_data *d, int keysym);
+int			key_saved(t_data *d);
 
+// print.c
+void		print_vector(t_vector v, int fd);
+void		print_color(t_color c, int fd);
+void		print_sphere(t_data *d, int index, int fd);
+void		print_plane(t_data *d, int index, int fd);
+void		print_cylinder(t_data *d, int index, int fd);
+void		print_camera(t_data *d, int index, int fd);
+void		print_light(t_data *d, int index, int fd);
+void		print_ambient(t_data *d, int index, int fd);
 
 // draw_gui.c
+void		mlx_putstr(t_data *d, int x, int y, char *str);
 int			draw_gui(t_data *d);
+void		gui_sphere(t_data *d, t_objs obj, int x);
+void		gui_plane(t_data *d, t_objs obj, int x);
+void		gui_cylinder(t_data *d, t_objs obj, int x);
+void		gui_camera(t_data *d, t_objs obj, int x);
+void		gui_light(t_data *d, t_objs obj, int x);
+void		gui_ambient(t_data *d, t_objs obj, int x);
 
 // general.c
 void		free_data(t_data *d);
@@ -86,7 +109,6 @@ int			check_filename(const char *name, const char *ext);
 long int	findSize(char file_name[]);
 void		print_img_data(t_img *i);
 int			print_info(char *name);
-int			print_map(t_data *d, t_vector **map);
 void		*ft_malloc(t_data *d, size_t size);
 
 //math_sp.c

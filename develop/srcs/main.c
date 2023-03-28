@@ -21,9 +21,9 @@ int	minirt(char *filename)
 		return (1);
 	init_mlx(&d);
 	ft_printf("mlx init successfully\n");
-	printf("fov : %f\n", d.cam.fov);
+	printf("fov : %f\n", d.fov);
 	get_cam_len(&d);
-	printf("cam_len : %f\n", d.cam.cam_len);
+	printf("cam_len : %f\n", d.cam_len);
 	draw_imgs(&d);
 	mlx_loop_hook(d.mlx_ptr, render_frame, &d);
 	mlx_hook(d.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &d);

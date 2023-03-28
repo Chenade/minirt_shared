@@ -16,7 +16,7 @@ void	img_pix_put(t_data *d, int x, int y, int color)
 {
 	char	*pixel;
 
-	if (y >= 0 && y < HEIGHT && x >= 0 && x < WIDTH)
+	if (y >= 0 && y < WIN_HEIGHT && x >= 0 && x < WIDTH)
 	{
 		pixel = d->img.addr + (y * d->img.line_len + x * (d->img.bpp / 8));
 		*(unsigned int *)pixel = color;
@@ -44,6 +44,6 @@ rad trans -> deg * pi / 180
 
 void	get_cam_len(t_data *d)
 {
-	d->cam.cam_len = fabs(tan(PI / 2 - \
-	((d->cam.fov * PI / 180) / 2)) * (WIDTH / 2));
+	d->cam_len = fabs(tan(PI / 2 - \
+	((d->fov * PI / 180) / 2)) * (WIDTH / 2));
 }
