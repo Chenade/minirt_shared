@@ -64,6 +64,8 @@ void	print_ambient(t_data *d, int index, int fd)
 
 	obj = d->objs[index];
 	ft_putstr_fd("A ", fd);
+	ft_putdouble_fd(obj.ratio, fd);
+	ft_putstr_fd(" ", fd);
 	print_color(obj.color, fd);
 	ft_putstr_fd("\n", fd);
 }
