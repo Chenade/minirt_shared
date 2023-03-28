@@ -19,11 +19,11 @@ int	key_saved(t_data *d)
 
 	fd = open("./maps/newMap.rt", O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (fd < 0)
-		return (0);
+		return (printf("Unable to create new map.\n"), 0);
 	i = 0;
 	while (i < d->nbr_objs)
 	{
-		((void (*)(t_data*, int, int))(d->objs[i].print_func))(d, i, fd);
+		((void (*)(t_data *, int, int))(d->objs[i].print_func))(d, i, fd);
 		i += 1;
 	}
 	close(fd);

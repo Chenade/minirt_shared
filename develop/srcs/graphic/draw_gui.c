@@ -12,47 +12,49 @@
 
 #include "minirt.h"
 
-int	draw_icon(t_data *d, int x, int y)
+void	mlx_putstr(t_data *d, int x, int y, char *str)
 {
-	int		i;
-	t_objs	objs;
-	t_pixel	pixel;
-	int		color;
+	mlx_string_put(d->mlx_ptr, d->win_ptr, x, y, COLOR_WHITE, str);
+}
 
-	(void) x;
-	(void) y;
-	i = 0;
-	ft_bzero(&pixel, sizeof(t_pixel));
-	set_color(&pixel.color, "255,0,0");
-	while (i < d->nbr_objs)
-	{
-		objs = d->objs[i];
-		i++;
-	}
-	color = encode_rgb(pixel.color);
-	return (color);
+void	print_menu(t_data *d)
+{
+	int		y;
+
+	y = HEIGHT + 10;
+	mlx_putstr(d, 45, y += 20, "< How to Use >");
+	mlx_putstr(d, 35, y += 20, "Arrow Keys: Move X/Y");
+	mlx_putstr(d, 35, y += 20, "Key Z/X: Move Z");
+	mlx_putstr(d, 35, y += 20, "Key Q/A: Rotate X");
+	mlx_putstr(d, 35, y += 20, "Key W/S: Rotate Y");
+	mlx_putstr(d, 35, y += 20, "Key E/D: Rotate Z");
+	mlx_putstr(d, 35, y += 20, "Key U/I: Height");
+	mlx_putstr(d, 35, y += 20, "Key J/K: Diameter");
 }
 
 int	draw_gui(t_data *d)
 {
 	int		i;
-	int		j;
-	int		y;
-	void	*mlx;
-	void	*win;
+	int		x;
 
-	i = HEIGHT;
-	while (i < WIN_HEIGHT)
+	i = d->index;
+	x = 200;
+	mlx_putstr(d, 215, HEIGHT + 30, "Selected");
+	while (i < d->nbr_objs)
 	{
-		j = -1;
-		while (++j < WIDTH)
-			img_pix_put(d, j, i, draw_icon(d, j, i));
-		i++;
+		((void (*)(t_data *, t_objs, int))
+			(d->objs[i].gui_func))(d, d->objs[i], x);
+		x += 100;
+		i += 1;
 	}
-
-	y = 10;
-	mlx = d->mlx_ptr;
-	win = d->win_ptr;
-	mlx_string_put(mlx, win, 35, y += 20, COLOR_TEXT, "How to Use");
+	i = 0;
+	while (i <= d->index)
+	{
+		((void (*)(t_data *, t_objs, int))
+			(d->objs[i].gui_func))(d, d->objs[i], x);
+		x += 100;
+		i += 1;
+	}
+	print_menu(d);
 	return (0);
 }

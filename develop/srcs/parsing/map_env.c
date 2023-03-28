@@ -35,7 +35,7 @@ int	map_check_cam(t_data *d, char **line, int index)
 		return (1);
 	d->fov = fov;
 	d->objs[index].keyboard_func = key_camera;
-	d->objs[index].gui_func = draw_gui;
+	d->objs[index].gui_func = gui_camera;
 	d->objs[index].print_func = print_camera;
 	d->cam = &d->objs[index];
 	return (0);
@@ -60,7 +60,7 @@ int	map_check_ambient(t_data *d, char **line, int index)
 	d->objs[index].color = d->objs[index].color;
 	d->objs[index].ratio = d->objs[index].ratio;
 	d->objs[index].keyboard_func = key_light;
-	d->objs[index].gui_func = draw_gui;
+	d->objs[index].gui_func = gui_ambient;
 	d->objs[index].print_func = print_ambient;
 	d->ambient = &d->objs[index];
 	return (0);
@@ -87,7 +87,7 @@ int	map_check_light(t_data *d, char **line, int index)
 	d->objs[index].diameter = 10;
 	d->objs[index].collision_func = hit_light;
 	d->objs[index].keyboard_func = key_light;
-	d->objs[index].gui_func = draw_gui;
+	d->objs[index].gui_func = gui_light;
 	d->objs[index].print_func = print_light;
 	d->light = &d->objs[index];
 	return (0);

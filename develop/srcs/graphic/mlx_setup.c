@@ -73,7 +73,6 @@ int	handle_keypress(int keysym, t_data *d)
 	else if (keysym == XK_Tab)
 	{
 		d->index = (d->index + 1) % (d->nbr_objs);
-		printf("%s: %d\n", __func__, d->index);
 		draw_gui(d);
 	}
 	else if (keysym == XK_p)

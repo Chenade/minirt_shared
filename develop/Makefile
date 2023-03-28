@@ -72,15 +72,19 @@ SRCS_PAR	=	parsing/setup.c			\
 SRCS_MLX	=	graphic/mlx_setup.c		\
 				graphic/keyboard_env.c		\
 				graphic/keyboard_obj.c		\
-				graphic/print_env.c		\
-				graphic/print_obj.c		\
 				graphic/collision.c		\
 				graphic/ray_tracing.c	\
 				graphic/draw_gui.c
+	
+SRCS_DIS	=	display/print_obj.c		\
+				display/print_env.c		\
+				display/gui_env.c		\
+				display/gui_obj.c
 
 SRCS		=	$(SRCS_GEN)
 SRCS		+=	$(SRCS_PAR)
 SRCS		+=	$(SRCS_MLX)
+SRCS		+=	$(SRCS_DIS)
 SRCS		+=	main.c
 
 OBJS		=	$(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))

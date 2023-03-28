@@ -27,6 +27,7 @@
 # define WIDTH 1080
 # define WIN_HEIGHT 840
 # define HEIGHT 640
+# define GUI_HEIGHT 700
 
 # define STEP 5
 
@@ -90,7 +91,14 @@ void		print_light(t_data *d, int index, int fd);
 void		print_ambient(t_data *d, int index, int fd);
 
 // draw_gui.c
+void		mlx_putstr(t_data *d, int x, int y, char *str);
 int			draw_gui(t_data *d);
+void		gui_sphere(t_data *d, t_objs obj, int x);
+void		gui_plane(t_data *d, t_objs obj, int x);
+void		gui_cylinder(t_data *d, t_objs obj, int x);
+void		gui_camera(t_data *d, t_objs obj, int x);
+void		gui_light(t_data *d, t_objs obj, int x);
+void		gui_ambient(t_data *d, t_objs obj, int x);
 
 // general.c
 void		free_data(t_data *d);
