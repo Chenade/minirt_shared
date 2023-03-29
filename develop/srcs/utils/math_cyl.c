@@ -19,7 +19,7 @@ first, interaction with an infinite tube:
 
 at^2 + bt + c = 0 (like the spheres);
 
-a = va.va     -> va = (s x v x s);
+a = va.va     -> va = (s x v x s);      ->  *
 
 b = 2ra.va;   -> ra = s x (r0 - rt) x s;
 
@@ -31,11 +31,24 @@ rt = cord of obj;
 s = direction vector of the tube;
 R = radius of tube;
 
-------------------------------------------------
+* : "x" means cross product. see vectors functions;
 
-now we limit the tube with planes
+--------------------------------------------------
 
-...
+now we limit the tube.
+
+we have to check for 2 conditions :
+
+(hit_p - ra1).s > 0         &&         (hit_p - ra2).s < 0
+
+hit_p = r0 + v*t (so the position of the point of intersection between
+		the ray and the tube at t time in the v direction starting at r0,
+		r0 being 'p' in my functions);
+
+ra1 & ra2 = positions of the 2 extremities of the central axis
+			relative to the starting point of the ray (r0 or 'p');
+
+s = same as above, direction vector of the tube;
 
 */
 
@@ -74,6 +87,7 @@ double	check_solutions_cy(t_objs *obj, t_data *d, t_vector p)
 	b = dot_product(vec_scale(ra, 2), va);
 	c = dot_product(ra, ra) - (obj->diameter / 2) * (obj->diameter / 2);
 	return (quadratic_discriminant(a, b, c));
+	// normalize everyting !!!! cross product probably not working because of this;
 }
 
 double	calculate_scaler_cy(t_objs *obj, t_data *d, t_vector p)
@@ -93,5 +107,5 @@ double	calculate_scaler_cy(t_objs *obj, t_data *d, t_vector p)
 	b = dot_product(vec_scale(ra, 2), va);
 	c = dot_product(ra, ra) - (obj->diameter / 2) * (obj->diameter / 2);
 	return (limit_cyl(obj, d, p, quadratic_solve(a, b, c)));
+	// normalize everyting !!!! cross product probably not working because of this;
 }
-
