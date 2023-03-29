@@ -25,10 +25,14 @@ double	get_norm(double x, double y, double z)
 	return (sqrt(x * x + y * y + z * z));
 }
 
-double	cross_product(t_vector v1, t_vector v2)
+t_vector	cross_product(t_vector v1, t_vector v2)
 {
-	return ((v1.y * v2.z - v1.z * v2.y) - (v1.x * v2.z - v1.z * v2.x) \
-	+ (v1.x * v2.y - v1.y * v2.x));
+	t_vector	v;
+
+	v.x = v1.y * v2.z - v1.z * v2.y;
+	v.y = v1.x * v2.z - v1.z * v2.x;
+	v.z = v1.x * v2.y - v1.y * v2.x;
+	return (v);
 }
 
 double	dot_product(t_vector v1, t_vector v2)

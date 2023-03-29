@@ -85,7 +85,7 @@ int	map_check_light(t_data *d, char **line, int index)
 	if (set_color(&d->objs[index].color, line[3]))
 		return (1);
 	d->objs[index].type = DEF;
-	d->objs[index].diameter = 10;
+	d->objs[index].diameter = 6;
 	d->objs[index].collision_func = hit_light;
 	d->objs[index].keyboard_func = key_light;
 	d->objs[index].gui_func = gui_light;

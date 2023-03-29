@@ -92,7 +92,7 @@ void	trace_shadow(t_pixel *p, t_data *d, t_vector v, double d_to_l)
 			pixel = min_scaler(i, pixel,
 					((t_pixel (*)(struct s_objs *, struct s_data *, t_vector p))
 						objs.shadow_func)(&objs, d, vec_sum(d->cam->cord, \
-						vec_scale(vec_sum(p->pos, vec_scale(p->norm, 0.000001)), p->scaler))));
+						vec_scale(vec_sum(p->pos, vec_scale(p->norm, 0.00001)), p->scaler))));
 		}
 		i++;
 	}

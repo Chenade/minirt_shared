@@ -61,6 +61,7 @@ SRCS_GEN	=	utils/general.c			\
 				utils/tools.c			\
 				utils/math_sp.c			\
 				utils/math_pl.c			\
+				utils/math_cyl.c		\
 				utils/vectors.c			\
 				utils/helper.c			\
 

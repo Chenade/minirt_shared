@@ -66,7 +66,8 @@ int			map_check_cylinder(t_data *d, char **line, int index);
 // collision.c
 t_pixel		hit_sphere(struct s_objs *obj, struct s_data *d, t_vector p);
 t_pixel		hit_plane(struct s_objs *obj, struct s_data *d, t_vector p);
-t_pixel		hit_cylinder(struct s_objs *obj, struct s_data *d, int x, int y);
+t_pixel		hit_cylinder(struct s_objs *obj, struct s_data *d, t_vector p);
+t_pixel		cylinder_shadow(struct s_objs *obj, struct s_data *d, t_vector p);
 t_pixel		hit_light(struct s_objs *obj, struct s_data *d, t_vector p);
 int			ray_tracing(t_data *d, int x, int y);
 
@@ -115,6 +116,12 @@ void		print_img_data(t_img *i);
 int			print_info(char *name);
 void		*ft_malloc(t_data *d, size_t size);
 
+//math_cy.c
+double		quadratic_discriminant(double a, double b, double c);
+double		quadratic_solve(double a, double b, double c);
+double		check_solutions_cy(t_objs *obj, t_data *d, t_vector p);
+double		calculate_scaler_cy(t_objs *obj, t_data *d, t_vector p);
+
 //math_sp.c
 double		check_solutions(t_objs *obj, t_data *d, t_vector p);
 double		calculate_scaler_sp(t_objs *obj, t_data *d, t_vector p);
@@ -129,7 +136,7 @@ double		calculate_scaler_pl2(t_objs *obj, t_data *d, t_vector p);
 //vectors.c
 int			init_vector(t_vector *v, int x, int y, int z);
 double		get_norm(double x, double y, double z);
-double		cross_product(t_vector v1, t_vector v2);
+t_vector	cross_product(t_vector v1, t_vector v2);
 double		dot_product(t_vector v1, t_vector v2);
 t_vector	normalize_vect(t_vector v);
 void		get_cur_vec(t_data *d, int x, int y);
