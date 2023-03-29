@@ -45,14 +45,15 @@ double	limit_cyl(t_objs *obj, t_data *d, t_vector p, double t)
 	t_vector	ra1;
 	t_vector	ra2;
 
+	if (t <= 0)
+		return (-1);
 	hit_p = vec_sum(p, vec_scale(d->cur_p.pos, t));
-	// ra1 = vec_scale(normalize_vect(obj->cord), -obj->height);
-	// ra2 = vec_scale(normalize_vect(obj->cord), obj->height);
-	ra1 = vec_scale(obj->cord, -obj->height);
-	ra2 = vec_scale(obj->cord, obj->height);
+	obj->orientation = normalize_vect(obj->orientation);
+	ra1 = vec_sum(obj->cord, vec_scale(obj->orientation, -(obj->height / 2)));
+	ra2 = vec_sum(obj->cord, vec_scale(obj->orientation, obj->height / 2));
 	if (dot_product(vec_sub(hit_p, ra1), obj->orientation) > 0 && \
 		dot_product(vec_sub(hit_p, ra2), obj->orientation) < 0)
-		return (printf("test\n"), t);
+		return (t);
 	return (-1);
 }
 
@@ -91,7 +92,6 @@ double	calculate_scaler_cy(t_objs *obj, t_data *d, t_vector p)
 	a = dot_product(va, va);
 	b = dot_product(vec_scale(ra, 2), va);
 	c = dot_product(ra, ra) - (obj->diameter / 2) * (obj->diameter / 2);
-	// return (limit_cyl(obj, d, p, quadratic_solve(a, b, c)));
-	return (quadratic_solve(a, b, c));
+	return (limit_cyl(obj, d, p, quadratic_solve(a, b, c)));
 }
 

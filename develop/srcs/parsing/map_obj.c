@@ -60,7 +60,7 @@ int	map_check_cylinder(t_data *d, char **line, int index)
 	double	height;
 
 	if (ft_array_len(line) != 6)
-		return (printf("test\n"), 1);
+		return (1);
 	if (set_vector(&d->objs[index].cord, line[1]))
 		return (1);
 	diameter = ft_strtod(line[3]);
@@ -70,6 +70,7 @@ int	map_check_cylinder(t_data *d, char **line, int index)
 	height = ft_strtod(line[4]);
 	if (height > 1000)
 		return (1);
+	d->objs[index].height = height;
 	if (set_orientation(&d->objs[index].orientation, line[2]))
 		return (1);
 	if (set_color(&d->objs[index].color, line[5]))
