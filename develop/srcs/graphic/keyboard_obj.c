@@ -60,5 +60,7 @@ int	key_cylinder(t_data *d, int keysym)
 		if (d->objs[d->index].height > STEP)
 			d->objs[d->index].height -= STEP;
 	}
+	d->objs[d->index].orientation = \
+	normalize_vect(d->objs[d->index].orientation);
 	return (i);
 }

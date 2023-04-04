@@ -86,7 +86,7 @@ int			key_light(t_data *d, int keysym);
 int			key_saved(t_data *d);
 
 // print.c
-void		print_vector(t_vector v, int fd);
+void		print_vector(t_vector v, int fd, int isnormal);
 void		print_color(t_color c, int fd);
 void		print_sphere(t_data *d, int index, int fd);
 void		print_plane(t_data *d, int index, int fd);
