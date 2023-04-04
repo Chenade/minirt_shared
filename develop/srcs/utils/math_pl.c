@@ -47,8 +47,6 @@ double	check_vn2(t_objs *obj, t_data *d)
 	return (vn);
 }
 
-
-
 double	calculate_scaler_pl2(t_objs *obj, t_data *d, t_vector p)
 {
 	double		t;

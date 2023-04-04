@@ -57,11 +57,11 @@ int	ft_orientation(t_objs *obj, int keysym)
 	else if (keysym == XK_w)
 		return (obj->orientation.y += 1, 1);
 	else if (keysym == XK_s)
-		return (obj->orientation.y += 1, 1);
+		return (obj->orientation.y -= 1, 1);
 	else if (keysym == XK_e)
 		return (obj->orientation.z += 1, 1);
 	else if (keysym == XK_d)
-		return (obj->orientation.z += 1, 1);
+		return (obj->orientation.z -= 1, 1);
 	return (0);
 }
 
