@@ -43,6 +43,7 @@ int	map_check_plane(t_data *d, char **line, int index)
 		return (1);
 	if (set_orientation(&d->objs[index].orientation, line[2]))
 		return (1);
+	d->objs[index].orientation = normalize_vect(d->objs[index].orientation);
 	if (set_color(&d->objs[index].color, line[3]))
 		return (1);
 	d->objs[index].type = PL;
@@ -73,6 +74,7 @@ int	map_check_cylinder(t_data *d, char **line, int index)
 	d->objs[index].height = height;
 	if (set_orientation(&d->objs[index].orientation, line[2]))
 		return (1);
+	d->objs[index].orientation = normalize_vect(d->objs[index].orientation);
 	if (set_color(&d->objs[index].color, line[5]))
 		return (1);
 	d->objs[index].type = CYL;

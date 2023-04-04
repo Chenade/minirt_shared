@@ -49,7 +49,6 @@ else
 
 t_vector	calculate_sp_norm(t_vector center, t_vector hit_point)
 {
-	// printf("hit point : %f, %f, %f\n", hit_point.x, hit_point.y, hit_point.z);
 	return (normalize_vect(vec_sub(hit_point, center)));
 }
 
@@ -65,35 +64,17 @@ double	quadratic_solve(double a, double b, double c)
 	double	s2;
 
 	delta = quadratic_discriminant(a, b, c);
+	if (delta < 0)
+		return (-1);
 	if (delta > 0)
 	{
 		s1 = (-b - sqrt(delta)) / (2 * a);
 		s2 = (-b + sqrt(delta)) / (2 * a);
-		// printf("s1, s2 : %f, %f\n", s1, s2);
 		if (s1 < s2)
 			return (s1);
 		return (s2); // check for the smallest !! -> positive <- !!;
 	}
 	return (-b / (2 * a));
-}
-
-double	check_solutions(t_objs *obj, t_data *d, t_vector p)
-{
-	double		a;
-	double		b;
-	double		c;
-	t_vector	v;
-
-	v = d->cur_p.pos;
-	a = v.x * v.x + v.y * v.y + v.z * v.z;
-	b = 2 * (p.x * v.x - v.x * obj->cord.x + \
-		p.y * v.y - v.y * obj->cord.y + \
-		p.z * v.z - v.z * obj->cord.z);
-	c = (p.x - obj->cord.x) * (p.x - obj->cord.x) + \
-		(p.y - obj->cord.y) * (p.y - obj->cord.y) + \
-		(p.z - obj->cord.z) * (p.z - obj->cord.z) - \
-		(obj->diameter / 2) * (obj->diameter / 2);
-	return (quadratic_discriminant(a, b, c));
 }
 
 double	calculate_scaler_sp(t_objs *obj, t_data *d, t_vector p)
@@ -113,29 +94,5 @@ double	calculate_scaler_sp(t_objs *obj, t_data *d, t_vector p)
 		(p.z - obj->cord.z) * (p.z - obj->cord.z) - \
 		(obj->diameter / 2) * (obj->diameter / 2);
 	return (quadratic_solve(a, b, c));
+	//still missing the direction vector of the camera in all formulas !!!;
 }
-
-/*
-NEW
-a = v.x * v.x + v.y * v.y + v.z * v.z;
-
-b = 2(p.x * v.x - vx * obj->cord.x + \
-	p.y * v.y - vy * obj->cord.y + \
-	p.z * v.z - vz * obj->cord.z)
-
-c = (p.x - obj->cord.x) * (p.x - obj->cord.x) + \
-	(p.y - obj->cord.y) * (p.y - obj->cord.y) + \
-	(p.z - obj->cord.z) * (p.z - obj->cord.z) - \
-	(obj->diameter / 2) * (obj->diameter / 2);
-*/
-
-/*
-OLD
-
-a = v.x * v.x + v.y * v.y + v.z * v.z;
-b = 2 * (0 - v.x * obj->cord.x + 0 - v.y * \
-	obj->cord.y + 0 - v.z * obj->cord.z);
-c = (0 - obj->cord.x) * (0 - obj->cord.x) + (0 - obj->cord.y) \
-	* (0 - obj->cord.y) + (0 - obj->cord.z) * (0 - obj->cord.z) \
-	- (obj->diameter / 2) * (obj->diameter / 2);
-*/

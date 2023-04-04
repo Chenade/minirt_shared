@@ -14,19 +14,14 @@
 
 t_pixel	hit_sphere(struct s_objs *obj, struct s_data *d, t_vector p)
 {
-	double	delta;
 	double	scaler;
 	t_pixel	pixel;
 
-	delta = check_solutions(obj, d, p);
 	pixel.is_light = 0;
-	if (delta < 0)
-	{
-		pixel.scaler = -1;
-		return (pixel);
-	}
 	scaler = calculate_scaler_sp(obj, d, p);
 	pixel.scaler = scaler;
+	if (scaler == -1)
+		return (pixel);
 	pixel.pos = d->cur_p.pos;
 	pixel.norm = calculate_sp_norm(obj->cord, vec_sum(d->cam->cord, \
 	vec_scale(pixel.pos, pixel.scaler)));
@@ -36,16 +31,9 @@ t_pixel	hit_sphere(struct s_objs *obj, struct s_data *d, t_vector p)
 
 t_pixel	sphere_shadow(struct s_objs *obj, struct s_data *d, t_vector p)
 {
-	double	delta;
 	double	scaler;
 	t_pixel	pixel;
 
-	delta = check_solutions(obj, d, p);
-	if (delta < 0)
-	{
-		pixel.scaler = -1;
-		return (pixel);
-	}
 	scaler = calculate_scaler_sp(obj, d, p);
 	pixel.scaler = scaler;
 	// printf("%s\n", __func__);
@@ -108,22 +96,14 @@ t_pixel	plane_shadow(struct s_objs *obj, struct s_data *d, t_vector p)
 
 t_pixel	hit_cylinder(struct s_objs *obj, struct s_data *d, t_vector p)
 {
-	double	delta;
 	double	scaler;
 	t_pixel	pixel;
 
-	// (void)obj;
-	// (void)d;
-	// (void)p;
-	delta = check_solutions_cy(obj, d, p);
 	pixel.is_light = 0;
-	if (delta < 0)
-	{
-		pixel.scaler = -1;
-		return (pixel);
-	}
 	scaler = calculate_scaler_cy(obj, d, p);
 	pixel.scaler = scaler;
+	if (scaler == -1)
+		return (pixel);
 	pixel.pos = d->cur_p.pos;
 	// pixel.norm = calculate_sp_norm(obj->cord, vec_sum(d->cam->cord, \
 	// vec_scale(pixel.pos, pixel.scaler)));
@@ -147,20 +127,16 @@ t_pixel	cylinder_shadow(struct s_objs *obj, struct s_data *d, t_vector p)
 
 t_pixel	hit_light(struct s_objs *obj, struct s_data *d, t_vector p)
 {
-	double	delta;
+	// double	delta;
 	double	scaler;
 	t_pixel	pixel;
 
-	delta = check_solutions(obj, d, p);
 	pixel.is_light = 1;
-	if (delta < 0)
-	{
-		pixel.scaler = -1;
-		return (pixel);
-	}
 	scaler = calculate_scaler_sp(obj, d, p);
-	pixel.pos = d->cur_p.pos;
 	pixel.scaler = scaler;
+	if (scaler == -1)
+		return (pixel);
+	pixel.pos = d->cur_p.pos;
 	pixel.norm = calculate_sp_norm(obj->cord, vec_sum(d->cam->cord, \
 	vec_scale(pixel.pos, pixel.scaler)));
 	pixel.color = obj->color;

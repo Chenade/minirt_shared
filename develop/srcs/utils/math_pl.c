@@ -42,7 +42,6 @@ double	check_vn2(t_objs *obj, t_data *d)
 	t_vector	v;
 
 	v = d->cur_p.pos;
-	// normalize_vect(&obj->orientation);
 	vn = (obj->orientation.x * v.x + obj->orientation.y * v.y + \
 		obj->orientation.z * v.z);
 	return (vn);
@@ -56,7 +55,6 @@ double	calculate_scaler_pl2(t_objs *obj, t_data *d, t_vector p)
 	t_vector	v;
 
 	v = d->cur_p.pos;
-	// normalize_vect(&obj->orientation);
 	t = (-obj->orientation.x * (p.x - obj->cord.x) \
 		- obj->orientation.y * (p.y - obj->cord.y) \
 		- obj->orientation.z * (p.z - obj->cord.z)) / \
