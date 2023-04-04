@@ -59,10 +59,10 @@ void	get_color(t_pixel *p, t_data *d)
 	vec_scale(p->pos, p->scaler)));
 	v = normalize_vect(v);
 	norm1 = get_norm(v.x, v.y, v.z);
-	norm2 = get_norm(p->norm.x, p->norm.y, p->norm.z);
+	norm2 = get_norm(p->normal.x, p->normal.y, p->normal.z);
 	if (norm1 == 0 || norm2 == 0)
 		return ;
-	angle = acos(dot_product(v, p->norm) / (norm1 * norm2));
+	angle = acos(dot_product(v, p->normal) / (norm1 * norm2));
 	if (angle > PI / 2)
 		angle = PI / 2;
 	angle = 1 - (angle / (PI / 2));
@@ -92,7 +92,7 @@ void	trace_shadow(t_pixel *p, t_data *d, t_vector v, double d_to_l)
 			pixel = min_scaler(i, pixel,
 					((t_pixel (*)(struct s_objs *, struct s_data *, t_vector p))
 						objs.shadow_func)(&objs, d, vec_sum(d->cam->cord, \
-						vec_scale(vec_sum(p->pos, vec_scale(p->norm, 0.00001)), p->scaler))));
+						vec_scale(vec_sum(p->pos, vec_scale(p->normal, 0.00001)), p->scaler))));
 		}
 		i++;
 	}

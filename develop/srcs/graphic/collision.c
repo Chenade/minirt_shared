@@ -23,9 +23,9 @@ t_pixel	hit_sphere(struct s_objs *obj, struct s_data *d, t_vector p)
 	if (scaler == -1)
 		return (pixel);
 	pixel.pos = d->cur_p.pos;
-	pixel.norm = calculate_sp_norm(obj->cord, vec_sum(d->cam->cord, \
-	vec_scale(pixel.pos, pixel.scaler)));
 	pixel.color = obj->color;
+	pixel.normal = calculate_sp_normal(obj->cord, vec_sum(d->cam->cord, \
+	vec_scale(pixel.pos, pixel.scaler)));
 	return (pixel);
 }
 
@@ -63,7 +63,7 @@ t_pixel	hit_plane(struct s_objs *obj, struct s_data *d, t_vector p)
 	}
 	pixel.scaler = scaler;
 	pixel.pos = d->cur_p.pos;
-	pixel.norm = obj->orientation;
+	pixel.normal = obj->orientation;
 	pixel.color = obj->color;
 	// printf("%s\n", __func__);
 	return (pixel);
@@ -105,8 +105,8 @@ t_pixel	hit_cylinder(struct s_objs *obj, struct s_data *d, t_vector p)
 	if (scaler == -1)
 		return (pixel);
 	pixel.pos = d->cur_p.pos;
-	// pixel.norm = calculate_sp_norm(obj->cord, vec_sum(d->cam->cord, \
-	// vec_scale(pixel.pos, pixel.scaler)));
+	pixel.normal = calculate_cyl_normal(obj, vec_sum(d->cam->cord, \
+	vec_scale(pixel.pos, pixel.scaler)));
 	pixel.color = obj->color;
 	return (pixel);
 }
@@ -137,7 +137,7 @@ t_pixel	hit_light(struct s_objs *obj, struct s_data *d, t_vector p)
 	if (scaler == -1)
 		return (pixel);
 	pixel.pos = d->cur_p.pos;
-	pixel.norm = calculate_sp_norm(obj->cord, vec_sum(d->cam->cord, \
+	pixel.normal = calculate_sp_normal(obj->cord, vec_sum(d->cam->cord, \
 	vec_scale(pixel.pos, pixel.scaler)));
 	pixel.color = obj->color;
 	return (pixel);

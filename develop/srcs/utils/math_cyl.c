@@ -52,6 +52,31 @@ s = same as above, direction vector of the tube;
 
 */
 
+/*
+and finally, we check for the planes at each end of the tube;
+
+pos of pl_1 : pos of the cyl + direction vector(normalized) * height / 2;
+pos of pl_2 : pos of the cyl + direction vector(normalized) * -height / 2;
+
+direction of pl_1 : direction vector of cyl (normalized);
+direction of pl_2 : -direction vector of cyl (normalized);
+
+we check for intersections on both those planes, and if they
+are inside the diameter of the cylinder;
+*/
+
+t_vector	calculate_cyl_normal(t_objs *cyl, t_vector hit_pt)
+{
+	double		t;
+	t_vector	pt;
+	t_vector	cyl_bottom;
+
+	cyl_bottom = vec_sum(cyl->cord, vec_scale(cyl->orientation, cyl->height / 2));
+	t = dot_product(vec_sub(hit_pt, cyl_bottom), cyl->orientation); // cy.ori should be normalized and so has the length of 1.
+	pt = vec_sum(cyl_bottom, vec_scale(cyl->orientation, t));
+	return(normalize_vect(vec_sub(hit_pt, pt)));
+}
+
 double	limit_cyl(t_objs *obj, t_data *d, t_vector p, double t)
 {
 	t_vector	hit_p;

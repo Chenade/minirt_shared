@@ -32,7 +32,7 @@ typedef struct s_pixel
 {
 	int			is_light;
 	t_vector	pos;
-	t_vector	norm;
+	t_vector	normal;
 	t_color		color;
 	double		scaler;
 }	t_pixel;

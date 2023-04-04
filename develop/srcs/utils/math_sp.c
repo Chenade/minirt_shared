@@ -47,7 +47,7 @@ else
 	no solution;
 */
 
-t_vector	calculate_sp_norm(t_vector center, t_vector hit_point)
+t_vector	calculate_sp_normal(t_vector center, t_vector hit_point)
 {
 	return (normalize_vect(vec_sub(hit_point, center)));
 }
