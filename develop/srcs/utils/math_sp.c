@@ -47,6 +47,17 @@ else
 	no solution;
 */
 
+double	smallest_positive(double n1, double n2)
+{
+	if ((fabs(n1)) < (fabs(n2)) && n1 > 0)
+	{
+		return (n1);
+	}
+	if (n2 > 0)
+		return (n2);
+	return (n1);
+}
+
 t_vector	calculate_sp_normal(t_vector center, t_vector hit_point)
 {
 	return (normalize_vect(vec_sub(hit_point, center)));
@@ -70,9 +81,7 @@ double	quadratic_solve(double a, double b, double c)
 	{
 		s1 = (-b - sqrt(delta)) / (2 * a);
 		s2 = (-b + sqrt(delta)) / (2 * a);
-		if (s1 < s2)
-			return (s1);
-		return (s2); // check for the smallest !! -> positive <- !!;
+		return (smallest_positive(s1, s2)); // check for the smallest !! -> positive <- !!;
 	}
 	return (-b / (2 * a));
 }
