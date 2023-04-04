@@ -50,18 +50,18 @@ int	ft_move(t_objs *obj, int keysym)
 
 int	ft_orientation(t_objs *obj, int keysym)
 {
-	if (keysym == XK_q)
-		return (obj->orientation.x -= 1, 1);
-	else if (keysym == XK_a)
-		return (obj->orientation.x += 1, 1);
-	else if (keysym == XK_w)
-		return (obj->orientation.y += 1, 1);
-	else if (keysym == XK_s)
-		return (obj->orientation.y += 1, 1);
-	else if (keysym == XK_e)
-		return (obj->orientation.z += 1, 1);
-	else if (keysym == XK_d)
-		return (obj->orientation.z += 1, 1);
+	if (keysym == XK_q && (obj->orientation.x >= -1.05))
+		return (obj->orientation.x -= 0.05, 1);
+	else if (keysym == XK_a && (obj->orientation.x <= 0.95))
+		return (obj->orientation.x += 0.05, 1);
+	else if (keysym == XK_w && (obj->orientation.y >= -1.05))
+		return (obj->orientation.y -= 0.05, 1);
+	else if (keysym == XK_s && (obj->orientation.y <= 0.95))
+		return (obj->orientation.y += 0.05, 1);
+	else if (keysym == XK_e && (obj->orientation.z >= -1.05))
+		return (obj->orientation.z -= 0.05, 1);
+	else if (keysym == XK_d && (obj->orientation.z <= 0.95))
+		return (obj->orientation.z += 0.05, 1);
 	return (0);
 }
 
