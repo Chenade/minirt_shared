@@ -110,7 +110,10 @@ double	hit_cap(t_vector dir, t_data *d, t_vector p, t_vector center, double radi
 	// vec_sub(vec_sum(p, vec_scale(v, t)), center).z);
 	if (t > 0 && \
 	fabs(get_vec_norm(vec_sub(center, vec_sum(p, vec_scale(v, t))))) < radius)
-		return (printf("OUI MONSIEUR\n"), t);
+		return (printf("test : %f, %f, %f\n", \
+	vec_sum(p, vec_scale(v, t)).x, \
+	vec_sum(p, vec_scale(v, t)).y, \
+	vec_sum(p, vec_scale(v, t)).z), t);
 	return (-1);
 }
 
@@ -120,9 +123,9 @@ double	calculate_scaler_caps(t_objs *cyl, t_data *d, t_vector p)
 	double	t2;
 
 	t1 = hit_cap(cyl->orientation, d, p, \
-		vec_scale(cyl->orientation, cyl->height / 2), cyl->diameter / 2);
+		vec_sum(cyl->cord, vec_scale(cyl->orientation, cyl->height / 2)), cyl->diameter / 2);
 	t2 = hit_cap(vec_scale(cyl->orientation, -1), d, p, \
-		vec_scale(cyl->orientation, -cyl->height / 2), cyl->diameter / 2);
+		vec_sum(cyl->cord, vec_scale(cyl->orientation, -cyl->height / 2)), cyl->diameter / 2);
 	return (smallest_positive(t1, t2));
 	// for each plane, check for collisions;
 	// then check if the distance between the cord of plane (center
