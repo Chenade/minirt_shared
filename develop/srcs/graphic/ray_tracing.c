@@ -12,15 +12,6 @@
 
 #include "minirt.h"
 
-// t_pixel	min_objects(int i, t_pixel p1, t_pixel p2)
-// {
-// 	if (i != 0 && p1.pos.z < p2.pos.z)
-// 	{
-// 		return (p1);
-// 	}
-// 	return (p2);
-// }
-
 /*
 - dot_product;
 - get_norm;
@@ -66,6 +57,7 @@ void	get_color(t_pixel *p, t_data *d)
 	if (angle > PI / 2)
 		angle = PI / 2;
 	angle = 1 - (angle / (PI / 2));
+	//add ambient light;
 	p->color.r *= (d->light->color.r * d->light->ratio / 255) * angle;
 	p->color.g *= (d->light->color.g * d->light->ratio / 255) * angle;
 	p->color.b *= (d->light->color.b * d->light->ratio / 255) * angle;
@@ -113,16 +105,6 @@ void	get_shadow(t_pixel *p, t_data *d)
 	// calculate scaler; -> collision function;
 	trace_shadow(p, d, v, d_to_l);
 }
-
-
-
-// t_pixel	hit_light(struct s_objs *obj, struct s_data *d, t_pixel pixel)
-// {
-// 	(void)obj;
-// 	(void)d;
-// 	// printf("%s\n", __func__);
-// 	return (pixel);
-// }
 
 int	ray_tracing(t_data *d, int x, int y)
 {

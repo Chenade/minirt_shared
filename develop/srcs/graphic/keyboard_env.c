@@ -23,7 +23,8 @@ int	key_saved(t_data *d)
 	i = 0;
 	while (i < d->nbr_objs)
 	{
-		((void (*)(t_data *, int, int))(d->objs[i].print_func))(d, i, fd);
+		((void (*)
+				(t_data *, int, int))(d->objs[i].print_func))(d, i, fd);
 		i += 1;
 	}
 	close(fd);
