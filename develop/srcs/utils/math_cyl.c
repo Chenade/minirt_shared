@@ -75,12 +75,26 @@ t_vector	calculate_cyl_normal(t_objs *cyl, t_vector hit_pt)
 	return (normalize_vect(vec_sub(hit_pt, pt)));
 }
 
-double	hit_cap(t_vector dir, t_data *d, t_vector p, t_vector center, \
-		double radius)
+// double	calculate_scaler_pl2(t_objs *obj, t_data *d, t_vector p)
+// {
+// 	double		t;
+// 	t_vector	v;
+
+// 	v = d->cur_p.pos;
+// 	t = (-obj->orientation.x * (p.x - obj->cord.x) \
+// 		- obj->orientation.y * (p.y - obj->cord.y) \
+// 		- obj->orientation.z * (p.z - obj->cord.z)) / \
+// 		(obj->orientation.x * v.x + obj->orientation.y * v.y + \
+// 		obj->orientation.z * v.z);
+// 	return (t);
+// }
+
+double	hit_cap(t_vector dir, t_data *d, t_vector p, t_vector center, double radius)
 {
 	double		t;
 	t_vector	v;
 
+	// (void)radius;
 	v = d->cur_p.pos;
 	t = (-dir.x * (p.x - center.x) \
 		- dir.y * (p.y - center.y) \
@@ -89,9 +103,14 @@ double	hit_cap(t_vector dir, t_data *d, t_vector p, t_vector center, \
 		dir.z * v.z);
 	//hit_point = p + t*v; vec_sum(p, vec_scaler(v, t));
 	//dist between hit_point and center <= radius;
+	// printf("norm : %f\n", get_vec_norm(vec_sub(vec_sum(p, vec_scale(v, t)), center)));
+	// printf("test : %f, %f, %f\n", \
+	// vec_sub(vec_sum(p, vec_scale(v, t)), center).x, \
+	// vec_sub(vec_sum(p, vec_scale(v, t)), center).y, \
+	// vec_sub(vec_sum(p, vec_scale(v, t)), center).z);
 	if (t > 0 && \
-	fabs(get_vec_norm(vec_sub(vec_sum(p, vec_scale(v, t)), center))) <= radius)
-		return (t);
+	fabs(get_vec_norm(vec_sub(center, vec_sum(p, vec_scale(v, t))))) < radius)
+		return (printf("OUI MONSIEUR\n"), t);
 	return (-1);
 }
 
