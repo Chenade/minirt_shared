@@ -121,6 +121,7 @@ double		quadratic_discriminant(double a, double b, double c);
 double		quadratic_solve(double a, double b, double c);
 double		check_solutions_cy(t_objs *obj, t_data *d, t_vector p);
 double		calculate_scaler_cy(t_objs *obj, t_data *d, t_vector p);
+double		calculate_scaler_cy_maha(t_objs *obj, t_data *d, t_vector p);
 t_vector	calculate_cyl_normal(t_objs *cyl, t_vector hit_point);
 
 //math_sp.c
