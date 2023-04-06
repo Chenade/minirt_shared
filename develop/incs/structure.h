@@ -44,6 +44,7 @@ typedef struct s_objs
 	int			type;
 	t_vector	cord;
 	t_vector	orientation;
+	t_vector	normal;
 	t_color		color;
 	double		ratio;
 	double		diameter;

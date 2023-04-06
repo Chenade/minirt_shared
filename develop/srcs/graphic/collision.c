@@ -43,18 +43,18 @@ t_pixel	sphere_shadow(struct s_objs *obj, struct s_data *d, t_vector p)
 t_pixel	hit_plane(struct s_objs *obj, struct s_data *d, t_vector p)
 {
 	t_pixel	pixel;
-	double	vn;
 	double	scaler;
+	// double	vn;
 
 	obj->orientation = normalize_vect(obj->orientation);
-	vn = check_vn2(obj, d);
+	// vn = check_vn2(obj, d);
 	pixel.is_light = 0;
-	if (vn >= -0.00001 && vn <= 0.00001)
-	{
-		pixel.scaler = -1;
-		return (pixel);
-		//need to fix this cause its weird;
-	}
+	// if (vn >= -0.00001 && vn <= 0.00001)
+	// {
+	// 	pixel.scaler = -1;
+	// 	return (pixel);								??????????
+	// 	//need to fix this cause its weird;
+	// }
 	scaler = calculate_scaler_pl2(obj, d, p);
 	if (scaler < 0)
 	{
@@ -72,17 +72,17 @@ t_pixel	hit_plane(struct s_objs *obj, struct s_data *d, t_vector p)
 t_pixel	plane_shadow(struct s_objs *obj, struct s_data *d, t_vector p)
 {
 	t_pixel	pixel;
-	double	vn;
 	double	scaler;
+	// double	vn;
 
 	obj->orientation = normalize_vect(obj->orientation);
-	vn = check_vn2(obj, d);
-	if (vn >= -0.00001 && vn <= 0.00001)
-	{
-		pixel.scaler = -1;
-		return (pixel);
-		//need to fix this cause its weird;
-	}
+	// vn = check_vn2(obj, d);
+	// if (vn >= -0.00001 && vn <= 0.00001)
+	// {
+	// 	pixel.scaler = -1;
+	// 	return (pixel);								??????????
+	// 	//need to fix this cause its weird;
+	// }
 	scaler = calculate_scaler_pl2(obj, d, p);
 	if (scaler < 0)
 	{
@@ -100,28 +100,24 @@ t_pixel	hit_cylinder(struct s_objs *obj, struct s_data *d, t_vector p)
 	t_pixel	pixel;
 
 	pixel.is_light = 0;
-	scaler = calculate_scaler_cy(obj, d, p);
+	scaler = calculate_scaler_cy_maha(obj, d, p);
 	pixel.scaler = scaler;
 	if (scaler == -1)
 		return (pixel);
 	pixel.pos = d->cur_p.pos;
-	pixel.normal = calculate_cyl_normal(obj, vec_sum(d->cam->cord, \
-	vec_scale(pixel.pos, pixel.scaler)));
+	pixel.normal = obj->normal;
 	pixel.color = obj->color;
 	return (pixel);
 }
 
 t_pixel	cylinder_shadow(struct s_objs *obj, struct s_data *d, t_vector p)
 {
+	double	scaler;
 	t_pixel	pixel;
 
-	(void)obj;
-	(void)d;
-	(void)p;
-	// set_vector(&pixel.pos, "10000,10000,10000");
-	// set_color(&pixel.color, "0,0,0");
 	pixel.is_light = 0;
-	printf("%s\n", __func__);
+	scaler = calculate_scaler_cy_maha(obj, d, p);
+	pixel.scaler = scaler;
 	return (pixel);
 }
 

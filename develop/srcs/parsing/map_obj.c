@@ -79,7 +79,7 @@ int	map_check_cylinder(t_data *d, char **line, int index)
 		return (1);
 	d->objs[index].type = CYL;
 	d->objs[index].collision_func = hit_cylinder;
-	// d->objs[index].shadow_func = cylinder_shadow;
+	d->objs[index].shadow_func = cylinder_shadow;
 	d->objs[index].keyboard_func = key_cylinder;
 	d->objs[index].gui_func = gui_cylinder;
 	d->objs[index].print_func = print_cylinder;

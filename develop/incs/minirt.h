@@ -121,6 +121,7 @@ double		quadratic_discriminant(double a, double b, double c);
 double		quadratic_solve(double a, double b, double c);
 double		check_solutions_cy(t_objs *obj, t_data *d, t_vector p);
 double		calculate_scaler_cy(t_objs *obj, t_data *d, t_vector p);
+double		calculate_scaler_cy_maha(t_objs *obj, t_data *d, t_vector p);
 t_vector	calculate_cyl_normal(t_objs *cyl, t_vector hit_point);
 
 //math_sp.c
@@ -137,6 +138,7 @@ double		calculate_scaler_pl2(t_objs *obj, t_data *d, t_vector p);
 //vectors.c
 int			init_vector(t_vector *v, int x, int y, int z);
 double		get_norm(double x, double y, double z);
+double		get_vec_norm(t_vector v);
 t_vector	cross_product(t_vector v1, t_vector v2);
 double		dot_product(t_vector v1, t_vector v2);
 t_vector	normalize_vect(t_vector v);
@@ -146,6 +148,7 @@ t_vector	vec_sum(t_vector v1, t_vector v2);
 t_vector	vec_scale(t_vector w, double scaler);
 
 // tools.c
+double		smallest_positive(double n1, double n2);
 void		img_pix_put(t_data *d, int x, int y, int color);
 int			getpixelcolor(t_img *img, int x, int y);
 int			encode_rgb(t_color c);

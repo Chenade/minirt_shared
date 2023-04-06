@@ -25,6 +25,11 @@ double	get_norm(double x, double y, double z)
 	return (sqrt(x * x + y * y + z * z));
 }
 
+double	get_vec_norm(t_vector v)
+{
+	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
+}
+
 t_vector	cross_product(t_vector v1, t_vector v2)
 {
 	t_vector	v;
