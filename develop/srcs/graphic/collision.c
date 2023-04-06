@@ -112,15 +112,12 @@ t_pixel	hit_cylinder(struct s_objs *obj, struct s_data *d, t_vector p)
 
 t_pixel	cylinder_shadow(struct s_objs *obj, struct s_data *d, t_vector p)
 {
+	double	scaler;
 	t_pixel	pixel;
 
-	(void)obj;
-	(void)d;
-	(void)p;
-	// set_vector(&pixel.pos, "10000,10000,10000");
-	// set_color(&pixel.color, "0,0,0");
 	pixel.is_light = 0;
-	printf("%s\n", __func__);
+	scaler = calculate_scaler_cy_maha(obj, d, p);
+	pixel.scaler = scaler;
 	return (pixel);
 }
 

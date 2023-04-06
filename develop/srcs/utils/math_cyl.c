@@ -232,6 +232,7 @@ double	calculate_scaler_cy_maha(t_objs *obj, t_data *d, t_vector p)
 			yp * (b * c * zm - c * c * ym - a * a * ym + a * b * xm) + \
 			xp * (-c * c * xm + a * c * zm + a * b * ym - b * b * xm) - \
 			b * c * zp * yp - a * c * xp * zp - a * b * xp * yp);
+	//save the squared to save calculations;
 	t = limit_cyl(obj, d, p, quadratic_solve(A, B, C));
 	if (t < 0)
 		return (calculate_scaler_caps(obj, d, p));
