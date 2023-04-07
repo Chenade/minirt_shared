@@ -23,10 +23,8 @@ int	map_check_cam(t_data *d, char **line, int index)
 		return (print_err("Error\n: Invalid Map: Camera", d), 1);
 	if (set_vector(&d->objs[index].cord, line[1]))
 		return (print_err("Error\n: Invalid Map: Camera", d), 1);
-	// d->cam.cord = d->objs[index].cord;
 	if (set_orientation(&d->objs[index].orientation, line[2]))
 		return (print_err("Error\n: Invalid Map: Camera", d), 1);
-	// d->cam.orientation = d->objs[index].orientation;
 	if (d->objs[index].orientation.x == 0 && d->objs[index].orientation.y == 0
 		&& d->objs[index].orientation.z == 0)
 		return (print_err("Error\n: Invalid Map: Camera", d), 1);

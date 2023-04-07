@@ -17,7 +17,6 @@ int	define_obj(t_data *d, char	**tmp, int index)
 	int	status;
 
 	status = 1;
-	// printf("%s\n", tmp[0]);
 	if (ft_strcmp(tmp[0], "C") == 0)
 		status = map_check_cam(d, tmp, index);
 	else if (ft_strcmp(tmp[0], "A") == 0)
@@ -54,7 +53,6 @@ int	process_file(t_data *d, int fd)
 		free (l);
 	}
 	d->nbr_objs = ft_array_len(d->raw);
-	// printf("nbr_objs: %d\n", d->nbr_objs);
 	d->objs = ft_calloc(sizeof(t_objs), d->nbr_objs);
 	if (!d->objs)
 		return (print_err("Error\n: Malloc failed.", d), 1);

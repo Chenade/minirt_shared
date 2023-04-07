@@ -69,8 +69,6 @@ int	map_check_cylinder(t_data *d, char **line, int index)
 		return (print_err("Error\n: Invalid Map: Cylinder", d), 1);
 	d->objs[index].diameter = diameter;
 	height = ft_strtod(line[4]);
-	if (height > 1000)
-		return (print_err("Error\n: Invalid Map: Cylinder", d), 1);
 	d->objs[index].height = height;
 	if (set_orientation(&d->objs[index].orientation, line[2]))
 		return (print_err("Error\n: Invalid Map: Cylinder", d), 1);

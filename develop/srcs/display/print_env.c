@@ -20,7 +20,7 @@ void	print_vector(t_vector v, int fd, int is_normal)
 		ft_putstr_fd(",", fd);
 		ft_putdouble_fd(v.y, fd);
 		ft_putstr_fd(",", fd);
-		ft_putdouble_fd(v.z, fd);	
+		ft_putdouble_fd(v.z, fd);
 	}
 	else
 	{
