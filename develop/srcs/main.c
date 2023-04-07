@@ -41,9 +41,9 @@ int	main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	status = 1;
 	if (argc != 2 || !check_filename(argv[1], "rt"))
-		ft_printf("Error: Usage: ./rt {filename}.rt\n");
+		ft_printf("Error\n: Usage: ./rt {filename}.rt\n");
 	else if (fd < 0 || read(fd, 0, 0))
-		ft_printf("Error: Cannot open file.\n");
+		ft_printf("Error\n: Cannot open file.\n");
 	else
 		status = minirt(argv[1]);
 	close (fd);

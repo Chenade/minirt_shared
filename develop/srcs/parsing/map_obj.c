@@ -17,15 +17,15 @@ int	map_check_sphere(t_data *d, char **line, int index)
 	double	diameter;
 
 	if (ft_array_len(line) != 4)
-		return (1);
+		return (print_err("Error\n: Invalid Map: Sphere", d), 1);
 	if (set_vector(&d->objs[index].cord, line[1]))
-		return (1);
+		return (print_err("Error\n: Invalid Map: Sphere", d), 1);
 	diameter = ft_strtod(line[2]);
 	if (diameter > 1000)
-		return (1);
+		return (print_err("Error\n: Invalid Map: Sphere", d), 1);
 	d->objs[index].diameter = diameter;
 	if (set_color(&d->objs[index].color, line[3]))
-		return (1);
+		return (print_err("Error\n: Invalid Map: Sphere", d), 1);
 	d->objs[index].type = SP;
 	d->objs[index].collision_func = hit_sphere;
 	d->objs[index].shadow_func = sphere_shadow;
@@ -38,14 +38,14 @@ int	map_check_sphere(t_data *d, char **line, int index)
 int	map_check_plane(t_data *d, char **line, int index)
 {
 	if (ft_array_len(line) != 4)
-		return (1);
+		return (print_err("Error\n: Invalid Map: Plane", d), 1);
 	if (set_vector(&d->objs[index].cord, line[1]))
-		return (1);
+		return (print_err("Error\n: Invalid Map: Plane", d), 1);
 	if (set_orientation(&d->objs[index].orientation, line[2]))
-		return (1);
+		return (print_err("Error\n: Invalid Map: Plane", d), 1);
 	d->objs[index].orientation = normalize_vect(d->objs[index].orientation);
 	if (set_color(&d->objs[index].color, line[3]))
-		return (1);
+		return (print_err("Error\n: Invalid Map: Plane", d), 1);
 	d->objs[index].type = PL;
 	d->objs[index].collision_func = hit_plane;
 	d->objs[index].shadow_func = plane_shadow;
@@ -61,22 +61,22 @@ int	map_check_cylinder(t_data *d, char **line, int index)
 	double	height;
 
 	if (ft_array_len(line) != 6)
-		return (1);
+		return (print_err("Error\n: Invalid Map: Cylinder", d), 1);
 	if (set_vector(&d->objs[index].cord, line[1]))
-		return (1);
+		return (print_err("Error\n: Invalid Map: Cylinder", d), 1);
 	diameter = ft_strtod(line[3]);
 	if (diameter > 1000)
-		return (1);
+		return (print_err("Error\n: Invalid Map: Cylinder", d), 1);
 	d->objs[index].diameter = diameter;
 	height = ft_strtod(line[4]);
 	if (height > 1000)
-		return (1);
+		return (print_err("Error\n: Invalid Map: Cylinder", d), 1);
 	d->objs[index].height = height;
 	if (set_orientation(&d->objs[index].orientation, line[2]))
-		return (1);
+		return (print_err("Error\n: Invalid Map: Cylinder", d), 1);
 	d->objs[index].orientation = normalize_vect(d->objs[index].orientation);
 	if (set_color(&d->objs[index].color, line[5]))
-		return (1);
+		return (print_err("Error\n: Invalid Map: Cylinder", d), 1);
 	d->objs[index].type = CYL;
 	d->objs[index].collision_func = hit_cylinder;
 	d->objs[index].shadow_func = cylinder_shadow;

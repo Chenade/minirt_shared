@@ -23,7 +23,7 @@ int	init_mlx(t_data *d)
 			print_err("Failed to launch window.", d);
 		d->img.mlx_img = mlx_new_image(d->mlx_ptr, WIDTH, WIN_HEIGHT);
 		if (!d->img.mlx_img)
-			print_err("mlx new image error", d);
+			print_err("mlx new image Error\n", d);
 		d->img.addr = mlx_get_data_addr(d->img.mlx_img, &d->img.bpp,
 				&d->img.line_len, &d->img.endian);
 	}
