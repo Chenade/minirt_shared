@@ -44,7 +44,7 @@
 
 // setup.c
 int			set_vector(t_vector *v, char *str);
-int			set_orientation(t_vector *v, char *str);
+int			set_dir(t_vector *v, char *str);
 int			set_color(t_color *c, char *str);
 
 //mlx_setup.c
@@ -77,7 +77,7 @@ t_pixel		plane_shadow(struct s_objs *obj, struct s_data *d, t_vector p);
 
 // keyboard.c
 int			ft_move(t_objs *obj, int keysym);
-int			ft_orientation(t_objs *obj, int keysym);
+int			ft_dir(t_objs *obj, int keysym);
 int			key_sphere(t_data *d, int keysym);
 int			key_plane(t_data *d, int keysym);
 int			key_cylinder(t_data *d, int keysym);
@@ -145,6 +145,7 @@ t_vector	normalize_vect(t_vector v);
 void		get_cur_vec(t_data *d, int x, int y);
 t_vector	vec_sub(t_vector v1, t_vector v2);
 t_vector	vec_sum(t_vector v1, t_vector v2);
+t_vector	vec_fact(t_vector v1, t_vector v2);
 t_vector	vec_scale(t_vector w, double scaler);
 
 // tools.c

@@ -31,7 +31,7 @@ typedef struct s_vector
 typedef struct s_pixel
 {
 	int			is_light;
-	t_vector	pos;
+	t_vector	dir;
 	t_vector	normal;
 	t_color		color;
 	double		scaler;
@@ -42,12 +42,12 @@ typedef struct s_data	t_data;
 typedef struct s_objs
 {
 	int			type;
-	t_vector	cord;
-	t_vector	orientation;
+	t_vector	pos;
+	t_vector	dir;
 	t_vector	normal;
 	t_color		color;
-	double		ratio;
-	double		diameter;
+	double		intensity;
+	double		radius;
 	double		height;
 	void		*collision_func;
 	void		*shadow_func;

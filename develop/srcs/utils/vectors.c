@@ -59,10 +59,11 @@ t_vector	normalize_vect(t_vector v)
 
 void	get_cur_vec(t_data *d, int x, int y)
 {
-	d->cur_p.pos.x = (-WIDTH / 2 + x);
-	d->cur_p.pos.y = (HEIGHT / 2 - y);
-	d->cur_p.pos.z = (d->cam_len);
-	d->cur_p.pos = normalize_vect(d->cur_p.pos);
+	d->cur_p.dir.x = (-WIDTH / 2 + x);
+	d->cur_p.dir.y = (HEIGHT / 2 - y);
+	d->cur_p.dir.z = (d->cam_len);
+	d->cur_p.dir = normalize_vect(d->cur_p.dir);
+	// d->cur_p.dir = normalize_vect(vec_sum(d->cur_p.dir, normalize_vect(d->cam->dir)));
 }
 
 t_vector	vec_sub(t_vector v1, t_vector v2)
@@ -85,6 +86,16 @@ t_vector	vec_sum(t_vector v1, t_vector v2)
 	return (v);
 }
 
+t_vector	vec_fact(t_vector v1, t_vector v2)
+{
+	t_vector	v;
+
+	v.x = v1.x * v2.x;
+	v.y = v1.y * v2.y;
+	v.z = v1.z * v2.z;
+	return (v);
+}
+
 t_vector	vec_scale(t_vector v, double scaler)
 {
 	t_vector	w;
@@ -94,6 +105,8 @@ t_vector	vec_scale(t_vector v, double scaler)
 	w.z = v.z * scaler;
 	return (w);
 }
+
+
 
 // t_vector	vec_incr(t_vecto v, double i)
 // {

@@ -26,7 +26,7 @@ int	set_vector(t_vector *v, char *str)
 	return (0);
 }
 
-int	set_orientation(t_vector *v, char *str)
+int	set_dir(t_vector *v, char *str)
 {
 	char	**arr;
 

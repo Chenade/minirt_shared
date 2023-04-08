@@ -18,12 +18,12 @@ int	map_check_sphere(t_data *d, char **line, int index)
 
 	if (ft_array_len(line) != 4)
 		return (1);
-	if (set_vector(&d->objs[index].cord, line[1]))
+	if (set_vector(&d->objs[index].pos, line[1]))
 		return (1);
 	diameter = ft_strtod(line[2]);
 	if (diameter > 1000)
 		return (1);
-	d->objs[index].diameter = diameter;
+	d->objs[index].radius = diameter / 2;
 	if (set_color(&d->objs[index].color, line[3]))
 		return (1);
 	d->objs[index].type = SP;
@@ -39,11 +39,11 @@ int	map_check_plane(t_data *d, char **line, int index)
 {
 	if (ft_array_len(line) != 4)
 		return (1);
-	if (set_vector(&d->objs[index].cord, line[1]))
+	if (set_vector(&d->objs[index].pos, line[1]))
 		return (1);
-	if (set_orientation(&d->objs[index].orientation, line[2]))
+	if (set_dir(&d->objs[index].dir, line[2]))
 		return (1);
-	d->objs[index].orientation = normalize_vect(d->objs[index].orientation);
+	d->objs[index].dir = normalize_vect(d->objs[index].dir);
 	if (set_color(&d->objs[index].color, line[3]))
 		return (1);
 	d->objs[index].type = PL;
@@ -62,19 +62,19 @@ int	map_check_cylinder(t_data *d, char **line, int index)
 
 	if (ft_array_len(line) != 6)
 		return (1);
-	if (set_vector(&d->objs[index].cord, line[1]))
+	if (set_vector(&d->objs[index].pos, line[1]))
 		return (1);
 	diameter = ft_strtod(line[3]);
 	if (diameter > 1000)
 		return (1);
-	d->objs[index].diameter = diameter;
+	d->objs[index].radius = diameter / 2;
 	height = ft_strtod(line[4]);
 	if (height > 1000)
 		return (1);
 	d->objs[index].height = height;
-	if (set_orientation(&d->objs[index].orientation, line[2]))
+	if (set_dir(&d->objs[index].dir, line[2]))
 		return (1);
-	d->objs[index].orientation = normalize_vect(d->objs[index].orientation);
+	d->objs[index].dir = normalize_vect(d->objs[index].dir);
 	if (set_color(&d->objs[index].color, line[5]))
 		return (1);
 	d->objs[index].type = CYL;
