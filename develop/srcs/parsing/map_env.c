@@ -91,5 +91,7 @@ int	map_check_light(t_data *d, char **line, int index)
 	d->objs[index].gui_func = gui_light;
 	d->objs[index].print_func = print_light;
 	d->light = &d->objs[index];
+	d->objs[index].math.radius_2 = \
+	d->objs[index].radius * d->objs[index].radius;
 	return (0);
 }

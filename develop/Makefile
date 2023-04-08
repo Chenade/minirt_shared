@@ -57,33 +57,35 @@ INCS_DIR	=	incs
 
 OBJS_DIR	=	objs
 
-SRCS_MAT	= 	math/math_cyl.c			\
-				math/math_pl.c			\
-				math/math_sp.c			\
-				math/vectors_init.c		\
-				math/vectors_ops.c		\
-				math/vectors_ops2.c		\
+SRCS_MAT	= 	math/math_cyl.c				\
+				math/math_pl.c				\
+				math/math_sp.c				\
+				math/vectors_init.c			\
+				math/vectors_ops.c			\
+				math/vectors_ops2.c			\
 
-SRCS_UTI	=	utils/general.c			\
-				utils/tools.c			\
+SRCS_UTI	=	utils/general.c				\
+				utils/tools.c				\
 				utils/helper.c
 
-SRCS_PAR	=	parsing/setup.c			\
-				parsing/map_env.c		\
-				parsing/map_obj.c		\
+SRCS_PAR	=	parsing/setup.c				\
+				parsing/map_env.c			\
+				parsing/map_obj.c			\
 				parsing/parse.c
 
-SRCS_MLX	=	graphic/mlx_setup.c		\
-				graphic/keyboard_env.c	\
-				graphic/keyboard_obj.c	\
-				graphic/collisions.c	\
-				graphic/shadows.c		\
-				graphic/ray_tracing.c	\
+SRCS_MLX	=	graphic/mlx_setup.c			\
+				graphic/keyboard_env.c		\
+				graphic/keyboard_obj.c		\
+				graphic/collisions.c		\
+				graphic/shadows.c			\
+				graphic/shadow_tracing.c	\
+				graphic/ray_tracing.c		\
+				graphic/calculate_colors.c
 	
-SRCS_DIS	=	display/print_obj.c		\
-				display/print_env.c		\
-				display/draw_gui.c		\
-				display/gui_env.c		\
+SRCS_DIS	=	display/print_obj.c			\
+				display/print_env.c			\
+				display/draw_gui.c			\
+				display/gui_env.c			\
 				display/gui_obj.c
 
 SRCS		=	$(SRCS_MAT)

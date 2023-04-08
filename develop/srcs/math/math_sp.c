@@ -101,7 +101,7 @@ double	calculate_scaler_sp(t_objs *obj, t_data *d, t_vector p)
 	c = (p.x - obj->pos.x) * (p.x - obj->pos.x) + \
 		(p.y - obj->pos.y) * (p.y - obj->pos.y) + \
 		(p.z - obj->pos.z) * (p.z - obj->pos.z) - \
-		obj->radius * obj->radius;
+		obj->math.radius_2;
 	return (quadratic_solve(a, b, c));
 	//still missing the direction vector of the camera in all formulas !!!;
 }

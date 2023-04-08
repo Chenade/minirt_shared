@@ -32,6 +32,8 @@ int	map_check_sphere(t_data *d, char **line, int index)
 	d->objs[index].keyboard_func = key_sphere;
 	d->objs[index].gui_func = gui_sphere;
 	d->objs[index].print_func = print_sphere;
+	d->objs[index].math.radius_2 = \
+	d->objs[index].radius * d->objs[index].radius;
 	return (0);
 }
 
@@ -53,6 +55,23 @@ int	map_check_plane(t_data *d, char **line, int index)
 	d->objs[index].gui_func = gui_plane;
 	d->objs[index].print_func = print_plane;
 	return (0);
+}
+
+void	init_math(t_objs *obj)
+{
+	obj->math.radius_2 = obj->radius * obj->radius;
+	obj->math.a = obj->dir.x;
+	obj->math.b = obj->dir.y;
+	obj->math.c = obj->dir.z;
+	obj->math.xm = obj->pos.x;
+	obj->math.ym = obj->pos.y;
+	obj->math.zm = obj->pos.z;
+	obj->math.a_2 = obj->math.a * obj->math.a;
+	obj->math.b_2 = obj->math.b * obj->math.b;
+	obj->math.c_2 = obj->math.c * obj->math.c;
+	obj->math.xm_2 = obj->math.xm * obj->math.xm;
+	obj->math.ym_2 = obj->math.ym * obj->math.ym;
+	obj->math.zm_2 = obj->math.zm * obj->math.zm;
 }
 
 int	map_check_cylinder(t_data *d, char **line, int index)
@@ -83,5 +102,10 @@ int	map_check_cylinder(t_data *d, char **line, int index)
 	d->objs[index].keyboard_func = key_cylinder;
 	d->objs[index].gui_func = gui_cylinder;
 	d->objs[index].print_func = print_cylinder;
+	d->objs[index].cap_1 = vec_sum(d->objs[index].pos, \
+	vec_scale(d->objs[index].dir, d->objs[index].height / 2));
+	d->objs[index].cap_2 = vec_sum(d->objs[index].pos, \
+	vec_scale(d->objs[index].dir, -d->objs[index].height / 2));
+	init_math(&d->objs[index]);
 	return (0);
 }

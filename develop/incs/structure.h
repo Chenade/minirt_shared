@@ -26,45 +26,83 @@ typedef struct s_vector
 	double	x;
 	double	y;
 	double	z;
+	double	norm;
 }	t_vector;
 
 typedef struct s_pixel
 {
 	int			is_light;
+	double		scaler;
+	t_color		color;
 	t_vector	dir;
 	t_vector	normal;
-	t_color		color;
-	double		scaler;
+	t_vector	pos;
 }	t_pixel;
+
+typedef struct s_math
+{
+	double	A;
+	double	B;
+	double	C;
+	double	a;
+	double	b;
+	double	c;
+	double	i;
+	double	j;
+	double	k;
+	double	xp;
+	double	yp;
+	double	zp;
+	double	xm;
+	double	ym;
+	double	zm;
+	double	a_2;
+	double	b_2;
+	double	c_2;
+	double	i_2;
+	double	j_2;
+	double	k_2;
+	double	xp_2;
+	double	yp_2;
+	double	zp_2;
+	double	xm_2;
+	double	ym_2;
+	double	zm_2;
+	double	radius_2;
+}	t_math;
 
 typedef struct s_data	t_data;
 
 typedef struct s_objs
 {
 	int			type;
+	t_color		color;
 	t_vector	pos;
 	t_vector	dir;
 	t_vector	normal;
-	t_color		color;
-	double		intensity;
-	double		radius;
+	t_vector	cap_1;
+	t_vector	cap_2;
 	double		height;
+	double		radius;
+	double		radius_2;
+	double		intensity;
 	void		*collision_func;
 	void		*shadow_func;
 	void		*keyboard_func;
 	void		*gui_func;
 	void		*print_func;
+	t_math		math;
 }	t_objs;
 
 typedef struct s_img
 {
-	void	*mlx_img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
 	int		w;
 	int		h;
+	int		bpp;
+	int		endian;
+	int		line_len;
+	char	*addr;
+	void	*mlx_img;
 }	t_img;
 
 typedef struct s_data
@@ -82,11 +120,11 @@ typedef struct s_data
 	int				nbr_camera;
 	int				nbr_light;
 	int				nbr_ambient;
+	t_pixel			cur_p;
 	struct s_objs	*objs;
 	struct s_objs	*cam;
 	struct s_objs	*light;
 	struct s_objs	*ambient;
-	t_pixel			cur_p;
 }	t_data;
 
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vectors_ops2.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: znogueir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/08 23:46:33 by znogueir          #+#    #+#             */
+/*   Updated: 2023/04/08 23:46:35 by znogueir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 double	get_norm(double x, double y, double z)
@@ -34,5 +46,6 @@ t_vector	normalize_vect(t_vector v)
 	w.x = v.x / norm;
 	w.y = v.y / norm;
 	w.z = v.z / norm;
+	w.norm = norm;
 	return (w);
 }

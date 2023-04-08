@@ -26,6 +26,8 @@ int	key_sphere(t_data *d, int keysym)
 		if (d->objs[d->index].radius > STEP)
 			d->objs[d->index].radius -= STEP;
 	}
+	d->objs[d->index].math.radius_2 = \
+	d->objs[d->index].radius * d->objs[d->index].radius;
 	return (i);
 }
 
@@ -62,5 +64,10 @@ int	key_cylinder(t_data *d, int keysym)
 	}
 	d->objs[d->index].dir = \
 	normalize_vect(d->objs[d->index].dir);
+	d->objs[d->index].cap_1 = vec_sum(d->objs[d->index].pos, \
+	vec_scale(d->objs[d->index].dir, d->objs[d->index].height / 2));
+	d->objs[d->index].cap_2 = vec_sum(d->objs[d->index].pos, \
+	vec_scale(d->objs[d->index].dir, -d->objs[d->index].height / 2));
+	init_math(&d->objs[d->index]);
 	return (i);
 }

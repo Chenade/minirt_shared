@@ -72,8 +72,7 @@ t_vector	calculate_cyl_normal(t_objs *cyl, t_vector hit_pt)
 	t_vector	pt;
 	t_vector	cyl_bottom;
 
-	cyl_bottom = vec_sum(cyl->pos, vec_scale(cyl->dir, \
-	cyl->height / 2));
+	cyl_bottom = cyl->cap_2;
 	t = dot_product(vec_sub(hit_pt, cyl_bottom), cyl->dir);
 	pt = vec_sum(cyl_bottom, vec_scale(cyl->dir, t));
 	return (normalize_vect(vec_sub(hit_pt, pt)));
@@ -104,10 +103,8 @@ double	calculate_scaler_caps(t_objs *cyl, t_data *d, t_vector p)
 	double	t2;
 	double	res;
 
-	t1 = hit_cap(cyl->dir, d, p, \
-		vec_sum(cyl->pos, vec_scale(cyl->dir, cyl->height / 2)), cyl->radius);
-	t2 = hit_cap(vec_scale(cyl->dir, -1), d, p, \
-		vec_sum(cyl->pos, vec_scale(cyl->dir, -cyl->height / 2)), cyl->radius);
+	t1 = hit_cap(cyl->dir, d, p, cyl->cap_1, cyl->radius);
+	t2 = hit_cap(vec_scale(cyl->dir, -1), d, p, cyl->cap_2, cyl->radius);
 	res = smallest_positive(t1, t2);
 	if (res == t1)
 		cyl->normal = cyl->dir;
@@ -163,57 +160,55 @@ double	limit_cyl(t_objs *obj, t_data *d, t_vector p, double t)
 // 	return (t);
 // }
 
+void	update_math(t_objs *obj, t_data *d, t_vector p)
+{
+	obj->math.i = d->cur_p.dir.x;
+	obj->math.j = d->cur_p.dir.y;
+	obj->math.k = d->cur_p.dir.z;
+	obj->math.xp = p.x;
+	obj->math.yp = p.y;
+	obj->math.zp = p.z;
+	obj->math.i_2 = obj->math.i * obj->math.i;
+	obj->math.j_2 = obj->math.j * obj->math.j;
+	obj->math.k_2 = obj->math.k * obj->math.k;
+	obj->math.xp_2 = obj->math.xp * obj->math.xp;
+	obj->math.yp_2 = obj->math.yp * obj->math.yp;
+	obj->math.zp_2 = obj->math.zp * obj->math.zp;
+}
+
 double	calculate_scaler_cy_maha(t_objs *obj, t_data *d, t_vector p)
 {
-	double		A, B, C;
-	double		a, b, c;
-	double		k, j, i;
-	double		xp, yp, zp;
-	double		xm, ym, zm;
 	double		t;
-	// t_vector	va;
-	// t_vector	ra;
+	t_math		m;
 	t_vector	v;
 
 	v = d->cur_p.dir;
-	a = obj->dir.x;
-	b = obj->dir.y;
-	c = obj->dir.z;
-	i = d->cur_p.dir.x;
-	j = d->cur_p.dir.y;
-	k = d->cur_p.dir.z;
-	xp = p.x;
-	yp = p.y;
-	zp = p.z;
-	xm = obj->pos.x;
-	ym = obj->pos.y;
-	zm = obj->pos.z;
-
-	A = k * k * (b * b + a * a) + \
-		j * j * (c * c + a * a) + \
-		i * i * (c * c + b * b) - \
-		2 * (b * c * k * j + a * c * i * k + a * b * j * i);
-	B = 2 * (k * zp * (b * b + a * a) + j * yp * (c * c + a * a) + i * xp * (c * c + b * b) + \
-		k * (-b * b * zm + b * c * ym + a * c * xm - a * a * zm) + \
-		j * (b * c * zm - c * c * ym - a * a * ym + a * b * xm) + \
-		i * (-c * c * xm + a * c * zm + a * b * ym - b * b * xm) - \
-		b * c * (k * yp + j * zp) - \
-		a * c * (i * zp + k * xp) - \
-		a * b * (j * xp + i * yp));
-	C = -obj->radius * obj->radius * (a * a + b * b + c * c) + \
-		b * b * (zm * zm + xm * xm) + \
-		c * c * (ym * ym + xm * xm) + \
-		a * a * (zm * zm + ym * ym) + \
-		2 * (- b * c * zm * ym - a * c * zm * xm - a * b * ym * xm) + \
-		zp * zp * (b * b + a * a) + \
-		yp * yp * (a * a + c * c) + \
-		xp * xp * (c * c + b * b) + \
-		2 * (zp * (-b * b * zm + b * c * ym + a * c * xm - a * a * zm) + \
-			yp * (b * c * zm - c * c * ym - a * a * ym + a * b * xm) + \
-			xp * (-c * c * xm + a * c * zm + a * b * ym - b * b * xm) - \
-			b * c * zp * yp - a * c * xp * zp - a * b * xp * yp);
-	//save the squared to save calculations;
-	t = limit_cyl(obj, d, p, quadratic_solve(A, B, C));
+	update_math(obj, d, p);
+	m = obj->math;
+	m.A = m.k_2 * (m.b_2 + m.a_2) + \
+		m.j_2 * (m.c_2 + m.a_2) + \
+		m.i_2 * (m.c_2 + m.b_2) - \
+		2 * (m.b * m.c * m.k * m.j + m.a * m.c * m.i * m.k + m.a * m.b * m.j * m.i);
+	m.B = 2 * (m.k * m.zp * (m.b_2 + m.a_2) + m.j * m.yp * (m.c_2 + m.a_2) + m.i * m.xp * (m.c_2 + m.b_2) + \
+		m.k * (-m.b_2 * m.zm + m.b * m.c * m.ym + m.a * m.c * m.xm - m.a_2 * m.zm) + \
+		m.j * (m.b * m.c * m.zm - m.c_2 * m.ym - m.a_2 * m.ym + m.a * m.b * m.xm) + \
+		m.i * (-m.c_2 * m.xm + m.a * m.c * m.zm + m.a * m.b * m.ym - m.b_2 * m.xm) - \
+		m.b * m.c * (m.k * m.yp + m.j * m.zp) - \
+		m.a * m.c * (m.i * m.zp + m.k * m.xp) - \
+		m.a * m.b * (m.j * m.xp + m.i * m.yp));
+	m.C = -obj->math.radius_2 * (m.a_2 + m.b_2 + m.c_2) + \
+		m.b_2 * (m.zm_2 + m.xm_2) + \
+		m.c_2 * (m.ym_2 + m.xm_2) + \
+		m.a_2 * (m.zm_2 + m.ym_2) + \
+		2 * (- m.b * m.c * m.zm * m.ym - m.a * m.c * m.zm * m.xm - m.a * m.b * m.ym * m.xm) + \
+		m.zp_2 * (m.b_2 + m.a_2) + \
+		m.yp_2 * (m.a_2 + m.c_2) + \
+		m.xp_2 * (m.c_2 + m.b_2) + \
+		2 * (m.zp * (-m.b_2 * m.zm + m.b * m.c * m.ym + m.a * m.c * m.xm - m.a_2 * m.zm) + \
+		m.yp * (m.b * m.c * m.zm - m.c_2 * m.ym - m.a_2 * m.ym + m.a * m.b * m.xm) + \
+		m.xp * (-m.c_2 * m.xm + m.a * m.c * m.zm + m.a * m.b * m.ym - m.b_2 * m.xm) - \
+		m.b * m.c * m.zp * m.yp - m.a * m.c * m.xp * m.zp - m.a * m.b * m.xp * m.yp);
+	t = limit_cyl(obj, d, p, quadratic_solve(m.A, m.B, m.C));
 	if (t < 0)
 		return (calculate_scaler_caps(obj, d, p));
 	obj->normal = calculate_cyl_normal(obj, vec_sum(d->cam->pos, \
