@@ -51,17 +51,17 @@ int	ft_move(t_objs *obj, int keysym)
 int	ft_dir(t_objs *obj, int keysym)
 {
 	if (keysym == XK_q && (obj->dir.x >= -1.05))
-		return (obj->dir.x -= 0.05, 1);
+		return (obj->dir.x -= 0.075, 1);
 	else if (keysym == XK_a && (obj->dir.x <= 0.95))
-		return (obj->dir.x += 0.05, 1);
+		return (obj->dir.x += 0.075, 1);
 	else if (keysym == XK_w && (obj->dir.y >= -1.05))
-		return (obj->dir.y -= 0.05, 1);
+		return (obj->dir.y -= 0.075, 1);
 	else if (keysym == XK_s && (obj->dir.y <= 0.95))
-		return (obj->dir.y += 0.05, 1);
+		return (obj->dir.y += 0.075, 1);
 	else if (keysym == XK_e && (obj->dir.z >= -1.05))
-		return (obj->dir.z -= 0.05, 1);
+		return (obj->dir.z -= 0.075, 1);
 	else if (keysym == XK_d && (obj->dir.z <= 0.95))
-		return (obj->dir.z += 0.05, 1);
+		return (obj->dir.z += 0.075, 1);
 	return (0);
 }
 

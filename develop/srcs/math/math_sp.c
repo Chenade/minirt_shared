@@ -81,7 +81,7 @@ double	quadratic_solve(double a, double b, double c)
 	{
 		s1 = (-b - sqrt(delta)) / (2 * a);
 		s2 = (-b + sqrt(delta)) / (2 * a);
-		return (smallest_positive(s1, s2)); // check for the smallest !! -> positive <- !!;
+		return (smallest_positive(s1, s2));
 	}
 	return (-b / (2 * a));
 }

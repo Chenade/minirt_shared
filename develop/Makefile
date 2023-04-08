@@ -11,7 +11,7 @@ RM			=	rm -rf
 CC			=	cc
 
 CFLAGS		=	-Wall -Werror -Wextra 
-# CFLAGS		+=	-Ofast -flto
+CFLAGS		+=	-Ofast -flto
 CFLAGS		+=	-I $(INCS_DIR) -I $(LIBFT_DIR) -I ${MLX_DIR}
 CFLAGS		+=	-g3 -MMD
 
@@ -57,32 +57,37 @@ INCS_DIR	=	incs
 
 OBJS_DIR	=	objs
 
-SRCS_GEN	=	utils/general.c			\
+SRCS_MAT	= 	math/math_cyl.c			\
+				math/math_pl.c			\
+				math/math_sp.c			\
+				math/vectors_init.c		\
+				math/vectors_ops.c		\
+				math/vectors_ops2.c		\
+
+SRCS_UTI	=	utils/general.c			\
 				utils/tools.c			\
-				utils/math_sp.c			\
-				utils/math_pl.c			\
-				utils/math_cyl.c		\
-				utils/vectors.c			\
-				utils/helper.c			\
+				utils/helper.c
 
 SRCS_PAR	=	parsing/setup.c			\
-				parsing/map_env.c	\
-				parsing/map_obj.c	\
+				parsing/map_env.c		\
+				parsing/map_obj.c		\
 				parsing/parse.c
 
 SRCS_MLX	=	graphic/mlx_setup.c		\
-				graphic/keyboard_env.c		\
-				graphic/keyboard_obj.c		\
-				graphic/collision.c		\
+				graphic/keyboard_env.c	\
+				graphic/keyboard_obj.c	\
+				graphic/collisions.c	\
+				graphic/shadows.c		\
 				graphic/ray_tracing.c	\
-				graphic/draw_gui.c
 	
 SRCS_DIS	=	display/print_obj.c		\
 				display/print_env.c		\
+				display/draw_gui.c		\
 				display/gui_env.c		\
 				display/gui_obj.c
 
-SRCS		=	$(SRCS_GEN)
+SRCS		=	$(SRCS_MAT)
+SRCS		+=	$(SRCS_UTI)
 SRCS		+=	$(SRCS_PAR)
 SRCS		+=	$(SRCS_MLX)
 SRCS		+=	$(SRCS_DIS)
