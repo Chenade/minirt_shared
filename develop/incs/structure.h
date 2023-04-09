@@ -41,9 +41,9 @@ typedef struct s_pixel
 
 typedef struct s_math
 {
-	double	A;
-	double	B;
-	double	C;
+	double	_a;
+	double	_b;
+	double	_c;
 	double	a;
 	double	b;
 	double	c;

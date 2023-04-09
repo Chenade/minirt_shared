@@ -185,18 +185,18 @@ double	calculate_scaler_cy_maha(t_objs *obj, t_data *d, t_vector p)
 	v = d->cur_p.dir;
 	update_math(obj, d, p);
 	m = obj->math;
-	m.A = m.k_2 * (m.b_2 + m.a_2) + \
+	m._a = m.k_2 * (m.b_2 + m.a_2) + \
 		m.j_2 * (m.c_2 + m.a_2) + \
 		m.i_2 * (m.c_2 + m.b_2) - \
 		2 * (m.b * m.c * m.k * m.j + m.a * m.c * m.i * m.k + m.a * m.b * m.j * m.i);
-	m.B = 2 * (m.k * m.zp * (m.b_2 + m.a_2) + m.j * m.yp * (m.c_2 + m.a_2) + m.i * m.xp * (m.c_2 + m.b_2) + \
+	m._b = 2 * (m.k * m.zp * (m.b_2 + m.a_2) + m.j * m.yp * (m.c_2 + m.a_2) + m.i * m.xp * (m.c_2 + m.b_2) + \
 		m.k * (-m.b_2 * m.zm + m.b * m.c * m.ym + m.a * m.c * m.xm - m.a_2 * m.zm) + \
 		m.j * (m.b * m.c * m.zm - m.c_2 * m.ym - m.a_2 * m.ym + m.a * m.b * m.xm) + \
 		m.i * (-m.c_2 * m.xm + m.a * m.c * m.zm + m.a * m.b * m.ym - m.b_2 * m.xm) - \
 		m.b * m.c * (m.k * m.yp + m.j * m.zp) - \
 		m.a * m.c * (m.i * m.zp + m.k * m.xp) - \
 		m.a * m.b * (m.j * m.xp + m.i * m.yp));
-	m.C = -obj->math.radius_2 * (m.a_2 + m.b_2 + m.c_2) + \
+	m._c = -obj->math.radius_2 * (m.a_2 + m.b_2 + m.c_2) + \
 		m.b_2 * (m.zm_2 + m.xm_2) + \
 		m.c_2 * (m.ym_2 + m.xm_2) + \
 		m.a_2 * (m.zm_2 + m.ym_2) + \
@@ -208,7 +208,7 @@ double	calculate_scaler_cy_maha(t_objs *obj, t_data *d, t_vector p)
 		m.yp * (m.b * m.c * m.zm - m.c_2 * m.ym - m.a_2 * m.ym + m.a * m.b * m.xm) + \
 		m.xp * (-m.c_2 * m.xm + m.a * m.c * m.zm + m.a * m.b * m.ym - m.b_2 * m.xm) - \
 		m.b * m.c * m.zp * m.yp - m.a * m.c * m.xp * m.zp - m.a * m.b * m.xp * m.yp);
-	t = limit_cyl(obj, d, p, quadratic_solve(m.A, m.B, m.C));
+	t = limit_cyl(obj, d, p, quadratic_solve(m._a, m._b, m._c));
 	if (t < 0)
 		return (calculate_scaler_caps(obj, d, p));
 	obj->normal = calculate_cyl_normal(obj, vec_sum(d->cam->pos, \

@@ -35,7 +35,7 @@ void	draw_imgs(t_data *d)
 	int		i;
 	int		j;
 
-	ft_bzero(d->img.addr, d->img.line_len * WIN_HEIGHT);
+	// ft_bzero(d->img.addr, d->img.line_len * WIN_HEIGHT);
 	i = 0;
 	while (i < HEIGHT)
 	{
