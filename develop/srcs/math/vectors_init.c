@@ -26,5 +26,5 @@ void	get_cur_vec(t_data *d, int x, int y)
 	d->cur_p.dir.y = (HEIGHT / 2 - y);
 	d->cur_p.dir.z = (d->cam_len);
 	d->cur_p.dir = normalize_vect(d->cur_p.dir);
-	d->cur_p.dir = normalize_vect(vec_sum(d->cur_p.dir, normalize_vect(d->cam->dir)));
+	// d->cur_p.dir = normalize_vect(vec_sum(d->cur_p.dir, normalize_vect(d->cam->dir)));
 }

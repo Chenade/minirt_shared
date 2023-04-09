@@ -77,7 +77,8 @@ void		get_shadow(t_pixel *p, t_data *d);
 t_pixel		sphere_shadow(struct s_objs *obj, struct s_data *d, t_vector p);
 t_pixel		plane_shadow(struct s_objs *obj, struct s_data *d, t_vector p);
 t_pixel		cylinder_shadow(struct s_objs *obj, struct s_data *d, t_vector p);
-void		get_color(t_pixel pixel, t_pixel *p, t_data *d);
+t_vector	put_ambient(t_pixel pixel, t_pixel *p, t_data *d);
+void		put_diffuse(t_pixel pixel, t_pixel *p, t_data *d);
 
 // keyboard.c
 int			ft_move(t_objs *obj, int keysym);

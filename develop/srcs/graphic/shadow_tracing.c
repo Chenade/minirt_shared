@@ -33,10 +33,12 @@ void	trace_shadow(t_pixel *p, t_data *d, t_vector v)
 						objs.shadow_func)(&objs, d, vec_sum(d->cam->pos, \
 						vec_scale(vec_sum(p->dir, vec_scale(p->normal, 0.00001)), p->scaler))));
 		}
+		if (pixel.scaler > 0 && pixel.scaler < v.norm)
+			return ((void)put_ambient(pixel, p, d));
 		i++;
 	}
-	pixel.pos = vec_sum(d->cam->pos, vec_scale(pixel.dir, pixel.scaler));
-	get_color(pixel, p, d);
+	// pixel.pos = vec_sum(d->cam->pos, vec_scale(pixel.dir, pixel.scaler));
+	put_diffuse(pixel, p, d);
 }
 
 void	get_shadow(t_pixel *p, t_data *d)
