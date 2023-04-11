@@ -81,7 +81,7 @@ double	quadratic_solve(double a, double b, double c)
 	{
 		s1 = (-b - sqrt(delta)) / (2 * a);
 		s2 = (-b + sqrt(delta)) / (2 * a);
-		return (smallest_positive(s1, s2)); // check for the smallest !! -> positive <- !!;
+		return (smallest_positive(s1, s2));
 	}
 	return (-b / (2 * a));
 }
@@ -93,15 +93,15 @@ double	calculate_scaler_sp(t_objs *obj, t_data *d, t_vector p)
 	double		c;
 	t_vector	v;
 
-	v = d->cur_p.pos;
+	v = d->cur_p.dir;
 	a = v.x * v.x + v.y * v.y + v.z * v.z;
-	b = 2 * (p.x * v.x - v.x * obj->cord.x + \
-		p.y * v.y - v.y * obj->cord.y + \
-		p.z * v.z - v.z * obj->cord.z);
-	c = (p.x - obj->cord.x) * (p.x - obj->cord.x) + \
-		(p.y - obj->cord.y) * (p.y - obj->cord.y) + \
-		(p.z - obj->cord.z) * (p.z - obj->cord.z) - \
-		(obj->diameter / 2) * (obj->diameter / 2);
+	b = 2 * (p.x * v.x - v.x * obj->pos.x + \
+		p.y * v.y - v.y * obj->pos.y + \
+		p.z * v.z - v.z * obj->pos.z);
+	c = (p.x - obj->pos.x) * (p.x - obj->pos.x) + \
+		(p.y - obj->pos.y) * (p.y - obj->pos.y) + \
+		(p.z - obj->pos.z) * (p.z - obj->pos.z) - \
+		obj->math.radius_2;
 	return (quadratic_solve(a, b, c));
 	//still missing the direction vector of the camera in all formulas !!!;
 }

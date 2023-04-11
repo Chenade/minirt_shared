@@ -77,3 +77,4 @@ void	gui_ambient(t_data *d, t_objs obj, int x)
 	}
 	mlx_putstr(d, x + 20, y + j + 20, "Ambient");
 }
+	

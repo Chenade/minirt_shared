@@ -47,9 +47,9 @@ void	print_camera(t_data *d, int index, int fd)
 
 	obj = d->objs[index];
 	ft_putstr_fd("C ", fd);
-	print_vector(obj.cord, fd, 0);
+	print_vector(obj.pos, fd, 0);
 	ft_putstr_fd(" ", fd);
-	print_vector(obj.orientation, fd, 1);
+	print_vector(obj.dir, fd, 1);
 	ft_putstr_fd(" ", fd);
 	ft_putnbr_fd(d->fov, fd);
 	ft_putstr_fd("\n", fd);
@@ -61,9 +61,9 @@ void	print_light(t_data *d, int index, int fd)
 
 	obj = d->objs[index];
 	ft_putstr_fd("L ", fd);
-	print_vector(obj.cord, fd, 0);
+	print_vector(obj.pos, fd, 0);
 	ft_putstr_fd(" ", fd);
-	ft_putnbr_fd(obj.ratio, fd);
+	ft_putnbr_fd(obj.intensity, fd);
 	ft_putstr_fd(" ", fd);
 	print_color(obj.color, fd);
 	ft_putstr_fd("\n", fd);
@@ -75,7 +75,7 @@ void	print_ambient(t_data *d, int index, int fd)
 
 	obj = d->objs[index];
 	ft_putstr_fd("A ", fd);
-	ft_putdouble_fd(obj.ratio, fd);
+	ft_putdouble_fd(obj.intensity, fd);
 	ft_putstr_fd(" ", fd);
 	print_color(obj.color, fd);
 	ft_putstr_fd("\n", fd);

@@ -41,9 +41,9 @@ double	check_vn2(t_objs *obj, t_data *d)
 	double		vn;
 	t_vector	v;
 
-	v = d->cur_p.pos;
-	vn = (obj->orientation.x * v.x + obj->orientation.y * v.y + \
-		obj->orientation.z * v.z);
+	v = d->cur_p.dir;
+	vn = (obj->dir.x * v.x + obj->dir.y * v.y + \
+		obj->dir.z * v.z);
 	return (vn);
 }
 
@@ -52,12 +52,12 @@ double	calculate_scaler_pl2(t_objs *obj, t_data *d, t_vector p)
 	double		t;
 	t_vector	v;
 
-	v = d->cur_p.pos;
-	t = (-obj->orientation.x * (p.x - obj->cord.x) \
-		- obj->orientation.y * (p.y - obj->cord.y) \
-		- obj->orientation.z * (p.z - obj->cord.z)) / \
-		(obj->orientation.x * v.x + obj->orientation.y * v.y + \
-		obj->orientation.z * v.z);
+	v = d->cur_p.dir;
+	t = (-obj->dir.x * (p.x - obj->pos.x) \
+		- obj->dir.y * (p.y - obj->pos.y) \
+		- obj->dir.z * (p.z - obj->pos.z)) / \
+		(obj->dir.x * v.x + obj->dir.y * v.y + \
+		obj->dir.z * v.z);
 	return (t);
 }
 
@@ -86,7 +86,7 @@ us which means we dont see it; (we only consider solutions >= 0);
 // 	v.x = (-WIDTH / 2 + x) / norm;
 // 	v.y = (HEIGHT / 2 - y) / norm;
 // 	v.z = (d->cam_len) / norm;
-// 	return (cross_product(v, obj->orientation));
+// 	return (cross_product(v, obj->dir));
 // }
 
 // double	calculate_scaler_pl(t_objs *obj, t_data *d, double x, double y)
@@ -100,11 +100,11 @@ us which means we dont see it; (we only consider solutions >= 0);
 // 	v.x = (-WIDTH / 2 + x) / norm1;
 // 	v.y = (HEIGHT / 2 - y) / norm1;
 // 	v.z = (d->cam_len) / norm1;
-// 	norm2 = get_norm(-obj->cord.x, -obj->cord.y, -obj->cord.z);
-// 	w.x = -obj->cord.x / norm2;
-// 	w.y = -obj->cord.y / norm2;
-// 	w.z = -obj->cord.z / norm2;
-// 	printf("check cross : %f\n", cross_product(w, obj->orientation));
-// 	return (cross_product(w, obj->orientation) / \
-// 	cross_product(v, obj->orientation));
+// 	norm2 = get_norm(-obj->dir.x, -obj->dir.y, -obj->dir.z);
+// 	w.x = -obj->dir.x / norm2;
+// 	w.y = -obj->dir.y / norm2;
+// 	w.z = -obj->dir.z / norm2;
+// 	printf("check cross : %f\n", cross_product(w, obj->dir));
+// 	return (cross_product(w, obj->dir) / \
+// 	cross_product(v, obj->dir));
 // }

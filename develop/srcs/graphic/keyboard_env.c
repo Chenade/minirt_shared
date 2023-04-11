@@ -35,34 +35,34 @@ int	key_saved(t_data *d)
 int	ft_move(t_objs *obj, int keysym)
 {
 	if (keysym == XK_Left)
-		return (obj->cord.x -= STEP, 1);
+		return (obj->pos.x -= STEP, 1);
 	else if (keysym == XK_Right)
-		return (obj->cord.x += STEP, 1);
+		return (obj->pos.x += STEP, 1);
 	else if (keysym == XK_Up)
-		return (obj->cord.y += STEP, 1);
+		return (obj->pos.y += STEP, 1);
 	else if (keysym == XK_Down)
-		return (obj->cord.y -= STEP, 1);
+		return (obj->pos.y -= STEP, 1);
 	else if (keysym == XK_z)
-		return (obj->cord.z += STEP, 1);
+		return (obj->pos.z += STEP, 1);
 	else if (keysym == XK_x)
-		return (obj->cord.z -= STEP, 1);
+		return (obj->pos.z -= STEP, 1);
 	return (0);
 }
 
-int	ft_orientation(t_objs *obj, int keysym)
+int	ft_dir(t_objs *obj, int keysym)
 {
-	if (keysym == XK_q && (obj->orientation.x >= -1.05))
-		return (obj->orientation.x -= 0.05, 1);
-	else if (keysym == XK_a && (obj->orientation.x <= 0.95))
-		return (obj->orientation.x += 0.05, 1);
-	else if (keysym == XK_w && (obj->orientation.y >= -1.05))
-		return (obj->orientation.y -= 0.05, 1);
-	else if (keysym == XK_s && (obj->orientation.y <= 0.95))
-		return (obj->orientation.y += 0.05, 1);
-	else if (keysym == XK_e && (obj->orientation.z >= -1.05))
-		return (obj->orientation.z -= 0.05, 1);
-	else if (keysym == XK_d && (obj->orientation.z <= 0.95))
-		return (obj->orientation.z += 0.05, 1);
+	if (keysym == XK_q && (obj->dir.x >= -1.05))
+		return (obj->dir.x -= 0.075, 1);
+	else if (keysym == XK_a && (obj->dir.x <= 0.95))
+		return (obj->dir.x += 0.075, 1);
+	else if (keysym == XK_w && (obj->dir.y >= -1.05))
+		return (obj->dir.y -= 0.075, 1);
+	else if (keysym == XK_s && (obj->dir.y <= 0.95))
+		return (obj->dir.y += 0.075, 1);
+	else if (keysym == XK_e && (obj->dir.z >= -1.05))
+		return (obj->dir.z -= 0.075, 1);
+	else if (keysym == XK_d && (obj->dir.z <= 0.95))
+		return (obj->dir.z += 0.075, 1);
 	return (0);
 }
 
@@ -71,7 +71,7 @@ int	key_camera(t_data *d, int keysym)
 	int	i;
 
 	i = ft_move(&d->objs[d->index], keysym);
-	i = (i || ft_orientation(&d->objs[d->index], keysym));
+	i = (i || ft_dir(&d->objs[d->index], keysym));
 	return (i);
 }
 

@@ -29,7 +29,7 @@ void	print_menu(t_data *d)
 	mlx_putstr(d, 35, y += 20, "Key W/S: Rotate Y");
 	mlx_putstr(d, 35, y += 20, "Key E/D: Rotate Z");
 	mlx_putstr(d, 35, y += 20, "Key U/I: Height");
-	mlx_putstr(d, 35, y += 20, "Key J/K: Diameter");
+	mlx_putstr(d, 35, y += 20, "Key J/K: radius");
 }
 
 int	draw_gui(t_data *d)

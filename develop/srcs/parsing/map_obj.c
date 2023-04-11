@@ -18,12 +18,12 @@ int	map_check_sphere(t_data *d, char **line, int index)
 
 	if (ft_array_len(line) != 4)
 		return (print_err("Error\n: Invalid Map: Sphere", d), 1);
-	if (set_vector(&d->objs[index].cord, line[1]))
+	if (set_vector(&d->objs[index].pos, line[1]))
 		return (print_err("Error\n: Invalid Map: Sphere", d), 1);
 	diameter = ft_strtod(line[2]);
 	if (diameter > 1000)
 		return (print_err("Error\n: Invalid Map: Sphere", d), 1);
-	d->objs[index].diameter = diameter;
+	d->objs[index].radius = diameter / 2;
 	if (set_color(&d->objs[index].color, line[3]))
 		return (print_err("Error\n: Invalid Map: Sphere", d), 1);
 	d->objs[index].type = SP;
@@ -32,6 +32,8 @@ int	map_check_sphere(t_data *d, char **line, int index)
 	d->objs[index].keyboard_func = key_sphere;
 	d->objs[index].gui_func = gui_sphere;
 	d->objs[index].print_func = print_sphere;
+	d->objs[index].math.radius_2 = \
+	d->objs[index].radius * d->objs[index].radius;
 	return (0);
 }
 
@@ -39,11 +41,11 @@ int	map_check_plane(t_data *d, char **line, int index)
 {
 	if (ft_array_len(line) != 4)
 		return (print_err("Error\n: Invalid Map: Plane", d), 1);
-	if (set_vector(&d->objs[index].cord, line[1]))
+	if (set_vector(&d->objs[index].pos, line[1]))
 		return (print_err("Error\n: Invalid Map: Plane", d), 1);
-	if (set_orientation(&d->objs[index].orientation, line[2]))
+	if (set_dir(&d->objs[index].dir, line[2]))
 		return (print_err("Error\n: Invalid Map: Plane", d), 1);
-	d->objs[index].orientation = normalize_vect(d->objs[index].orientation);
+	d->objs[index].dir = normalize_vect(d->objs[index].dir);
 	if (set_color(&d->objs[index].color, line[3]))
 		return (print_err("Error\n: Invalid Map: Plane", d), 1);
 	d->objs[index].type = PL;
@@ -55,6 +57,23 @@ int	map_check_plane(t_data *d, char **line, int index)
 	return (0);
 }
 
+void	init_math(t_objs *obj)
+{
+	obj->math.radius_2 = obj->radius * obj->radius;
+	obj->math.a = obj->dir.x;
+	obj->math.b = obj->dir.y;
+	obj->math.c = obj->dir.z;
+	obj->math.xm = obj->pos.x;
+	obj->math.ym = obj->pos.y;
+	obj->math.zm = obj->pos.z;
+	obj->math.a_2 = obj->math.a * obj->math.a;
+	obj->math.b_2 = obj->math.b * obj->math.b;
+	obj->math.c_2 = obj->math.c * obj->math.c;
+	obj->math.xm_2 = obj->math.xm * obj->math.xm;
+	obj->math.ym_2 = obj->math.ym * obj->math.ym;
+	obj->math.zm_2 = obj->math.zm * obj->math.zm;
+}
+
 int	map_check_cylinder(t_data *d, char **line, int index)
 {
 	double	diameter;
@@ -62,17 +81,17 @@ int	map_check_cylinder(t_data *d, char **line, int index)
 
 	if (ft_array_len(line) != 6)
 		return (print_err("Error\n: Invalid Map: Cylinder", d), 1);
-	if (set_vector(&d->objs[index].cord, line[1]))
+	if (set_vector(&d->objs[index].pos, line[1]))
 		return (print_err("Error\n: Invalid Map: Cylinder", d), 1);
 	diameter = ft_strtod(line[3]);
 	if (diameter > 1000)
 		return (print_err("Error\n: Invalid Map: Cylinder", d), 1);
-	d->objs[index].diameter = diameter;
+	d->objs[index].radius = diameter / 2;
 	height = ft_strtod(line[4]);
 	d->objs[index].height = height;
-	if (set_orientation(&d->objs[index].orientation, line[2]))
+	if (set_dir(&d->objs[index].dir, line[2]))
 		return (print_err("Error\n: Invalid Map: Cylinder", d), 1);
-	d->objs[index].orientation = normalize_vect(d->objs[index].orientation);
+	d->objs[index].dir = normalize_vect(d->objs[index].dir);
 	if (set_color(&d->objs[index].color, line[5]))
 		return (print_err("Error\n: Invalid Map: Cylinder", d), 1);
 	d->objs[index].type = CYL;
@@ -81,5 +100,10 @@ int	map_check_cylinder(t_data *d, char **line, int index)
 	d->objs[index].keyboard_func = key_cylinder;
 	d->objs[index].gui_func = gui_cylinder;
 	d->objs[index].print_func = print_cylinder;
+	d->objs[index].cap_1 = vec_sum(d->objs[index].pos, \
+	vec_scale(d->objs[index].dir, d->objs[index].height / 2));
+	d->objs[index].cap_2 = vec_sum(d->objs[index].pos, \
+	vec_scale(d->objs[index].dir, -d->objs[index].height / 2));
+	init_math(&d->objs[index]);
 	return (0);
 }
