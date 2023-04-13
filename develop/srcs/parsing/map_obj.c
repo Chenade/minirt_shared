@@ -74,6 +74,16 @@ void	init_math(t_objs *obj)
 	obj->math.zm_2 = obj->math.zm * obj->math.zm;
 }
 
+void	init_func(t_objs *objs)
+{
+	objs->type = CYL;
+	objs->collision_func = hit_cylinder;
+	objs->shadow_func = cylinder_shadow;
+	objs->keyboard_func = key_cylinder;
+	objs->gui_func = gui_cylinder;
+	objs->print_func = print_cylinder;
+}
+
 int	map_check_cylinder(t_data *d, char **line, int index)
 {
 	double	diameter;
@@ -94,12 +104,7 @@ int	map_check_cylinder(t_data *d, char **line, int index)
 	d->objs[index].dir = normalize_vect(d->objs[index].dir);
 	if (set_color(&d->objs[index].color, line[5]))
 		return (print_err("Error\n: Invalid Map: Cylinder", d), 1);
-	d->objs[index].type = CYL;
-	d->objs[index].collision_func = hit_cylinder;
-	d->objs[index].shadow_func = cylinder_shadow;
-	d->objs[index].keyboard_func = key_cylinder;
-	d->objs[index].gui_func = gui_cylinder;
-	d->objs[index].print_func = print_cylinder;
+	init_func(&d->objs[index]);
 	d->objs[index].cap_1 = vec_sum(d->objs[index].pos, \
 	vec_scale(d->objs[index].dir, d->objs[index].height / 2));
 	d->objs[index].cap_2 = vec_sum(d->objs[index].pos, \

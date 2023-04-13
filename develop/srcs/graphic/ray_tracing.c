@@ -143,7 +143,6 @@ int	ray_tracing(t_data *d, int x, int y)
 
 	i = 0;
 	ft_bzero(&pixel, sizeof(t_pixel));
-	// set_color(&pixel.color, "0,0,0");
 	pixel.scaler = -1;
 	pixel.is_light = 0;
 	get_cur_vec(d, x, y);
