@@ -35,6 +35,9 @@ int	map_check_cam(t_data *d, char **line, int index)
 		return (1);
 	d->fov = fov;
 	d->objs[index].type = DEF;
+	d->objs[index].angle_x = 0;
+	d->objs[index].angle_y = 0;
+	d->objs[index].angle_z = 0;
 	d->objs[index].keyboard_func = key_camera;
 	d->objs[index].gui_func = gui_camera;
 	d->objs[index].print_func = print_camera;

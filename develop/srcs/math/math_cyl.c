@@ -208,7 +208,7 @@ double	calculate_scaler_cy_maha(t_objs *obj, t_data *d, t_vector p)
 		m.yp * (m.b * m.c * m.zm - m.c_2 * m.ym - m.a_2 * m.ym + m.a * m.b * m.xm) + \
 		m.xp * (-m.c_2 * m.xm + m.a * m.c * m.zm + m.a * m.b * m.ym - m.b_2 * m.xm) - \
 		m.b * m.c * m.zp * m.yp - m.a * m.c * m.xp * m.zp - m.a * m.b * m.xp * m.yp);
-	t = limit_cyl(obj, d, p, quadratic_solve(m._a, m._b, m._c));
+	t = limit_cyl(obj, d, p, quadratic_solve(m._a, m._b, m._c, obj));
 	if (t < 0)
 		return (calculate_scaler_caps(obj, d, p));
 	obj->normal = calculate_cyl_normal(obj, vec_sum(d->cam->pos, \

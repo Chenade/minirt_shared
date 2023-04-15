@@ -51,3 +51,13 @@ t_vector	vec_scale(t_vector v, double scaler)
 	w.z = v.z * scaler;
 	return (w);
 }
+
+t_vector	vec_invert(t_vector v)
+{
+	t_vector	w;
+
+	w.x = -v.x;
+	w.y = -v.y;
+	w.z = -v.z;
+	return (w);
+}

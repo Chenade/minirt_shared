@@ -47,6 +47,14 @@ else
 	no solution;
 */
 
+void	check_if_inside(t_objs *obj, double s1, double s2)
+{
+	if ((s1 > 0 && s2 < 0) || (s2 > 0 && s1 < 0))
+		obj->cam_is_inside = 1;
+	else
+		obj->cam_is_inside = 0;
+}
+
 double	smallest_positive(double n1, double n2)
 {
 	if ((fabs(n1)) < (fabs(n2)) && n1 > 0)
@@ -68,12 +76,13 @@ double	quadratic_discriminant(double a, double b, double c)
 	return (b * b - 4 * (a * c));
 }
 
-double	quadratic_solve(double a, double b, double c)
+double	quadratic_solve(double a, double b, double c, t_objs *obj)
 {
 	double	delta;
 	double	s1;
 	double	s2;
 
+	(void)obj;
 	delta = quadratic_discriminant(a, b, c);
 	if (delta < 0)
 		return (-1);
@@ -81,6 +90,7 @@ double	quadratic_solve(double a, double b, double c)
 	{
 		s1 = (-b - sqrt(delta)) / (2 * a);
 		s2 = (-b + sqrt(delta)) / (2 * a);
+		check_if_inside(obj, s1, s2);
 		return (smallest_positive(s1, s2));
 	}
 	return (-b / (2 * a));
@@ -102,6 +112,6 @@ double	calculate_scaler_sp(t_objs *obj, t_data *d, t_vector p)
 		(p.y - obj->pos.y) * (p.y - obj->pos.y) + \
 		(p.z - obj->pos.z) * (p.z - obj->pos.z) - \
 		obj->math.radius_2;
-	return (quadratic_solve(a, b, c));
+	return (quadratic_solve(a, b, c, obj));
 	//still missing the direction vector of the camera in all formulas !!!;
 }

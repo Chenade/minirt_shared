@@ -26,6 +26,8 @@ t_pixel	hit_sphere(struct s_objs *obj, struct s_data *d, t_vector p)
 	pixel.color = obj->color;
 	pixel.normal = calculate_sp_normal(obj->pos, vec_sum(d->cam->pos, \
 	vec_scale(pixel.dir, pixel.scaler)));
+	if (obj->cam_is_inside == 1)
+		pixel.normal = vec_invert(pixel.normal);
 	return (pixel);
 }
 
@@ -71,6 +73,8 @@ t_pixel	hit_cylinder(struct s_objs *obj, struct s_data *d, t_vector p)
 	pixel.dir = d->cur_p.dir;
 	pixel.normal = obj->normal;
 	pixel.color = obj->color;
+	if (obj->cam_is_inside == 1)
+		pixel.normal = vec_invert(pixel.normal);
 	return (pixel);
 }
 
