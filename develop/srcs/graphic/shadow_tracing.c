@@ -37,6 +37,8 @@ void	trace_shadow(t_pixel *p, t_data *d, t_vector v)
 			return ((void)put_ambient(pixel, p, d));
 		i++;
 	}
+	// pixel.pos = vec_sum(d->cam->pos, vec_scale(pixel.dir, pixel.scaler));
+	// if (pixel.scaler > get_vec_norm(vec_sub(d->light->pos, d->cam->pos)))
 	put_diffuse(pixel, p, d);
 }
 // pixel.pos = vec_sum(d->cam->pos, vec_scale(pixel.dir, pixel.scaler));

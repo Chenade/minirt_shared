@@ -66,12 +66,46 @@ int	ft_dir(t_objs *obj, int keysym)
 	return (0);
 }
 
+int	ft_rotate_cam(t_objs *obj, int keycode)
+{
+	if (keycode == XK_q)
+		return (obj->angle_z += 0.05, 1);
+	if (keycode == XK_e)
+		return (obj->angle_z -= 0.05, 1);
+	if (keycode == XK_s)
+		return (obj->angle_x += 0.05, 1);
+	if (keycode == XK_w)
+		return (obj->angle_x -= 0.05, 1);
+	if (keycode == XK_d)
+		return (obj->angle_y += 0.05, 1);
+	if (keycode == XK_a)
+		return (obj->angle_y -= 0.05, 1);
+	return (0);
+}
+
+void	fix_angle(t_objs *obj)
+{
+	if (obj->angle_x >= 2 * PI)
+		obj->angle_x -= 2 * PI;
+	if (obj->angle_x < 0)
+		obj->angle_x += 2 * PI;
+	if (obj->angle_y >= 2 * PI)
+		obj->angle_y -= 2 * PI;
+	if (obj->angle_y < 0)
+		obj->angle_y += 2 * PI;
+	if (obj->angle_z >= 2 * PI)
+		obj->angle_z -= 2 * PI;
+	if (obj->angle_z < 0)
+		obj->angle_z += 2 * PI;
+}
+
 int	key_camera(t_data *d, int keysym)
 {
 	int	i;
 
 	i = ft_move(&d->objs[d->index], keysym);
-	i = (i || ft_dir(&d->objs[d->index], keysym));
+	i = (i || ft_rotate_cam(&d->objs[d->index], keysym));
+	fix_angle(&d->objs[d->index]);
 	return (i);
 }
 

@@ -123,7 +123,7 @@ void		*ft_malloc(t_data *d, size_t size);
 
 //math_cy.c
 double		quadratic_discriminant(double a, double b, double c);
-double		quadratic_solve(double a, double b, double c);
+double		quadratic_solve(double a, double b, double c, t_objs *obj);
 double		check_solutions_cy(t_objs *obj, t_data *d, t_vector p);
 double		calculate_scaler_cy(t_objs *obj, t_data *d, t_vector p);
 double		calculate_scaler_cy_maha(t_objs *obj, t_data *d, t_vector p);
@@ -152,6 +152,7 @@ t_vector	vec_sub(t_vector v1, t_vector v2);
 t_vector	vec_sum(t_vector v1, t_vector v2);
 t_vector	vec_fact(t_vector v1, t_vector v2);
 t_vector	vec_scale(t_vector w, double scaler);
+t_vector	vec_invert(t_vector v);
 
 // tools.c
 double		smallest_positive(double n1, double n2);

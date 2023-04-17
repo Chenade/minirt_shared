@@ -76,6 +76,7 @@ typedef struct s_data	t_data;
 typedef struct s_objs
 {
 	int			type;
+	int			cam_is_inside;
 	t_color		color;
 	t_vector	pos;
 	t_vector	dir;
@@ -86,6 +87,9 @@ typedef struct s_objs
 	double		radius;
 	double		radius_2;
 	double		intensity;
+	double		angle_x;
+	double		angle_y;
+	double		angle_z;
 	void		*collision_func;
 	void		*shadow_func;
 	void		*keyboard_func;
