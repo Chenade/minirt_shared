@@ -105,6 +105,8 @@ int	key_camera(t_data *d, int keysym)
 	i = ft_move(&d->objs[d->index], keysym);
 	i = (i || ft_rotate_cam(&d->objs[d->index], keysym));
 	fix_angle(&d->objs[d->index]);
+	printf("%f, %f, %f\n", d->objs[d->index].angle_x, \
+	d->objs[d->index].angle_y, d->objs[d->index].angle_z);
 	return (i);
 }
 

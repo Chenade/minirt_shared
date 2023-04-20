@@ -73,6 +73,7 @@ t_pixel		min_scaler(int i, t_pixel p1, t_pixel p2);
 int			ray_tracing(t_data *d, int x, int y);
 
 //shadows.c
+void		check_inside_objs(t_data *d);
 void		get_shadow(t_pixel *p, t_data *d);
 t_pixel		sphere_shadow(struct s_objs *obj, struct s_data *d, t_vector p);
 t_pixel		plane_shadow(struct s_objs *obj, struct s_data *d, t_vector p);
@@ -141,6 +142,7 @@ double		calculate_scaler_pl(t_objs *obj, t_data *d, double x, double y);
 double		calculate_scaler_pl2(t_objs *obj, t_data *d, t_vector p);
 
 //vectors.c
+t_vector	vector(double x, double y, double z);
 int			init_vector(t_vector *v, int x, int y, int z);
 double		get_norm(double x, double y, double z);
 double		get_vec_norm(t_vector v);
