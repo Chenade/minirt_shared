@@ -26,9 +26,15 @@ t_vector	cross_product(t_vector v1, t_vector v2)
 {
 	t_vector	v;
 
-	v.x = v1.y * v2.z - v1.z * v2.y;
-	v.y = v1.x * v2.z - v1.z * v2.x;
-	v.z = v1.x * v2.y - v1.y * v2.x;
+	v.x = v1.y * v2.z - (v1.z * v2.y);
+	v.y = v1.z * v2.x - (v1.x * v2.z);
+	v.z = v1.x * v2.y - (v1.y * v2.x);
+	if (v.x > -0.000001 && v.x < 0.000001)
+		v.x = 0.0;
+	if (v.y > -0.000001 && v.y < 0.000001)
+		v.y = 0.0;
+	if (v.z > -0.000001 && v.z < 0.000001)
+		v.z = 0.0;
 	return (v);
 }
 

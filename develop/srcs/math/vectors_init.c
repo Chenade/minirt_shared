@@ -62,9 +62,8 @@ void	get_cur_vec(t_data *d, int x, int y)
 	// d->cur_p.dir.z = tmp_z;
 
 	// Potential new method :
-	d->cur_p.dir = vec_sum(vec_scale(d->cam->dir, d->cam_len), \
-	vec_sum(vec_scale(d->cam->dir_x, (-WIDTH / 2 + x)), \
+	d->cur_p.dir = vec_sum(vec_scale(d->cam->dir_x, (-WIDTH / 2 + x)), \
+	vec_sum(vec_scale(d->cam->dir, d->cam_len), \
 	vec_scale(d->cam->dir_y, (HEIGHT / 2 - y))));
-
 	// printf("new dir  [d->cur_p.dir.x] =%f [d->cur_p.dir.y] = %f [d->cur_p.dir.z] = %f\n", d->cur_p.dir.x, d->cur_p.dir.y, d->cur_p.dir.z);
 }
