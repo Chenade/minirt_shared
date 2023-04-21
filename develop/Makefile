@@ -68,12 +68,14 @@ SRCS_MAT	= 	math/math_cyl.c				\
 
 SRCS_UTI	=	utils/general.c				\
 				utils/tools.c				\
-				utils/helper.c
+				utils/helper.c				\
 
 SRCS_PAR	=	parsing/setup.c				\
+				parsing/init_env.c			\
 				parsing/map_env.c			\
+				parsing/init_obj.c			\
 				parsing/map_obj.c			\
-				parsing/parse.c
+				parsing/parse.c				\
 
 SRCS_MLX	=	graphic/mlx_setup.c			\
 				graphic/keyboard_env.c		\
@@ -82,13 +84,13 @@ SRCS_MLX	=	graphic/mlx_setup.c			\
 				graphic/shadows.c			\
 				graphic/shadow_tracing.c	\
 				graphic/ray_tracing.c		\
-				graphic/calculate_colors.c
+				graphic/calculate_colors.c	\
 	
 SRCS_DIS	=	display/print_obj.c			\
 				display/print_env.c			\
 				display/draw_gui.c			\
 				display/gui_env.c			\
-				display/gui_obj.c
+				display/gui_obj.c			\
 
 SRCS		=	$(SRCS_MAT)
 SRCS		+=	$(SRCS_UTI)

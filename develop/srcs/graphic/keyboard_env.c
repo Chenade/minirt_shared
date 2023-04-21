@@ -98,9 +98,9 @@ int	ft_move(t_data *d, t_objs *obj, int keysym)
 int	ft_dir(t_data *d, t_objs *obj, int keycode)
 {
 	if (keycode == XK_q)
-		return (rot_v_arount_v(&obj->dir, &d->cam->dir, -0.1), 1);
-	if (keycode == XK_e)
 		return (rot_v_arount_v(&obj->dir, &d->cam->dir, 0.1), 1);
+	if (keycode == XK_e)
+		return (rot_v_arount_v(&obj->dir, &d->cam->dir, -0.1), 1);
 	if (keycode == XK_s)
 		return (rot_v_arount_v(&obj->dir, &d->cam->dir_x, -0.1), 1);
 	if (keycode == XK_w)
@@ -110,16 +110,6 @@ int	ft_dir(t_data *d, t_objs *obj, int keycode)
 	if (keycode == XK_a)
 		return (rot_v_arount_v(&obj->dir, &d->cam->dir_y, 0.1), 1);
 	return (0);
-}
-
-void	rot_v_arount_v(t_vector *v, t_vector *w, double angle)
-{
-	t_vector	v_rot;
-
-	v_rot = vec_sum(vec_sum(vec_scale(*v, cos(angle)), \
-	vec_scale(cross_product(*w, *v), sin(angle))), \
-	vec_scale(*w, (dot_product(*w, *v) * (1 - cos(angle)))));
-	*v = normalize_vect(v_rot);
 }
 
 int	ft_rotate_cam(t_objs *obj, int keycode)

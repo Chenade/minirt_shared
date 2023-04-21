@@ -56,7 +56,14 @@ int			handle_keypress(int keysym, t_data *data);
 
 // parse.c
 int			read_file(t_data *d, char *name);
+void		get_cam_axes(t_objs *cam);
 void		init_math(t_objs *obj);
+void		init_cyl(t_data *d, int index);
+void		init_sp(t_data *d, int index);
+void		init_pl(t_data *d, int index);
+void		init_cam(t_data *d, int index);
+void		init_ambient(t_data *d, int index);
+void		init_light(t_data *d, int index);
 int			map_check_cam(t_data *d, char **line, int index);
 int			map_check_ambient(t_data *d, char **line, int index);
 int			map_check_light(t_data *d, char **line, int index);
@@ -142,6 +149,8 @@ double		calculate_scaler_pl(t_objs *obj, t_data *d, double x, double y);
 double		calculate_scaler_pl2(t_objs *obj, t_data *d, t_vector p);
 
 //vectors.c
+void		print_vec(t_vector v);
+int			compare_vecs(t_vector v, t_vector w);
 void		rot_v_arount_v(t_vector *v, t_vector *w, double angle);
 t_vector	vector(double x, double y, double z);
 int			init_vector(t_vector *v, int x, int y, int z);

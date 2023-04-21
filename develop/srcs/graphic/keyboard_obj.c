@@ -40,12 +40,16 @@ int	key_plane(t_data *d, int keysym)
 	return (i);
 }
 
+void	reset_cyl()
+{
+}
+
 int	key_cylinder(t_data *d, int keysym)
 {
 	int	i;
 
 	i = ft_move(d, &d->objs[d->index], keysym);
-	i = ft_dir(d, &d->objs[d->index], keysym);
+	i = (i || ft_dir(d, &d->objs[d->index], keysym));
 	if (keysym == XK_j || keysym == XK_k || keysym == XK_u || keysym == XK_i)
 		i = 1;
 	if (keysym == XK_j)

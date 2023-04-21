@@ -12,6 +12,20 @@
 
 #include "minirt.h"
 
+void	print_vec(t_vector v)
+{
+	printf("x : %f, y : %f, z : %f\n", v.x, v.y, v.z);
+}
+
+int	compare_vecs(t_vector v, t_vector w)
+{
+	if (v.x != w.x)
+		return (0);
+	if (v.y != w.y)
+		return (0);
+	return (v.z == w.z);
+}
+
 t_vector	vector(double x, double y, double z)
 {
 	t_vector	v;
@@ -28,6 +42,16 @@ int	init_vector(t_vector *v, int x, int y, int z)
 	v->y = y;
 	v->z = z;
 	return (0);
+}
+
+void	rot_v_arount_v(t_vector *v, t_vector *w, double angle)
+{
+	t_vector	v_rot;
+
+	v_rot = vec_sum(vec_sum(vec_scale(*v, cos(angle)), \
+	vec_scale(cross_product(*w, *v), sin(angle))), \
+	vec_scale(*w, (dot_product(*w, *v) * (1 - cos(angle)))));
+	*v = normalize_vect(v_rot);
 }
 
 void	get_cur_vec(t_data *d, int x, int y)

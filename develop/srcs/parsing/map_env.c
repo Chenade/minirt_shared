@@ -12,61 +12,6 @@
 
 #include "minirt.h"
 
-/*
-calculating the axes of the camera :
-
-- z axis = cam->dir;
-- y axis : needs to be perpendicular to z, but with a positive y component;
-- x axis : needs to be perpendicular to z and y, with a y component == 0;
-
-for x, we're gonna do the cross product of the cam->dir and the y axis of
-the world;
-
-for y, the cross product of the new x axis and the cam->dir;
-
-we normalize everything of course and that's it;
-
-so we have :
-
-cam->dir_x = normalize_vect(cross_product(cam->dir, vector(0, 1, 0)));
-cam->dir_y = normalize_vect(cross_product(cam->dir_y, cam->dir));
-*/
-
-void	print_vec(t_vector v)
-{
-	printf("x : %f, y : %f, z : %f\n", v.x, v.y, v.z);
-}
-
-int	compare_vecs(t_vector v, t_vector w)
-{
-	if (v.x != w.x)
-		return (0);
-	if (v.y != w.y)
-		return (0);
-	return (v.z == w.z);
-}
-
-void	get_cam_axes(t_objs *cam)
-{
-	t_vector	world_y;
-
-	world_y = vector(0, 1, 0);
-	cam->dir = normalize_vect(cam->dir);
-	if (compare_vecs(cam->dir, world_y) || \
-	compare_vecs(cam->dir, vector(0, -1, 0)))
-		cam->dir_x = vector(1, 0, 0);
-	else
-		cam->dir_x = normalize_vect(cross_product(world_y, cam->dir));
-	printf("prev cam axes : \n");
-	print_vec(cam->dir_x);
-	print_vec(cam->dir);
-	cam->dir_y = normalize_vect(cross_product(cam->dir, cam->dir_x));
-	printf("new cam axes : \n");
-	print_vec(cam->dir_x);
-	print_vec(cam->dir_y);
-	print_vec(cam->dir);
-}
-
 int	map_check_cam(t_data *d, char **line, int index)
 {
 	double	fov;
@@ -87,12 +32,7 @@ int	map_check_cam(t_data *d, char **line, int index)
 	if (fov < 0 || fov > 180)
 		return (1);
 	d->fov = fov;
-	d->objs[index].type = DEF;
-	get_cam_axes(&d->objs[index]);
-	d->objs[index].keyboard_func = key_camera;
-	d->objs[index].gui_func = gui_camera;
-	d->objs[index].print_func = print_camera;
-	d->cam = &d->objs[index];
+	init_cam(d, index);
 	return (0);
 }
 
@@ -111,13 +51,7 @@ int	map_check_ambient(t_data *d, char **line, int index)
 	d->objs[index].intensity = intensity;
 	if (set_color(&d->objs[index].color, line[2]))
 		return (1);
-	d->objs[index].type = DEF;
-	d->objs[index].color = d->objs[index].color;
-	d->objs[index].intensity = d->objs[index].intensity;
-	d->objs[index].keyboard_func = key_light;
-	d->objs[index].gui_func = gui_ambient;
-	d->objs[index].print_func = print_ambient;
-	d->ambient = &d->objs[index];
+	init_ambient(d, index);
 	return (0);
 }
 
@@ -138,14 +72,6 @@ int	map_check_light(t_data *d, char **line, int index)
 	d->objs[index].intensity = intensity;
 	if (set_color(&d->objs[index].color, line[3]))
 		return (1);
-	d->objs[index].type = DEF;
-	d->objs[index].radius = 3;
-	d->objs[index].collision_func = hit_light;
-	d->objs[index].keyboard_func = key_light;
-	d->objs[index].gui_func = gui_light;
-	d->objs[index].print_func = print_light;
-	d->light = &d->objs[index];
-	d->objs[index].math.radius_2 = \
-	d->objs[index].radius * d->objs[index].radius;
+	init_light(d, index);
 	return (0);
 }
