@@ -40,10 +40,6 @@ int	key_plane(t_data *d, int keysym)
 	return (i);
 }
 
-void	reset_cyl()
-{
-}
-
 int	key_cylinder(t_data *d, int keysym)
 {
 	int	i;
@@ -66,12 +62,6 @@ int	key_cylinder(t_data *d, int keysym)
 		if (d->objs[d->index].height > STEP)
 			d->objs[d->index].height -= STEP;
 	}
-	d->objs[d->index].dir = \
-	normalize_vect(d->objs[d->index].dir);
-	d->objs[d->index].cap_1 = vec_sum(d->objs[d->index].pos, \
-	vec_scale(d->objs[d->index].dir, d->objs[d->index].height / 2));
-	d->objs[d->index].cap_2 = vec_sum(d->objs[d->index].pos, \
-	vec_scale(d->objs[d->index].dir, -d->objs[d->index].height / 2));
-	init_math(&d->objs[d->index]);
+	init_cyl(d, d->index);
 	return (i);
 }

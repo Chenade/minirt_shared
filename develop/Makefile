@@ -62,7 +62,7 @@ OBJS_DIR	=	objs
 SRCS_MAT	= 	math/math_cyl.c				\
 				math/math_pl.c				\
 				math/math_sp.c				\
-				math/vectors_init.c			\
+				math/vectors_utils.c		\
 				math/vectors_ops.c			\
 				math/vectors_ops2.c			\
 
@@ -80,6 +80,7 @@ SRCS_PAR	=	parsing/setup.c				\
 SRCS_MLX	=	graphic/mlx_setup.c			\
 				graphic/keyboard_env.c		\
 				graphic/keyboard_obj.c		\
+				graphic/transla_rota.c		\
 				graphic/collisions.c		\
 				graphic/shadows.c			\
 				graphic/shadow_tracing.c	\

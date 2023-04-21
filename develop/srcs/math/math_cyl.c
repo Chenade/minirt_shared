@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-/*-------!!!!-----------------DEPRECATED-----------------!!!!---------
+/*
 cylinder equations :
 
 first, interaction with an infinite tube:
@@ -32,8 +32,6 @@ s = direction vector of the tube;
 R = radius of tube;
 
 * : "x" means cross product. see vectors functions;
-
----------!!!!------^^^^-------DEPRECATED-------^^^^-----!!!!---------
 
 --------------------------------------------------
 
@@ -133,85 +131,68 @@ double	limit_cyl(t_objs *obj, t_data *d, t_vector p, double t)
 	return (-1);
 }
 
-// double	calculate_scaler_cy(t_objs *obj, t_data *d, t_vector p)
-// {
-// 	double		a;
-// 	double		b;
-// 	double		c;
-// 	double		t;
-// 	t_vector	va;
-// 	t_vector	ra;
-// 	t_vector	v;
-
-// 	v = d->cur_p.dir;
-// 	va = cross_product(cross_product(obj->dir, v), obj->dir);
-// 	ra = cross_product(cross_product(obj->dir, \
-// 	vec_sub(p, obj->pos)), obj->dir);
-// 	a = dot_product(va, va);
-// 	b = dot_product(vec_scale(ra, 2), va);
-// 	c = dot_product(ra, ra) - obj->radius * obj->radius;
-// 	//if the tube is not hit, check for the caps;
-// 	t = limit_cyl(obj, d, p, quadratic_solve(a, b, c));
-// 	if (t < 0)
-// 		return (calculate_scaler_caps(obj, d, p));
-// 	// t = quadratic_solve(a, b, c);
-// 	obj->normal = calculate_cyl_normal(obj, vec_sum(d->cam->pos, \
-// 	vec_scale(v, t)));
-// 	return (t);
-// }
-
-void	update_math(t_objs *obj, t_data *d, t_vector p)
+double	calculate_scaler_cy(t_objs *obj, t_data *d, t_vector p)
 {
-	obj->math.i = d->cur_p.dir.x;
-	obj->math.j = d->cur_p.dir.y;
-	obj->math.k = d->cur_p.dir.z;
-	obj->math.xp = p.x;
-	obj->math.yp = p.y;
-	obj->math.zp = p.z;
-	obj->math.i_2 = obj->math.i * obj->math.i;
-	obj->math.j_2 = obj->math.j * obj->math.j;
-	obj->math.k_2 = obj->math.k * obj->math.k;
-	obj->math.xp_2 = obj->math.xp * obj->math.xp;
-	obj->math.yp_2 = obj->math.yp * obj->math.yp;
-	obj->math.zp_2 = obj->math.zp * obj->math.zp;
-}
-
-double	calculate_scaler_cy_maha(t_objs *obj, t_data *d, t_vector p)
-{
+	double		a;
+	double		b;
+	double		c;
 	double		t;
-	t_math		m;
 	t_vector	v;
 
 	v = d->cur_p.dir;
-	update_math(obj, d, p);
-	m = obj->math;
-	m._a = m.k_2 * (m.b_2 + m.a_2) + \
-		m.j_2 * (m.c_2 + m.a_2) + \
-		m.i_2 * (m.c_2 + m.b_2) - \
-		2 * (m.b * m.c * m.k * m.j + m.a * m.c * m.i * m.k + m.a * m.b * m.j * m.i);
-	m._b = 2 * (m.k * m.zp * (m.b_2 + m.a_2) + m.j * m.yp * (m.c_2 + m.a_2) + m.i * m.xp * (m.c_2 + m.b_2) + \
-		m.k * (-m.b_2 * m.zm + m.b * m.c * m.ym + m.a * m.c * m.xm - m.a_2 * m.zm) + \
-		m.j * (m.b * m.c * m.zm - m.c_2 * m.ym - m.a_2 * m.ym + m.a * m.b * m.xm) + \
-		m.i * (-m.c_2 * m.xm + m.a * m.c * m.zm + m.a * m.b * m.ym - m.b_2 * m.xm) - \
-		m.b * m.c * (m.k * m.yp + m.j * m.zp) - \
-		m.a * m.c * (m.i * m.zp + m.k * m.xp) - \
-		m.a * m.b * (m.j * m.xp + m.i * m.yp));
-	m._c = -obj->math.radius_2 * (m.a_2 + m.b_2 + m.c_2) + \
-		m.b_2 * (m.zm_2 + m.xm_2) + \
-		m.c_2 * (m.ym_2 + m.xm_2) + \
-		m.a_2 * (m.zm_2 + m.ym_2) + \
-		2 * (- m.b * m.c * m.zm * m.ym - m.a * m.c * m.zm * m.xm - m.a * m.b * m.ym * m.xm) + \
-		m.zp_2 * (m.b_2 + m.a_2) + \
-		m.yp_2 * (m.a_2 + m.c_2) + \
-		m.xp_2 * (m.c_2 + m.b_2) + \
-		2 * (m.zp * (-m.b_2 * m.zm + m.b * m.c * m.ym + m.a * m.c * m.xm - m.a_2 * m.zm) + \
-		m.yp * (m.b * m.c * m.zm - m.c_2 * m.ym - m.a_2 * m.ym + m.a * m.b * m.xm) + \
-		m.xp * (-m.c_2 * m.xm + m.a * m.c * m.zm + m.a * m.b * m.ym - m.b_2 * m.xm) - \
-		m.b * m.c * m.zp * m.yp - m.a * m.c * m.xp * m.zp - m.a * m.b * m.xp * m.yp);
-	t = limit_cyl(obj, d, p, quadratic_solve(m._a, m._b, m._c, obj));
+	obj->math.va = cross_product(cross_product(obj->dir, v), obj->dir);
+	obj->math.ra = cross_product(cross_product(obj->dir, \
+	vec_sub(p, obj->pos)), obj->dir);
+	a = dot_product(obj->math.va, obj->math.va);
+	b = dot_product(vec_scale(obj->math.ra, 2), obj->math.va);
+	c = dot_product(obj->math.ra, obj->math.ra) - obj->radius * obj->radius;
+	t = limit_cyl(obj, d, p, quadratic_solve(a, b, c, obj));
+	// if the tube is not hit, check for the caps :
 	if (t < 0)
 		return (calculate_scaler_caps(obj, d, p));
 	obj->normal = calculate_cyl_normal(obj, vec_sum(d->cam->pos, \
 	vec_scale(v, t)));
 	return (t);
 }
+
+// -------------------------------DEPRECATED-----------------------------------
+
+// double	calculate_scaler_cy_maha(t_objs *obj, t_data *d, t_vector p)
+// {
+// 	double		t;
+// 	t_math		m;
+// 	t_vector	v;
+
+// 	v = d->cur_p.dir;
+// 	update_math(obj, d, p);
+// 	m = obj->math;
+// 	m._a = m.k_2 * (m.b_2 + m.a_2) + \
+// 		m.j_2 * (m.c_2 + m.a_2) + \
+// 		m.i_2 * (m.c_2 + m.b_2) - \
+// 		2 * (m.b * m.c * m.k * m.j + m.a * m.c * m.i * m.k + m.a * m.b * m.j * m.i);
+// 	m._b = 2 * (m.k * m.zp * (m.b_2 + m.a_2) + m.j * m.yp * (m.c_2 + m.a_2) + m.i * m.xp * (m.c_2 + m.b_2) + \
+// 		m.k * (-m.b_2 * m.zm + m.b * m.c * m.ym + m.a * m.c * m.xm - m.a_2 * m.zm) + \
+// 		m.j * (m.b * m.c * m.zm - m.c_2 * m.ym - m.a_2 * m.ym + m.a * m.b * m.xm) + \
+// 		m.i * (-m.c_2 * m.xm + m.a * m.c * m.zm + m.a * m.b * m.ym - m.b_2 * m.xm) - \
+// 		m.b * m.c * (m.k * m.yp + m.j * m.zp) - \
+// 		m.a * m.c * (m.i * m.zp + m.k * m.xp) - \
+// 		m.a * m.b * (m.j * m.xp + m.i * m.yp));
+// 	m._c = -obj->math.radius_2 * (m.a_2 + m.b_2 + m.c_2) + \
+// 		m.b_2 * (m.zm_2 + m.xm_2) + \
+// 		m.c_2 * (m.ym_2 + m.xm_2) + \
+// 		m.a_2 * (m.zm_2 + m.ym_2) + \
+// 		2 * (- m.b * m.c * m.zm * m.ym - m.a * m.c * m.zm * m.xm - m.a * m.b * m.ym * m.xm) + \
+// 		m.zp_2 * (m.b_2 + m.a_2) + \
+// 		m.yp_2 * (m.a_2 + m.c_2) + \
+// 		m.xp_2 * (m.c_2 + m.b_2) + \
+// 		2 * (m.zp * (-m.b_2 * m.zm + m.b * m.c * m.ym + m.a * m.c * m.xm - m.a_2 * m.zm) + \
+// 		m.yp * (m.b * m.c * m.zm - m.c_2 * m.ym - m.a_2 * m.ym + m.a * m.b * m.xm) + \
+// 		m.xp * (-m.c_2 * m.xm + m.a * m.c * m.zm + m.a * m.b * m.ym - m.b_2 * m.xm) - \
+// 		m.b * m.c * m.zp * m.yp - m.a * m.c * m.xp * m.zp - m.a * m.b * m.xp * m.yp);
+// 	t = limit_cyl(obj, d, p, quadratic_solve(m._a, m._b, m._c, obj));
+// 	if (t < 0)
+// 		return (calculate_scaler_caps(obj, d, p));
+// 	obj->normal = calculate_cyl_normal(obj, vec_sum(d->cam->pos, \
+// 	vec_scale(v, t)));
+// 	return (t);
+// }

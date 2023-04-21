@@ -58,6 +58,7 @@ int			handle_keypress(int keysym, t_data *data);
 int			read_file(t_data *d, char *name);
 void		get_cam_axes(t_objs *cam);
 void		init_math(t_objs *obj);
+void		update_math(t_objs *obj, t_data *d, t_vector p);
 void		init_cyl(t_data *d, int index);
 void		init_sp(t_data *d, int index);
 void		init_pl(t_data *d, int index);
@@ -91,6 +92,7 @@ void		put_diffuse(t_pixel pixel, t_pixel *p, t_data *d);
 // keyboard.c
 int			ft_move(t_data *d, t_objs *obj, int keysym);
 int			ft_dir(t_data *d, t_objs *obj, int keysym);
+int			ft_rotate_cam(t_objs *obj, int keycode);
 int			key_sphere(t_data *d, int keysym);
 int			key_plane(t_data *d, int keysym);
 int			key_cylinder(t_data *d, int keysym);
@@ -164,7 +166,6 @@ t_vector	vec_sub(t_vector v1, t_vector v2);
 t_vector	vec_sum(t_vector v1, t_vector v2);
 t_vector	vec_fact(t_vector v1, t_vector v2);
 t_vector	vec_scale(t_vector w, double scaler);
-t_vector	vec_invert(t_vector v);
 
 // tools.c
 double		smallest_positive(double n1, double n2);
