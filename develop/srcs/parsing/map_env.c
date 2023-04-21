@@ -32,32 +32,12 @@ cam->dir_x = normalize_vect(cross_product(cam->dir, vector(0, 1, 0)));
 cam->dir_y = normalize_vect(cross_product(cam->dir_y, cam->dir));
 */
 
-// DEPRECATED
-// void	get_init_angles(t_objs *obj)
-// {
-// 	t_vector	dir;
-
-// 	dir = normalize_vect(obj->dir);
-// 	// Compute the yaw angle (rotation around the Y-axis)
-// 	obj->angle_y = atan2(dir.x, dir.z);
-
-// 	// Compute the pitch angle (rotation around the X-axis)
-// 	obj->angle_x = asin(-dir.y / \
-// 	sqrt(dir.x * dir.x + dir.y * dir.y + dir.z * dir.z));
-
-// 	// Set the roll angle (rotation around the Z-axis) to zero
-// 	obj->angle_z = 0.0;
-
-// 	printf("%f, %f, %f\n", obj->angle_x, obj->angle_y, obj->angle_z);
-// 	// printf("%f, %f, %f\n", obj->angle_x, obj->angle_y, obj->angle_z);
-// }
-
 void	print_vec(t_vector v)
 {
 	printf("x : %f, y : %f, z : %f\n", v.x, v.y, v.z);
 }
 
-int		compare_vecs(t_vector v, t_vector w)
+int	compare_vecs(t_vector v, t_vector w)
 {
 	if (v.x != w.x)
 		return (0);
@@ -81,57 +61,11 @@ void	get_cam_axes(t_objs *cam)
 	print_vec(cam->dir_x);
 	print_vec(cam->dir);
 	cam->dir_y = normalize_vect(cross_product(cam->dir, cam->dir_x));
-	// cam->dir = vector(0, 0.447214, 0.894427);
-	// cam->dir_x = vector(1, 0, 0);
-	// cam->dir_y = vector(0, 0.894427 , -0.447214);
 	printf("new cam axes : \n");
 	print_vec(cam->dir_x);
 	print_vec(cam->dir_y);
 	print_vec(cam->dir);
 }
-
-/*
-I added a few prints in the function :
-
-void	get_cam_axes(t_objs *cam)
-{
-	t_vector	world_y;
-
-	world_y = vector(0, 1, 0);
-	if (compare_vecs(cam->dir, world_y) || \
-	compare_vecs(cam->dir, vector(0, -1, 0)))
-		cam->dir_x = vector(1, 0, 0);
-	else
-		cam->dir_x = normalize_vect(cross_product(world_y, cam->dir));
-	printf("prev cam axes : \n");
-	print_vec(cam->dir_x);
-	print_vec(cam->dir);
-	cam->dir_y = normalize_vect(cross_product(cam->dir_x, cam->dir));
-	// cam->dir = vector(0, 0.447214, 0.894427);
-	// cam->dir_x = vector(1, 0, 0);
-	// cam->dir_y = vector(0, 0.894427 , -0.447214);
-	printf("new cam axes : \n");
-	print_vec(cam->dir_x);
-	print_vec(cam->dir_y);
-	print_vec(cam->dir);
-}
-
-And I gave a direction vector of (0, 0.5, 1), and this is the results i get 
-(in the prev cam axes I'm printing the x axis and the z axis, and in the new cam axes I'm
-printing the x, y, and z axes) : 
-
-prev cam axes : 
-x : 1.000000, y : 0.000000, z : 0.000000
-x : 0.000000, y : 0.447214, z : 0.894427
-new cam axes : 
-x : 1.000000, y : 0.000000, z : 0.000000
-x : 0.000000, y : 0.894427, z : 0.447214
-x : 0.000000, y : 0.447214, z : 0.894427
-Map init successfully.
-mlx init successfully
-fov : 80.000000
-cam_len : 643.546940
-*/
 
 int	map_check_cam(t_data *d, char **line, int index)
 {

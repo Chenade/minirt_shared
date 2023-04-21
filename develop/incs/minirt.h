@@ -82,8 +82,8 @@ t_vector	put_ambient(t_pixel pixel, t_pixel *p, t_data *d);
 void		put_diffuse(t_pixel pixel, t_pixel *p, t_data *d);
 
 // keyboard.c
-int			ft_move(t_objs *obj, int keysym);
-int			ft_dir(t_objs *obj, int keysym);
+int			ft_move(t_data *d, t_objs *obj, int keysym);
+int			ft_dir(t_data *d, t_objs *obj, int keysym);
 int			key_sphere(t_data *d, int keysym);
 int			key_plane(t_data *d, int keysym);
 int			key_cylinder(t_data *d, int keysym);
@@ -142,6 +142,7 @@ double		calculate_scaler_pl(t_objs *obj, t_data *d, double x, double y);
 double		calculate_scaler_pl2(t_objs *obj, t_data *d, t_vector p);
 
 //vectors.c
+void		rot_v_arount_v(t_vector *v, t_vector *w, double angle);
 t_vector	vector(double x, double y, double z);
 int			init_vector(t_vector *v, int x, int y, int z);
 double		get_norm(double x, double y, double z);
