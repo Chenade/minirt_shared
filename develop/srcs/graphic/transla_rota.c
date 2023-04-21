@@ -99,6 +99,9 @@ int	ft_dir(t_data *d, t_objs *obj, int keycode)
 
 int	ft_rotate_cam(t_objs *obj, int keycode)
 {
+	if (keycode == XK_r)
+		return (obj->dir = vec_scale(obj->dir, -1), \
+		obj->dir_x = vec_scale(obj->dir_x, -1), 1);
 	if (keycode == XK_q)
 		return (rot_v_arount_v(&obj->dir_x, &obj->dir, 0.05), \
 		rot_v_arount_v(&obj->dir_y, &obj->dir, 0.05), 1);
