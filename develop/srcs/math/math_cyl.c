@@ -81,14 +81,13 @@ double	hit_cap(t_vector dir, t_data *d, t_vector p, t_vector center, double radi
 	double		t;
 	t_vector	v;
 
-	// (void)radius;
 	v = d->cur_p.dir;
 	t = (-dir.x * (p.x - center.x) \
 		- dir.y * (p.y - center.y) \
 		- dir.z * (p.z - center.z)) / \
 		(dir.x * v.x + dir.y * v.y + dir.z * v.z);
-	//hit_point = p + t*v; vec_sum(p, vec_scaler(v, t));
-	//dist between hit_point and center <= radius;
+	// hit_point = p + t*v; vec_sum(p, vec_scaler(v, t));
+	// dist between hit_point and center <= radius;
 	if (t > 0 && \
 	fabs(get_vec_norm(vec_sub(center, vec_sum(p, vec_scale(v, t))))) < radius)
 		return (t);
@@ -156,6 +155,39 @@ double	calculate_scaler_cy(t_objs *obj, t_data *d, t_vector p)
 }
 
 // -------------------------------DEPRECATED-----------------------------------
+
+// void	init_math(t_objs *obj)
+// {
+// 	obj->math.radius_2 = obj->radius * obj->radius;
+// 	obj->math.a = obj->dir.x;
+// 	obj->math.b = obj->dir.y;
+// 	obj->math.c = obj->dir.z;
+// 	obj->math.xm = obj->pos.x;
+// 	obj->math.ym = obj->pos.y;
+// 	obj->math.zm = obj->pos.z;
+// 	obj->math.a_2 = obj->math.a * obj->math.a;
+// 	obj->math.b_2 = obj->math.b * obj->math.b;
+// 	obj->math.c_2 = obj->math.c * obj->math.c;
+// 	obj->math.xm_2 = obj->math.xm * obj->math.xm;
+// 	obj->math.ym_2 = obj->math.ym * obj->math.ym;
+// 	obj->math.zm_2 = obj->math.zm * obj->math.zm;
+// }
+
+// void	update_math(t_objs *obj, t_data *d, t_vector p)
+// {
+// 	obj->math.i = d->cur_p.dir.x;
+// 	obj->math.j = d->cur_p.dir.y;
+// 	obj->math.k = d->cur_p.dir.z;
+// 	obj->math.xp = p.x;
+// 	obj->math.yp = p.y;
+// 	obj->math.zp = p.z;
+// 	obj->math.i_2 = obj->math.i * obj->math.i;
+// 	obj->math.j_2 = obj->math.j * obj->math.j;
+// 	obj->math.k_2 = obj->math.k * obj->math.k;
+// 	obj->math.xp_2 = obj->math.xp * obj->math.xp;
+// 	obj->math.yp_2 = obj->math.yp * obj->math.yp;
+// 	obj->math.zp_2 = obj->math.zp * obj->math.zp;
+// }
 
 // double	calculate_scaler_cy_maha(t_objs *obj, t_data *d, t_vector p)
 // {

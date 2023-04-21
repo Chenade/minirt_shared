@@ -12,6 +12,12 @@
 
 #include "minirt.h"
 
+void	get_cam_len(t_data *d)
+{
+	d->cam_len = fabs(tan(PI / 2 - \
+	((d->fov * PI / 180) / 2)) * (WIDTH / 2));
+}
+
 int	map_check_cam(t_data *d, char **line, int index)
 {
 	double	fov;

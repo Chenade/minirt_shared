@@ -76,6 +76,8 @@ us which means we dont see it; (we only consider solutions >= 0);
 */
 
 
+// ------------------------------------------------------------------------
+
 
 // double	check_vn(t_objs *obj, t_data *d, double x, double y)
 // {
@@ -87,24 +89,4 @@ us which means we dont see it; (we only consider solutions >= 0);
 // 	v.y = (HEIGHT / 2 - y) / norm;
 // 	v.z = (d->cam_len) / norm;
 // 	return (cross_product(v, obj->dir));
-// }
-
-// double	calculate_scaler_pl(t_objs *obj, t_data *d, double x, double y)
-// {
-// 	double		norm1;
-// 	double		norm2;
-// 	t_vector	v;
-// 	t_vector	w;
-
-// 	norm1 = get_norm(-WIDTH / 2 + x, HEIGHT / 2 - y, d->cam_len);
-// 	v.x = (-WIDTH / 2 + x) / norm1;
-// 	v.y = (HEIGHT / 2 - y) / norm1;
-// 	v.z = (d->cam_len) / norm1;
-// 	norm2 = get_norm(-obj->dir.x, -obj->dir.y, -obj->dir.z);
-// 	w.x = -obj->dir.x / norm2;
-// 	w.y = -obj->dir.y / norm2;
-// 	w.z = -obj->dir.z / norm2;
-// 	printf("check cross : %f\n", cross_product(w, obj->dir));
-// 	return (cross_product(w, obj->dir) / \
-// 	cross_product(v, obj->dir));
 // }

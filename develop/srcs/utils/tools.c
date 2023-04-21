@@ -41,9 +41,3 @@ int	encode_rgb(t_color c)
 
 rad trans -> deg * pi / 180
 */
-
-void	get_cam_len(t_data *d)
-{
-	d->cam_len = fabs(tan(PI / 2 - \
-	((d->fov * PI / 180) / 2)) * (WIDTH / 2));
-}
