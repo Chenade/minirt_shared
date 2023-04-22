@@ -24,8 +24,7 @@
 # include "libft.h"
 # include "structure.h"
 
-# define WIDTH 1280
-// # define WIN_HEIGHT 840
+# define WIDTH 1080
 # define HEIGHT 840
 # define GUI_HEIGHT 190
 

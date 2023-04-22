@@ -22,24 +22,55 @@ void	mlx_putstr_b(t_data *d, int x, int y, char *str)
 	mlx_string_put(d->mlx_ptr, d->win_ptr, x, y, 0x00000000, str);
 }
 
-
-void	print_menu(t_data *d)
+void	print_move_menu(t_data *d, char *type)
 {
 	int		y;
 
-	y = HEIGHT - 180;
-	// mlx_putstr_b(d, 44, y + 20, "< How to Use >");
-	// mlx_putstr_b(d, 46, y + 20, "< How to Use >");
-	// mlx_putstr_b(d, 45, y + 21, "< How to Use >");
-	// mlx_putstr_b(d, 45, y + 19, "< How to Use >");
-	mlx_putstr(d, 45, y += 20, "< How to Use >");
-	mlx_putstr(d, 35, y += 20, "Arrow Keys: Move X/Y");
-	mlx_putstr(d, 35, y += 20, "Key Z/X: Move Z");
-	mlx_putstr(d, 35, y += 20, "Key Q/A: Rotate X");
-	mlx_putstr(d, 35, y += 20, "Key W/S: Rotate Y");
-	mlx_putstr(d, 35, y += 20, "Key E/D: Rotate Z");
-	mlx_putstr(d, 35, y += 20, "Key U/I: Height");
-	mlx_putstr(d, 35, y += 20, "Key J/K: radius");
+	y = HEIGHT - GUI_HEIGHT + 50;
+	mlx_putstr(d, 170, HEIGHT - GUI_HEIGHT + 20, type);
+	mlx_putstr(d, 35, y += 20, "Insert Move menu");
+}
+
+void	print_complete_menu(t_data *d, char *type)
+{
+	int		y;
+
+	y = HEIGHT - GUI_HEIGHT + 50;
+	mlx_putstr(d, 170, HEIGHT - GUI_HEIGHT + 20, type);
+	mlx_putstr(d, 35, y += 20, "Insert Move + Rota menu");
+}
+
+void	print_cam_menu(t_data *d)
+{
+	int		y;
+
+	y = HEIGHT - GUI_HEIGHT + 50;
+	mlx_putstr(d, 170, HEIGHT - GUI_HEIGHT + 20, "Camera");
+	mlx_putstr(d, 35, y += 20, "Look Around : W A S D");
+	mlx_putstr(d, 35, y += 20, "Tilt right and left : E / Q");
+	mlx_putstr(d, 35, y += 40, "Move Around : Arrow keys");
+	mlx_putstr(d, 35, y += 20, "Go Up and Down : Y / H");
+}
+
+void	print_menu(t_data *d)
+{
+	int	type;
+
+	type = d->objs[d->index].type;
+	if (type == CAM)
+		print_cam_menu(d);
+	else if (type == LIGHT)
+		print_move_menu(d, "Light");
+	else if (type == AMB)
+		mlx_putstr(d, 170, HEIGHT - GUI_HEIGHT + 20, "Ambient light");
+	else if (type == SP)
+		print_move_menu(d, "Sphere");
+	else if (type == PL)
+		print_complete_menu(d, "Plane");
+	else if (type == CY)
+		print_complete_menu(d, "Cylinder");
+	else if (type == CO)
+		print_complete_menu(d, "Cone");
 }
 
 void	draw_line(t_data *d, int x, int y, int l)
@@ -68,6 +99,7 @@ void	put_rect(t_data *d, int x, int y, int w, int h, int color)
 	draw_line(d, x, y + h, w);
 	draw_column(d, x + w, y, h);
 }
+
 
 void	print_menu_outline(t_data *d)
 {
@@ -124,9 +156,9 @@ int	draw_gui(t_data *d)
 	i = d->index;
 	x = 400;
 	print_menu_back(d);
-	// mlx_putstr(d, x + 2, HEIGHT - 165, "Press Tab -->");
 	mlx_putstr(d, x + 5, HEIGHT - 140, "> Selected <");
-	mlx_putstr(d, x + 273, HEIGHT - 138, "-  -  -  -  -  -  -  - Press Tab -  -  -  -  -  -  -  ->");
+	mlx_putstr(d, x + 273, HEIGHT - 138, \
+	"-  -  -  -  -  -  -  - Press Tab -  -  -  -  -  -  -  ->");
 	put_rect(d, x - 10, HEIGHT - 130, 100, 120, 0x00FFFFFF);
 	while (i < d->nbr_objs)
 	{
