@@ -18,10 +18,10 @@ int	init_mlx(t_data *d)
 		d->mlx_ptr = mlx_init();
 		if (!d->mlx_ptr)
 			print_err("Failed init window.", d);
-		d->win_ptr = mlx_new_window(d->mlx_ptr, WIDTH, WIN_HEIGHT, "miniRT");
+		d->win_ptr = mlx_new_window(d->mlx_ptr, WIDTH, HEIGHT, "miniRT");
 		if (!d->win_ptr)
 			print_err("Failed to launch window.", d);
-		d->img.mlx_img = mlx_new_image(d->mlx_ptr, WIDTH, WIN_HEIGHT);
+		d->img.mlx_img = mlx_new_image(d->mlx_ptr, WIDTH, HEIGHT);
 		if (!d->img.mlx_img)
 			print_err("mlx new image error", d);
 		d->img.addr = mlx_get_data_addr(d->img.mlx_img, &d->img.bpp,
@@ -37,7 +37,7 @@ void	draw_imgs(t_data *d)
 
 	// ft_bzero(d->img.addr, d->img.line_len * WIN_HEIGHT);
 	i = 0;
-	while (i < HEIGHT)
+	while (i < HEIGHT - (GUI_HEIGHT * d->display_gui))
 	{
 		j = -1;
 		while (++j < WIDTH)

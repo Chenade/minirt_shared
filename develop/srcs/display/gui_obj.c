@@ -20,7 +20,7 @@ void	gui_sphere(t_data *d, t_objs obj, int x)
 
 	i = 0;
 	j = 0;
-	y = GUI_HEIGHT;
+	y = HEIGHT - 120;
 	while (i < 80)
 	{
 		j = 0;
@@ -42,7 +42,7 @@ void	gui_plane(t_data *d, t_objs obj, int x)
 
 	i = 0;
 	j = 0;
-	y = GUI_HEIGHT;
+	y = HEIGHT - 120;
 	while (i < 80)
 	{
 		j = 0;
@@ -64,7 +64,7 @@ void	gui_cylinder(t_data *d, t_objs obj, int x)
 
 	i = 0;
 	j = 0;
-	y = GUI_HEIGHT;
+	y = HEIGHT - 120;
 	while (i < 80)
 	{
 		j = 0;

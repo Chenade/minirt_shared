@@ -37,6 +37,11 @@ int	key_camera(t_data *d, int keysym)
 
 	i = ft_move(d, &d->objs[d->index], keysym);
 	i = (i || ft_rotate_cam(&d->objs[d->index], keysym));
+	// if (keysym == XK_m)
+	// {
+	// 	d->display_gui = (d->display_gui == 0);
+	// 	i = 1;
+	// }
 	return (i);
 }
 

@@ -16,7 +16,7 @@ void	img_pix_put(t_data *d, int x, int y, int color)
 {
 	char	*pixel;
 
-	if (y >= 0 && y < WIN_HEIGHT && x >= 0 && x < WIDTH)
+	if (y >= 0 && y < HEIGHT && x >= 0 && x < WIDTH)
 	{
 		pixel = d->img.addr + (y * d->img.line_len + x * (d->img.bpp / 8));
 		*(unsigned int *)pixel = color;

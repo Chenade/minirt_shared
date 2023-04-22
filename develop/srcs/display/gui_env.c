@@ -20,7 +20,7 @@ void	gui_camera(t_data *d, t_objs obj, int x)
 
 	i = 0;
 	j = 0;
-	y = GUI_HEIGHT;
+	y = HEIGHT - 120;
 	while (i < 80)
 	{
 		j = 0;
@@ -42,7 +42,7 @@ void	gui_light(t_data *d, t_objs obj, int x)
 
 	i = 0;
 	j = 0;
-	y = GUI_HEIGHT;
+	y = HEIGHT - 120;
 	while (i < 80)
 	{
 		j = 0;
@@ -64,7 +64,7 @@ void	gui_ambient(t_data *d, t_objs obj, int x)
 
 	i = 0;
 	j = 0;
-	y = GUI_HEIGHT;
+	y = HEIGHT - 120;
 	while (i < 80)
 	{
 		j = 0;

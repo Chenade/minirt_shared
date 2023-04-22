@@ -124,10 +124,11 @@ int	ft_rotate_cam(t_objs *obj, int keycode)
 }
 
 /*
-NEW SYSTEM ?
+NEW SYSTEM
 
 - Move around : Arrow keys;
 - Move up and down : Y+/H-;
+
 - Rotations :
 	- Around X : W+ / S-;
 	- Around Y : D -> / A <-;
