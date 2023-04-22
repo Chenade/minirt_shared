@@ -27,7 +27,6 @@ t_pixel	hit_sphere(struct s_objs *obj, struct s_data *d, t_vector p)
 	pixel.normal = calculate_sp_normal(obj->pos, vec_sum(d->cam->pos, \
 	vec_scale(pixel.dir, pixel.scaler)));
 	obj->cam_is_inside = check_inside_sp(obj, d->cam->pos);
-	// obj->light_is_inside = check_inside_sp(obj, d->light->pos);
 	if (obj->cam_is_inside == 1)
 		pixel.normal = vec_scale(pixel.normal, -1);
 	return (pixel);
@@ -59,7 +58,6 @@ t_pixel	hit_plane(struct s_objs *obj, struct s_data *d, t_vector p)
 	pixel.normal = obj->dir;
 	pixel.color = obj->color;
 	obj->cam_is_inside = check_side_pl(obj, d->cam->pos);
-	// obj->light_is_inside = check_side_pl(obj, d->light->pos);
 	if (obj->cam_is_inside == 1)
 		pixel.normal = vec_scale(pixel.normal, -1);
 	// printf("%s\n", __func__);
@@ -80,7 +78,6 @@ t_pixel	hit_cylinder(struct s_objs *obj, struct s_data *d, t_vector p)
 	pixel.normal = obj->normal;
 	pixel.color = obj->color;
 	obj->cam_is_inside = check_inside_cy(obj, d->cam->pos);
-	// obj->light_is_inside = check_inside_cy(obj, d->light->pos);
 	if (obj->cam_is_inside == 1)
 		pixel.normal = vec_scale(pixel.normal, -1);
 	return (pixel);
