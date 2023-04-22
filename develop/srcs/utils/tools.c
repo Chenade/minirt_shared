@@ -33,11 +33,3 @@ int	encode_rgb(t_color c)
 {
 	return (c.r << 16 | c.g << 8 | c.b);
 }
-
-/*
-|tan(180 - fov/2) * WIDTH/2|
-
--> |tan(pi - fov(rad)/2) * WIDTH/2|
-
-rad trans -> deg * pi / 180
-*/

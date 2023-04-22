@@ -47,19 +47,6 @@ else
 	no solution;
 */
 
-int	check_if_inside(t_objs *obj, double s1, double s2)
-{
-	if ((s1 > 0 && s2 < 0) || (s2 > 0 && s1 < 0))
-	{
-		if (obj->from_light == 1)
-			return (obj->light_is_inside = 1);
-		return (obj->cam_is_inside = 1);
-	}
-	if (obj->from_light == 1)
-		return (obj->light_is_inside = 0);
-	return (obj->cam_is_inside = 0);
-}
-
 double	smallest_positive(double n1, double n2)
 {
 	if ((fabs(n1)) < (fabs(n2)) && n1 > 0)
@@ -95,7 +82,6 @@ double	quadratic_solve(double a, double b, double c, t_objs *obj)
 	{
 		s1 = (-b - sqrt(delta)) / (2 * a);
 		s2 = (-b + sqrt(delta)) / (2 * a);
-		// check_if_inside(obj, s1, s2);
 		return (smallest_positive(s1, s2));
 	}
 	return (-b / (2 * a));

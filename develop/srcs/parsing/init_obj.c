@@ -36,7 +36,7 @@ void	init_pl(t_data *d, int index)
 
 void	init_cyl(t_data *d, int index)
 {
-	d->objs[index].type = CYL;
+	d->objs[index].type = CY;
 	d->objs[index].collision_func = hit_cylinder;
 	d->objs[index].shadow_func = cylinder_shadow;
 	d->objs[index].keyboard_func = key_cylinder;

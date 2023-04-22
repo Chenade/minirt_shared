@@ -31,15 +31,20 @@
 
 # define STEP 5
 
-# define DEF 0
-# define PL 1
-# define SP 2
-# define CYL 3
-# define CO	4
+# define CAM 0
+# define LIGHT 1
+# define AMB 2
+# define SP 3
+# define PL 4
+# define CY 5
+# define CO 6
 
 # define PI 3.14159265358979
 
 # define COLOR_WHITE 0x00FFFFFF
+# define BLUE 0x000000FF
+# define RED 0x00FF0000
+# define GREEN 0x0000FF00
 # define COLOR_TEXT 0x202020
 
 // setup.c
@@ -132,6 +137,7 @@ int			print_info(char *name);
 void		*ft_malloc(t_data *d, size_t size);
 
 //math_cy.c
+int			check_inside_cy(t_objs *obj, t_vector p);
 double		quadratic_discriminant(double a, double b, double c);
 double		quadratic_solve(double a, double b, double c, t_objs *obj);
 double		check_solutions_cy(t_objs *obj, t_data *d, t_vector p);
@@ -140,11 +146,13 @@ double		calculate_scaler_cy_maha(t_objs *obj, t_data *d, t_vector p);
 t_vector	calculate_cyl_normal(t_objs *cyl, t_vector hit_point);
 
 //math_sp.c
+int			check_inside_sp(t_objs *obj, t_vector p);
 double		check_solutions(t_objs *obj, t_data *d, t_vector p);
 double		calculate_scaler_sp(t_objs *obj, t_data *d, t_vector p);
 t_vector	calculate_sp_normal(t_vector center, t_vector hit_point);
 
 //math_pl.c
+int			check_side_pl(t_objs *obj, t_vector p);
 double		check_vn(t_objs *obj, t_data *d, double x, double y);
 double		check_vn2(t_objs *obj, t_data *d);
 double		calculate_scaler_pl(t_objs *obj, t_data *d, double x, double y);

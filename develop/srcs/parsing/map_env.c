@@ -12,6 +12,14 @@
 
 #include "minirt.h"
 
+/*
+|tan(180 - fov/2) * WIDTH/2|
+
+-> |tan(pi - fov(rad)/2) * WIDTH/2|
+
+rad trans -> deg * pi / 180
+*/
+
 void	get_cam_len(t_data *d)
 {
 	d->cam_len = fabs(tan(PI / 2 - \

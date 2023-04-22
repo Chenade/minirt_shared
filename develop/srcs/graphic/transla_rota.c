@@ -122,3 +122,16 @@ int	ft_rotate_cam(t_objs *obj, int keycode)
 		rot_v_arount_v(&obj->dir_x, &obj->dir_y, -0.05), 1);
 	return (0);
 }
+
+/*
+NEW SYSTEM ?
+
+- Move around : Arrow keys;
+- Move up and down : Y+/H-;
+- Rotations :
+	- Around X : W+ / S-;
+	- Around Y : D -> / A <-;
+	- Around Z : E tilt -> / Q tilt <-;
+- Lenght (for cyl) : U+ / I-;
+- Radius (cyl & sp) : J+ / K-;
+*/

@@ -55,7 +55,7 @@ void	get_cam_axes(t_objs *cam)
 
 void	init_cam(t_data *d, int index)
 {
-	d->objs[index].type = DEF;
+	d->objs[index].type = CAM;
 	get_cam_axes(&d->objs[index]);
 	d->objs[index].keyboard_func = key_camera;
 	d->objs[index].gui_func = gui_camera;
@@ -65,7 +65,7 @@ void	init_cam(t_data *d, int index)
 
 void	init_ambient(t_data *d, int index)
 {
-	d->objs[index].type = DEF;
+	d->objs[index].type = AMB;
 	d->objs[index].color = d->objs[index].color;
 	d->objs[index].intensity = d->objs[index].intensity;
 	d->objs[index].keyboard_func = key_light;
@@ -76,7 +76,7 @@ void	init_ambient(t_data *d, int index)
 
 void	init_light(t_data *d, int index)
 {
-	d->objs[index].type = DEF;
+	d->objs[index].type = LIGHT;
 	d->objs[index].radius = 3;
 	d->objs[index].collision_func = hit_light;
 	d->objs[index].keyboard_func = key_light;

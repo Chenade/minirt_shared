@@ -62,6 +62,7 @@ OBJS_DIR	=	objs
 SRCS_MAT	= 	math/math_cyl.c				\
 				math/math_pl.c				\
 				math/math_sp.c				\
+				math/check_inside.c			\
 				math/vectors_utils.c		\
 				math/vectors_ops.c			\
 				math/vectors_ops2.c			\
