@@ -93,6 +93,9 @@ SRCS_DIS	=	display/print_obj.c			\
 				display/draw_gui.c			\
 				display/gui_env.c			\
 				display/gui_obj.c			\
+				display/print_menus.c		\
+				display/my_mlx_putstrs.c	\
+				display/pix_put_rect.c		\
 
 SRCS		=	$(SRCS_MAT)
 SRCS		+=	$(SRCS_UTI)

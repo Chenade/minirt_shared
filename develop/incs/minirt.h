@@ -40,7 +40,7 @@
 
 # define PI 3.14159265358979
 
-# define COLOR_WHITE 0x00FFFFFF
+# define WHITE 0x00FFFFFF
 # define BLUE 0x000060FF
 # define RED 0x00FF2020
 # define GREEN 0x0000FF00
@@ -123,6 +123,17 @@ void		gui_cylinder(t_data *d, t_objs obj, int x);
 void		gui_camera(t_data *d, t_objs obj, int x);
 void		gui_light(t_data *d, t_objs obj, int x);
 void		gui_ambient(t_data *d, t_objs obj, int x);
+void		print_move_menu(t_data *d, char *n_type, int type);
+void		print_complete_menu(t_data *d, char *n_type, int type);
+void		print_cam_menu(t_data *d);
+void		print_menu(t_data *d);
+void		mlx_putstr(t_data *d, int x, int y, char *str);
+void		mlx_putstr_r(t_data *d, int x, int y, char *str);
+void		mlx_putstr_g(t_data *d, int x, int y, char *str);
+void		mlx_putstr_b(t_data *d, int x, int y, char *str);
+void		draw_line(t_data *d, int x, int y, int l);
+void		draw_column(t_data *d, int x, int y, int l);
+void		put_rect(t_data *d, t_vector p, int w, int h);
 
 // general.c
 void		free_data(t_data *d);

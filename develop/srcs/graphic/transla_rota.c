@@ -67,16 +67,16 @@ int	ft_move(t_data *d, t_objs *obj, int keysym)
 		vec_scale(d->cam->dir_x, STEP)), 1);
 	else if (keysym == XK_Up)
 		return (obj->pos = vec_sum(obj->pos, \
-		vec_scale(d->cam->dir_y, STEP)), 1);
+		vec_scale(d->cam->dir, STEP)), 1);
 	else if (keysym == XK_Down)
 		return (obj->pos = vec_sum(obj->pos, \
-		vec_scale(d->cam->dir_y, -STEP)), 1);
-	else if (keysym == XK_z)
-		return (obj->pos = vec_sum(obj->pos, \
-		vec_scale(d->cam->dir, STEP)), 1);
-	else if (keysym == XK_x)
-		return (obj->pos = vec_sum(obj->pos, \
 		vec_scale(d->cam->dir, -STEP)), 1);
+	else if (keysym == XK_y)
+		return (obj->pos = vec_sum(obj->pos, \
+		vec_scale(d->cam->dir_y, STEP)), 1);
+	else if (keysym == XK_h)
+		return (obj->pos = vec_sum(obj->pos, \
+		vec_scale(d->cam->dir_y, -STEP)), 1);
 	return (0);
 }
 
