@@ -177,6 +177,7 @@ t_vector	vec_scale(t_vector w, double scaler);
 // tools.c
 double		smallest_positive(double n1, double n2);
 void		img_pix_put(t_data *d, int x, int y, int color);
+void		img_pix_darken(t_data *d, int x, int y, double amount);
 int			getpixelcolor(t_img *img, int x, int y);
 int			encode_rgb(t_color c);
 int			init_vector(t_vector *v, int x, int y, int z);

@@ -92,6 +92,9 @@ typedef struct s_data
 	void			*win_ptr;
 	void			*mlx_ptr;
 	t_img			img;
+	t_img			cam_icon;
+	t_img			light_icon;
+	t_img			menu_back;
 	int				display_gui;
 	int				cur_col;
 

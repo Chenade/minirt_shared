@@ -26,18 +26,24 @@ void	print_move_menu(t_data *d, char *type)
 {
 	int		y;
 
-	y = HEIGHT - GUI_HEIGHT + 50;
+	y = HEIGHT - GUI_HEIGHT + 40;
 	mlx_putstr(d, 170, HEIGHT - GUI_HEIGHT + 20, type);
-	mlx_putstr(d, 35, y += 20, "Insert Move menu");
+	mlx_putstr(d, 20, y + 20, "Move :");
+	mlx_putstr(d, 64, y += 20, "Along X (Right/Left) : Left / Right Arrows");
+	mlx_putstr(d, 64, y += 20, "Along Y (Up/Down) : Y / H");
+	mlx_putstr(d, 64, y += 20, "Along Z (Forward/Backward) : Up / Down Arrows");
 }
 
 void	print_complete_menu(t_data *d, char *type)
 {
 	int		y;
 
-	y = HEIGHT - GUI_HEIGHT + 50;
-	mlx_putstr(d, 170, HEIGHT - GUI_HEIGHT + 20, type);
-	mlx_putstr(d, 35, y += 20, "Insert Move + Rota menu");
+	y = HEIGHT - GUI_HEIGHT + 110;
+	print_move_menu(d, type);
+	mlx_putstr(d, 20, y + 20, "Rotate :");
+	mlx_putstr(d, 74, y += 20, "Around X : W / S");
+	mlx_putstr(d, 74, y += 20, "Around Y : D / A");
+	mlx_putstr(d, 74, y += 20, "Around Z : E / Q");
 }
 
 void	print_cam_menu(t_data *d)
@@ -139,11 +145,12 @@ void	print_menu_back(t_data *d)
 		j = 0;
 		while (j < GUI_HEIGHT)
 		{
-			img_pix_put(d, i, y + j, 0x00202020);
+			img_pix_darken(d, i, y + j, 0.3);
 			j++;
 		}
 		i++;
 	}
+	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, d->menu_back.mlx_img, 0, HEIGHT - GUI_HEIGHT);
 	print_menu_outline(d);
 	mlx_putstr(d, (WIDTH + 350) / 2, HEIGHT - GUI_HEIGHT + 20, "Objects");
 }

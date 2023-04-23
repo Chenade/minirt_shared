@@ -14,6 +14,8 @@
 
 int	init_mlx(t_data *d)
 {
+	int	w = 80;
+	int	h = 80;
 	{
 		d->mlx_ptr = mlx_init();
 		if (!d->mlx_ptr)
@@ -26,6 +28,21 @@ int	init_mlx(t_data *d)
 			print_err("mlx new image error", d);
 		d->img.addr = mlx_get_data_addr(d->img.mlx_img, &d->img.bpp,
 				&d->img.line_len, &d->img.endian);
+		d->menu_back.mlx_img = mlx_new_image(d->mlx_ptr, WIDTH, GUI_HEIGHT);
+		if (!d->menu_back.mlx_img)
+			print_err("mlx new image error", d);
+		d->menu_back.addr = mlx_get_data_addr(d->menu_back.mlx_img, &d->menu_back.bpp,
+				&d->menu_back.line_len, &d->menu_back.endian);
+		d->cam_icon.mlx_img = mlx_xpm_file_to_image(d->mlx_ptr, "./images/Cam_Icon.xpm", &w, &h);
+		if (!d->cam_icon.mlx_img)
+			print_err("mlx cam image error", d);
+		d->cam_icon.addr = mlx_get_data_addr(d->cam_icon.mlx_img, &d->cam_icon.bpp,
+				&d->cam_icon.line_len, &d->cam_icon.endian);
+		d->light_icon.mlx_img = mlx_xpm_file_to_image(d->mlx_ptr, "./images/Light_Icon.xpm", &w, &h);
+		if (!d->light_icon.mlx_img)
+			print_err("mlx cam image error", d);
+		d->light_icon.addr = mlx_get_data_addr(d->light_icon.mlx_img, &d->light_icon.bpp,
+				&d->light_icon.line_len, &d->light_icon.endian);
 	}
 	return (0);
 }
@@ -37,7 +54,7 @@ void	draw_imgs(t_data *d)
 
 	// ft_bzero(d->img.addr, d->img.line_len * WIN_HEIGHT);
 	i = 0;
-	while (i < HEIGHT - (GUI_HEIGHT * d->display_gui))
+	while (i < HEIGHT)// - (GUI_HEIGHT * d->display_gui))
 	{
 		j = -1;
 		while (++j < WIDTH)
