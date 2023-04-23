@@ -97,6 +97,7 @@ typedef struct s_data
 	t_img			menu_back;
 	int				display_gui;
 	int				cur_col;
+	int				img_changed;
 
 	double			fov;
 	double			cam_len;

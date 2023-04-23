@@ -24,6 +24,7 @@ int	minirt(char *filename)
 	printf("fov : %f\n", d.fov);
 	get_cam_len(&d);
 	d.display_gui = 1;
+	d.img_changed = 1;
 	printf("cam_len : %f\n", d.cam_len);
 	draw_imgs(&d);
 	mlx_loop_hook(d.mlx_ptr, render_frame, &d);

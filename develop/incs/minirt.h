@@ -41,8 +41,8 @@
 # define PI 3.14159265358979
 
 # define COLOR_WHITE 0x00FFFFFF
-# define BLUE 0x000000FF
-# define RED 0x00FF0000
+# define BLUE 0x000060FF
+# define RED 0x00FF2020
 # define GREEN 0x0000FF00
 # define COLOR_TEXT 0x202020
 
@@ -176,7 +176,7 @@ t_vector	vec_scale(t_vector w, double scaler);
 
 // tools.c
 double		smallest_positive(double n1, double n2);
-void		img_pix_put(t_data *d, int x, int y, int color);
+void		img_pix_put(t_img *img, int x, int y, int color);
 void		img_pix_darken(t_data *d, int x, int y, double amount);
 int			getpixelcolor(t_img *img, int x, int y);
 int			encode_rgb(t_color c);

@@ -58,9 +58,10 @@ void	draw_imgs(t_data *d)
 	{
 		j = -1;
 		while (++j < WIDTH)
-			img_pix_put(d, j, i, ray_tracing(d, j, i));
+			img_pix_put(&d->img, j, i, ray_tracing(d, j, i));
 		i++;
 	}
+	d->img_changed = 1;
 	// ft_printf("mlx draw image successfully\n");
 }
 
@@ -68,15 +69,34 @@ int	render_frame(t_data *d)
 {
 	if (d->win_ptr == NULL)
 		return (1);
-	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, d->img.mlx_img, 0, 0);
-	draw_gui(d);
-	return (0);
+	if (d->img_changed == 1)
+	{
+		mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, d->img.mlx_img, 0, 0);
+		if (d->display_gui == 1)
+			draw_gui(d);
+	}
+	return (d->img_changed = 0, 0);
 }
 
 int	handle_exit(t_data *d)
 {
 	mlx_destroy_window(d->mlx_ptr, d->win_ptr);
 	d->win_ptr = NULL;
+	return (0);
+}
+
+int	handle_plus_minus(int keysym, t_data *d)
+{
+	if ((keysym == XK_equal || keysym == XK_minus) && d->display_gui == 1)
+	{
+		if (keysym == XK_equal)
+			d->index = (d->index + 1) % (d->nbr_objs);
+		else
+			d->index--;
+		if (d->index < 0)
+			d->index = d->nbr_objs - 1;
+		return (1);
+	}
 	return (0);
 }
 
@@ -87,13 +107,18 @@ int	handle_keypress(int keysym, t_data *d)
 		mlx_destroy_window(d->mlx_ptr, d->win_ptr);
 		d->win_ptr = NULL;
 	}
-	else if (keysym == XK_Tab)
+	else if (handle_plus_minus(keysym, d))
 	{
-		d->index = (d->index + 1) % (d->nbr_objs);
+		d->img_changed = 1;
 		draw_gui(d);
 	}
 	else if (keysym == XK_p)
 		key_saved(d);
+	else if (keysym == XK_m)
+	{
+		d->display_gui = (d->display_gui == 0);
+		d->img_changed = 1;
+	}
 	else
 		if (((int (*)(t_data *, int))
 			(d->objs[d->index].keyboard_func))(d, keysym))
