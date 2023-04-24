@@ -23,7 +23,7 @@ char	*get_icon_name(int type)
 	if (type == SP)
 		return ("./images/sp_icon.xpm");
 	if (type == PL)
-		return ("./images/pl_icon2.xpm");
+		return ("./images/pl_icon3.xpm");
 	return ("./images/cy_icon.xpm");
 	// if (type == CO)
 	// 	return ("./images/co_icon.xpm");
@@ -102,6 +102,9 @@ int	render_frame(t_data *d)
 		mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, d->img.mlx_img, 0, 0);
 		if (d->display_gui == 1)
 			draw_gui(d);
+		else
+			mlx_putstr(d, WIDTH - 150, HEIGHT - 10, \
+			"Press M to show the menu"); //"toggle" menu ?
 		d->img_changed = 0;
 	}
 	return (0);
