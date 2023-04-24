@@ -12,38 +12,48 @@
 
 #include "minirt.h"
 
-void	gui_camera(t_data *d, t_objs obj, int x)
+void	paint_image(t_img *img, int color, int target)
 {
-	(void)obj;
-	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, d->cam_icon.mlx_img, x, HEIGHT - 120);
-	mlx_putstr(d, x + 22, HEIGHT - 20, "Camera");
-}
-
-void	gui_light(t_data *d, t_objs obj, int x)
-{
-	(void)obj;
-	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, d->light_icon.mlx_img, x, HEIGHT - 120);
-	mlx_putstr(d, x + 25, HEIGHT - 20, "Light");
-}
-
-void	gui_ambient(t_data *d, t_objs obj, int x)
-{
+	char	*pixel;
 	int		i;
 	int		j;
-	// int		y;
 
 	i = 0;
 	j = 0;
-	// y = HEIGHT - 120;
 	while (i < 80)
 	{
 		j = 0;
 		while (j < 80)
 		{
-			img_pix_put(&d->menu_back, x + i, 70 + j, encode_rgb(obj.color));
+			pixel = img->addr + (j * img->line_len + i * (img->bpp / 8));
+			if (*(unsigned int *)pixel == (unsigned int)target)
+				*(unsigned int *)pixel = color;
 			j++;
 		}
 		i++;
 	}
+}
+
+void	gui_camera(t_data *d, t_objs obj, int x)
+{
+	(void)obj;
+	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, \
+	d->cam_icon.mlx_img, x, HEIGHT - 120);
+	mlx_putstr(d, x + 22, HEIGHT - 20, "Camera");
+}
+
+void	gui_light(t_data *d, t_objs obj, int x)
+{
+	paint_image(&d->light_icon, encode_rgb(obj.color), WHITE);
+	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, \
+	d->light_icon.mlx_img, x, HEIGHT - 120);
+	mlx_putstr(d, x + 25, HEIGHT - 20, "Light");
+}
+
+void	gui_ambient(t_data *d, t_objs obj, int x)
+{
+	paint_image(&d->amb_icon, encode_rgb(obj.color), WHITE);
+	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, \
+	d->amb_icon.mlx_img, x, HEIGHT - 120);
 	mlx_putstr(d, x + 2, HEIGHT - 20, "Ambient Light");
 }

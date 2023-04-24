@@ -24,8 +24,8 @@
 # include "libft.h"
 # include "structure.h"
 
-# define WIDTH 1080
-# define HEIGHT 840
+# define WIDTH 940
+# define HEIGHT 640
 # define GUI_HEIGHT 190
 
 # define STEP 5
@@ -44,7 +44,6 @@
 # define BLUE 0x000060FF
 # define RED 0x00FF2020
 # define GREEN 0x0000FF00
-# define COLOR_TEXT 0x202020
 
 // setup.c
 int			set_vector(t_vector *v, char *str);
@@ -134,6 +133,7 @@ void		mlx_putstr_b(t_data *d, int x, int y, char *str);
 void		draw_line(t_data *d, int x, int y, int l);
 void		draw_column(t_data *d, int x, int y, int l);
 void		put_rect(t_data *d, t_vector p, int w, int h);
+void		paint_image(t_img *img, int color, int target);
 
 // general.c
 void		free_data(t_data *d);

@@ -25,31 +25,22 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 
 void	img_pix_darken(t_data *d, int x, int y, double amount)
 {
+	int		r;
+	int		g;
+	int		b;
 	char	*prev_p;
 	char	*new_p;
-	// char	*pixel;
-	double	r;
-	double	g;
-	double	b;
 
-	// (void)amount;
 	if (y >= 0 && y < HEIGHT && x >= 0 && x < WIDTH)
 	{
-		// printf("line_len : %d, bpp : %d\n", d->img.line_len, d->img.bpp);
 		prev_p = d->img.addr + (y * d->img.line_len + x * (d->img.bpp / 8));
-		new_p = d->menu_back.addr + ((y - (HEIGHT - GUI_HEIGHT)) * d->menu_back.line_len + x * (d->menu_back.bpp / 8));
-		// pixel = d->img.addr + (y * d->img.line_len + x * (d->img.bpp / 8));
-		// printf("pix : %d\n", *(unsigned int *)pixel);
+		new_p = d->menu_back.addr + ((y - (HEIGHT - GUI_HEIGHT)) \
+		* d->menu_back.line_len + x * (d->menu_back.bpp / 8));
 		r = ((*(unsigned int *)prev_p & 16711680) >> 16) * amount;
 		g = ((*(unsigned int *)prev_p & 65280) >> 8) * amount;
 		b = (*(unsigned int *)prev_p & 255) * amount;
 		// printf("%d, %d, %d\n", r, g, b);
-		*(unsigned int *)new_p = ((int)r << 16) + ((int)g << 8) + ((int)b);
-		// (((int)(((*(unsigned int *)pixel & 16711680) >> 16) * amount) << 16) + \
-		// ((int)(((*(unsigned int *)pixel & 65280) >> 8) * amount) << 8) + \
-		// ((int)((*(unsigned int *)pixel & 255) * amount)));
-		// printf("%f\n", (((*(unsigned int *)pixel & 16711680) >> 16) * amount));
-		// *(unsigned int *)pixel = 0;
+		*(unsigned int *)new_p = (r << 16) + (g << 8) + (b);
 	}
 }
 

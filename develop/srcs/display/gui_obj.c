@@ -16,21 +16,22 @@ void	gui_sphere(t_data *d, t_objs obj, int x)
 {
 	int		i;
 	int		j;
-	// int		y;
 
 	i = 0;
 	j = 0;
-	// y = HEIGHT - 120;
+	paint_image(&d->sp_icon, encode_rgb(obj.color), WHITE);
 	while (i < 80)
 	{
 		j = 0;
 		while (j < 80)
 		{
-			img_pix_put(&d->menu_back, x + i, 70 + j, encode_rgb(obj.color));
+			img_pix_put(&d->menu_back, x + i, 70 + j, \
+			getpixelcolor(&d->sp_icon, i, j));
 			j++;
 		}
 		i++;
 	}
+	paint_image(&d->sp_icon, WHITE, encode_rgb(obj.color));
 	mlx_putstr(d, x + 22, HEIGHT - 20, "Sphere");
 }
 
@@ -38,21 +39,23 @@ void	gui_plane(t_data *d, t_objs obj, int x)
 {
 	int		i;
 	int		j;
-	// int		y;
 
 	i = 0;
 	j = 0;
-	// y = HEIGHT - 120;
+	// paint_image(&d->pl_icon, encode_rgb(obj.color), WHITE);
 	while (i < 80)
 	{
 		j = 0;
 		while (j < 80)
 		{
 			img_pix_put(&d->menu_back, x + i, 70 + j, encode_rgb(obj.color));
+			// img_pix_put(&d->menu_back, x + i, 70 + j, \
+			// getpixelcolor(&d->cy_icon, i, j));
 			j++;
 		}
 		i++;
 	}
+	// paint_image(&d->pl_icon, WHITE, encode_rgb(obj.color));
 	mlx_putstr(d, x + 25, HEIGHT - 20, "Plane");
 }
 
@@ -60,20 +63,21 @@ void	gui_cylinder(t_data *d, t_objs obj, int x)
 {
 	int		i;
 	int		j;
-	// int		y;
 
 	i = 0;
 	j = 0;
-	// y = HEIGHT - 120;
+	paint_image(&d->cy_icon, encode_rgb(obj.color), WHITE);
 	while (i < 80)
 	{
 		j = 0;
 		while (j < 80)
 		{
-			img_pix_put(&d->menu_back, x + i, 70 + j, encode_rgb(obj.color));
+			img_pix_put(&d->menu_back, x + i, 70 + j, \
+			getpixelcolor(&d->cy_icon, i, j));
 			j++;
 		}
 		i++;
 	}
+	paint_image(&d->cy_icon, WHITE, encode_rgb(obj.color));
 	mlx_putstr(d, x + 17, HEIGHT - 20, "Cylinder");
 }

@@ -94,6 +94,9 @@ typedef struct s_data
 	t_img			img;
 	t_img			cam_icon;
 	t_img			light_icon;
+	t_img			amb_icon;
+	t_img			sp_icon;
+	t_img			cy_icon;
 	t_img			menu_back;
 	int				display_gui;
 	int				rec_col;

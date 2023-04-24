@@ -43,14 +43,7 @@ void	get_cam_axes(t_objs *cam)
 		cam->dir_x = vector(1, 0, 0);
 	else
 		cam->dir_x = normalize_vect(cross_product(world_y, cam->dir));
-	// printf("prev cam axes : \n");
-	// print_vec(cam->dir_x);
-	// print_vec(cam->dir);
 	cam->dir_y = normalize_vect(cross_product(cam->dir, cam->dir_x));
-	// printf("new cam axes : \n");
-	// print_vec(cam->dir_x);
-	// print_vec(cam->dir_y);
-	// print_vec(cam->dir);
 }
 
 void	init_cam(t_data *d, int index)

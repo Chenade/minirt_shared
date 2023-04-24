@@ -12,6 +12,20 @@
 
 #include "minirt.h"
 
+void	free_icons(t_data *d)
+{
+	if (d->cam_icon.mlx_img)
+		mlx_destroy_image(d->mlx_ptr, d->cam_icon.mlx_img);
+	if (d->light_icon.mlx_img)
+		mlx_destroy_image(d->mlx_ptr, d->light_icon.mlx_img);
+	if (d->amb_icon.mlx_img)
+		mlx_destroy_image(d->mlx_ptr, d->amb_icon.mlx_img);
+	if (d->sp_icon.mlx_img)
+		mlx_destroy_image(d->mlx_ptr, d->sp_icon.mlx_img);
+	if (d->cy_icon.mlx_img)
+		mlx_destroy_image(d->mlx_ptr, d->cy_icon.mlx_img);
+}
+
 void	free_data(t_data *d)
 {
 	int	i;
@@ -20,6 +34,9 @@ void	free_data(t_data *d)
 		mlx_destroy_window(d->mlx_ptr, d->win_ptr);
 	if (d->img.mlx_img)
 		mlx_destroy_image(d->mlx_ptr, d->img.mlx_img);
+	if (d->menu_back.mlx_img)
+		mlx_destroy_image(d->mlx_ptr, d->menu_back.mlx_img);
+	free_icons(d);
 	if (d->mlx_ptr)
 		mlx_destroy_display(d->mlx_ptr);
 	free(d->mlx_ptr);

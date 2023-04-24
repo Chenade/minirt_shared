@@ -12,29 +12,18 @@
 
 #include "minirt.h"
 
-void	print_menu_outline(t_data *d)
+void	print_menu_details(t_data *d)
 {
-	int		i;
-	int		j;
-	int		y;
-
-	i = 0;
-	j = 0;
-	y = HEIGHT - GUI_HEIGHT;
-	while (i < WIDTH)
-	{
-		j = 0;
-		while (j < 30)
-		{
-			img_pix_put(&d->img, i, y + j, 0x00080808);
-			j++;
-		}
-		i++;
-	}
-	d->rec_col = 0x00404040;
+	d->rec_col = 0x00505050;
 	put_rect(d, vector(0,0,0), WIDTH - 1, GUI_HEIGHT - 1);
 	draw_column(d, 380, 0, GUI_HEIGHT - 1);
 	draw_line(d, 0, 30, WIDTH);
+	d->rec_col = WHITE;
+	put_rect(d, vector(390, 60, 0), 100, 120);
+	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, \
+	d->menu_back.mlx_img, 0, HEIGHT - GUI_HEIGHT);
+	mlx_putstr(d, (WIDTH + 350) / 2, HEIGHT - GUI_HEIGHT + 20, "Objects");
+	mlx_putstr(d, 392, HEIGHT - 140, "< - Selected + >");
 }
 
 void	print_menu_back(t_data *d)
@@ -59,13 +48,7 @@ void	print_menu_back(t_data *d)
 		}
 		i++;
 	}
-	d->rec_col = 0x00505050;
-	put_rect(d, vector(0,0,0), WIDTH - 1, GUI_HEIGHT - 1);
-	draw_column(d, 380, 0, GUI_HEIGHT - 1);
-	draw_line(d, 0, 30, WIDTH);
-	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, \
-	d->menu_back.mlx_img, 0, HEIGHT - GUI_HEIGHT);
-	mlx_putstr(d, (WIDTH + 350) / 2, HEIGHT - GUI_HEIGHT + 20, "Objects");
+	print_menu_details(d);
 }
 
 int	draw_gui(t_data *d)
@@ -92,16 +75,5 @@ int	draw_gui(t_data *d)
 		i += 1;
 	}
 	print_menu(d);
-	d->rec_col = WHITE;
-	put_rect(d, vector(390, 60, 0), 100, 120);
-	mlx_putstr(d, 392, HEIGHT - 140, "< - Selected + >");
 	return (0);
 }
-
-/*
-IMPORTANT !! :
-
-missing the diameter menu for spheres, 
-+ height for the cylinder !
-
-*/

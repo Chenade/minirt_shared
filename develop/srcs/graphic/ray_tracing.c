@@ -47,7 +47,6 @@ int	ray_tracing(t_data *d, int x, int y)
 		}
 		i++;
 	}
-	// check_inside_objs(d);
 	pixel.pos = vec_sum(d->cam->pos, vec_scale(pixel.dir, pixel.scaler));
 	if (pixel.scaler > 0 && pixel.is_light == 0)
 		get_shadow(&pixel, d);
