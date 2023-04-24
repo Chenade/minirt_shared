@@ -56,12 +56,13 @@ void	print_cam_menu(t_data *d)
 {
 	int		y;
 
-	y = HEIGHT - GUI_HEIGHT + 50;
+	y = HEIGHT - GUI_HEIGHT + 45;
 	mlx_putstr(d, 175, HEIGHT - GUI_HEIGHT + 20, "Camera");
-	mlx_putstr(d, 35, y += 20, "Look Around : W A S D");
-	mlx_putstr(d, 35, y += 20, "Tilt right and left : E / Q");
-	mlx_putstr(d, 35, y += 40, "Move Around : Arrow keys");
-	mlx_putstr(d, 35, y += 20, "Go Up and Down : Y / H");
+	mlx_putstr(d, 30, y += 20, "Look Around : W A S D");
+	mlx_putstr(d, 30, y += 20, "Tilt right and left : E / Q");
+	mlx_putstr(d, 30, y += 20, "Turn Around : R");
+	mlx_putstr(d, 30, y += 40, "Move Around : Arrow keys");
+	mlx_putstr(d, 30, y += 20, "Go Up and Down : Y / H");
 }
 
 void	print_menu(t_data *d)
