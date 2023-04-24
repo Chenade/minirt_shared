@@ -59,7 +59,6 @@ void	init_icons(t_data *d)
 
 int	init_mlx(t_data *d)
 {
-	printf("nbr objs : %d\n", d->nbr_objs);
 	d->mlx_ptr = mlx_init();
 	if (!d->mlx_ptr)
 		print_err("Failed init window.", d);

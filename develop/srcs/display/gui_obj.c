@@ -32,7 +32,8 @@ void	gui_plane(t_data *d, t_objs obj, int x)
 		j = 0;
 		while (j < 80)
 		{
-			img_pix_put(&d->menu_back, x + i, 70 + j, encode_rgb(obj.color));
+			img_pix_put(&d->menu_back, x + i, 70 + j, \
+			encode_rgb(obj.color));
 			// img_pix_put(&d->menu_back, x + i, 70 + j, \
 			// getpixelcolor(&d->cy_icon, i, j));
 			j++;
