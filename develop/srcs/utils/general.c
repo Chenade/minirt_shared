@@ -12,6 +12,19 @@
 
 #include "minirt.h"
 
+void	free_icons(t_data *d)
+{
+	int	i;
+
+	i = 0;
+	while (i < d->nbr_objs)
+	{
+		if (d->objs[i].icon.mlx_img)
+			mlx_destroy_image(d->mlx_ptr, d->objs[i].icon.mlx_img);
+		i++;
+	}
+}
+
 void	free_data(t_data *d)
 {
 	int	i;
@@ -20,6 +33,9 @@ void	free_data(t_data *d)
 		mlx_destroy_window(d->mlx_ptr, d->win_ptr);
 	if (d->img.mlx_img)
 		mlx_destroy_image(d->mlx_ptr, d->img.mlx_img);
+	if (d->menu_back.mlx_img)
+		mlx_destroy_image(d->mlx_ptr, d->menu_back.mlx_img);
+	free_icons(d);
 	if (d->mlx_ptr)
 		mlx_destroy_display(d->mlx_ptr);
 	free(d->mlx_ptr);

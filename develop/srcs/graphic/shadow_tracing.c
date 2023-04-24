@@ -12,6 +12,28 @@
 
 #include "minirt.h"
 
+void	check_inside_objs(t_data *d)
+{
+	int		i;
+	t_objs	objs;
+	t_pixel	pixel;
+
+	i = 0;
+	ft_bzero(&pixel, sizeof(t_pixel));
+	d->cur_p.dir = vector(1, 0, 0);
+	while (i < d->nbr_objs)
+	{
+		objs = d->objs[i];
+		objs.from_light = 1;
+		if (objs.shadow_func)
+		{
+			((t_pixel (*)(struct s_objs *, struct s_data *, t_vector p))
+			objs.shadow_func)(&objs, d, d->light->pos);
+		}
+		i++;
+	}
+}
+
 void	trace_shadow(t_pixel *p, t_data *d, t_vector v)
 {
 	int		i;
@@ -25,6 +47,7 @@ void	trace_shadow(t_pixel *p, t_data *d, t_vector v)
 	while (i < d->nbr_objs)
 	{
 		objs = d->objs[i];
+		objs.from_light = 0;
 		if (objs.shadow_func)
 		{
 			pixel = min_scaler(i, pixel,
@@ -37,8 +60,6 @@ void	trace_shadow(t_pixel *p, t_data *d, t_vector v)
 			return ((void)put_ambient(pixel, p, d));
 		i++;
 	}
-	// pixel.pos = vec_sum(d->cam->pos, vec_scale(pixel.dir, pixel.scaler));
-	// if (pixel.scaler > get_vec_norm(vec_sub(d->light->pos, d->cam->pos)))
 	put_diffuse(pixel, p, d);
 }
 // pixel.pos = vec_sum(d->cam->pos, vec_scale(pixel.dir, pixel.scaler));

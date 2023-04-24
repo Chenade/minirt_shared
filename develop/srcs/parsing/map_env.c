@@ -12,6 +12,20 @@
 
 #include "minirt.h"
 
+/*
+|tan(180 - fov/2) * WIDTH/2|
+
+-> |tan(pi - fov(rad)/2) * WIDTH/2|
+
+rad trans -> deg * pi / 180
+*/
+
+void	get_cam_len(t_data *d)
+{
+	d->cam_len = fabs(tan(PI / 2 - \
+	((d->fov * PI / 180) / 2)) * (WIDTH / 2));
+}
+
 int	map_check_cam(t_data *d, char **line, int index)
 {
 	double	fov;
@@ -32,14 +46,7 @@ int	map_check_cam(t_data *d, char **line, int index)
 	if (fov < 0 || fov > 180)
 		return (print_err("Error\n: Invalid Map: Camera", d), 1);
 	d->fov = fov;
-	d->objs[index].type = DEF;
-	d->objs[index].angle_x = 0;
-	d->objs[index].angle_y = 0;
-	d->objs[index].angle_z = 0;
-	d->objs[index].keyboard_func = key_camera;
-	d->objs[index].gui_func = gui_camera;
-	d->objs[index].print_func = print_camera;
-	d->cam = &d->objs[index];
+	init_cam(d, index);
 	return (0);
 }
 
@@ -57,14 +64,8 @@ int	map_check_ambient(t_data *d, char **line, int index)
 		return (print_err("Error\n: Invalid Map: Ambinent Light", d), 1);
 	d->objs[index].intensity = intensity;
 	if (set_color(&d->objs[index].color, line[2]))
-		return (print_err("Error\n: Invalid Map: Ambinent Light", d), 1);
-	d->objs[index].type = DEF;
-	d->objs[index].color = d->objs[index].color;
-	d->objs[index].intensity = d->objs[index].intensity;
-	d->objs[index].keyboard_func = key_light;
-	d->objs[index].gui_func = gui_ambient;
-	d->objs[index].print_func = print_ambient;
-	d->ambient = &d->objs[index];
+		return (1);
+	init_ambient(d, index);
 	return (0);
 }
 
@@ -84,15 +85,7 @@ int	map_check_light(t_data *d, char **line, int index)
 		return (print_err("Error\n: Invalid Map: Light", d), 1);
 	d->objs[index].intensity = intensity;
 	if (set_color(&d->objs[index].color, line[3]))
-		return (print_err("Error\n: Invalid Map: Light", d), 1);
-	d->objs[index].type = DEF;
-	d->objs[index].radius = 3;
-	d->objs[index].collision_func = hit_light;
-	d->objs[index].keyboard_func = key_light;
-	d->objs[index].gui_func = gui_light;
-	d->objs[index].print_func = print_light;
-	d->light = &d->objs[index];
-	d->objs[index].math.radius_2 = \
-	d->objs[index].radius * d->objs[index].radius;
+		return (1);
+	init_light(d, index);
 	return (0);
 }

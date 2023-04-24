@@ -62,33 +62,40 @@ OBJS_DIR	=	objs
 SRCS_MAT	= 	math/math_cyl.c				\
 				math/math_pl.c				\
 				math/math_sp.c				\
-				math/vectors_init.c			\
+				math/check_inside.c			\
+				math/vectors_utils.c		\
 				math/vectors_ops.c			\
 				math/vectors_ops2.c			\
 
 SRCS_UTI	=	utils/general.c				\
 				utils/tools.c				\
-				utils/helper.c
+				utils/helper.c				\
 
 SRCS_PAR	=	parsing/setup.c				\
+				parsing/init_env.c			\
 				parsing/map_env.c			\
+				parsing/init_obj.c			\
 				parsing/map_obj.c			\
-				parsing/parse.c
+				parsing/parse.c				\
 
 SRCS_MLX	=	graphic/mlx_setup.c			\
 				graphic/keyboard_env.c		\
 				graphic/keyboard_obj.c		\
+				graphic/transla_rota.c		\
 				graphic/collisions.c		\
 				graphic/shadows.c			\
 				graphic/shadow_tracing.c	\
 				graphic/ray_tracing.c		\
-				graphic/calculate_colors.c
+				graphic/calculate_colors.c	\
 	
 SRCS_DIS	=	display/print_obj.c			\
 				display/print_env.c			\
 				display/draw_gui.c			\
 				display/gui_env.c			\
-				display/gui_obj.c
+				display/gui_obj.c			\
+				display/print_menus.c		\
+				display/my_mlx_putstrs.c	\
+				display/pix_put_rect.c		\
 
 SRCS		=	$(SRCS_MAT)
 SRCS		+=	$(SRCS_UTI)

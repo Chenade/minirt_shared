@@ -12,14 +12,35 @@
 
 #include "minirt.h"
 
-void	img_pix_put(t_data *d, int x, int y, int color)
+void	img_pix_put(t_img *img, int x, int y, int color)
 {
 	char	*pixel;
 
-	if (y >= 0 && y < WIN_HEIGHT && x >= 0 && x < WIDTH)
+	if (y >= 0 && y < HEIGHT && x >= 0 && x < WIDTH)
 	{
-		pixel = d->img.addr + (y * d->img.line_len + x * (d->img.bpp / 8));
+		pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
 		*(unsigned int *)pixel = color;
+	}
+}
+
+void	img_pix_darken(t_data *d, int x, int y, double amount)
+{
+	int		r;
+	int		g;
+	int		b;
+	char	*prev_p;
+	char	*new_p;
+
+	if (y >= 0 && y < HEIGHT && x >= 0 && x < WIDTH)
+	{
+		prev_p = d->img.addr + (y * d->img.line_len + x * (d->img.bpp / 8));
+		new_p = d->menu_back.addr + ((y - (HEIGHT - GUI_HEIGHT)) \
+		* d->menu_back.line_len + x * (d->menu_back.bpp / 8));
+		r = ((*(unsigned int *)prev_p & 16711680) >> 16) * amount;
+		g = ((*(unsigned int *)prev_p & 65280) >> 8) * amount;
+		b = (*(unsigned int *)prev_p & 255) * amount;
+		// printf("%d, %d, %d\n", r, g, b);
+		*(unsigned int *)new_p = (r << 16) + (g << 8) + (b);
 	}
 }
 
@@ -32,18 +53,4 @@ int	getpixelcolor(t_img *img, int x, int y)
 int	encode_rgb(t_color c)
 {
 	return (c.r << 16 | c.g << 8 | c.b);
-}
-
-/*
-|tan(180 - fov/2) * WIDTH/2|
-
--> |tan(pi - fov(rad)/2) * WIDTH/2|
-
-rad trans -> deg * pi / 180
-*/
-
-void	get_cam_len(t_data *d)
-{
-	d->cam_len = fabs(tan(PI / 2 - \
-	((d->fov * PI / 180) / 2)) * (WIDTH / 2));
 }

@@ -52,12 +52,15 @@ t_vector	vec_scale(t_vector v, double scaler)
 	return (w);
 }
 
-t_vector	vec_invert(t_vector v)
+t_vector	normalize_vect(t_vector v)
 {
+	double		norm;
 	t_vector	w;
 
-	w.x = -v.x;
-	w.y = -v.y;
-	w.z = -v.z;
+	norm = get_norm(v.x, v.y, v.z);
+	w.x = v.x / norm;
+	w.y = v.y / norm;
+	w.z = v.z / norm;
+	w.norm = norm;
 	return (w);
 }

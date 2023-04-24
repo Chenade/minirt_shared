@@ -54,7 +54,7 @@ t_pixel	cylinder_shadow(struct s_objs *obj, struct s_data *d, t_vector p)
 	t_pixel	pixel;
 
 	pixel.is_light = 0;
-	scaler = calculate_scaler_cy_maha(obj, d, p);
+	scaler = calculate_scaler_cy(obj, d, p);
 	pixel.scaler = scaler;
 	return (pixel);
 }

@@ -41,45 +41,34 @@ typedef struct s_pixel
 
 typedef struct s_math
 {
-	double	_a;
-	double	_b;
-	double	_c;
-	double	a;
-	double	b;
-	double	c;
-	double	i;
-	double	j;
-	double	k;
-	double	xp;
-	double	yp;
-	double	zp;
-	double	xm;
-	double	ym;
-	double	zm;
-	double	a_2;
-	double	b_2;
-	double	c_2;
-	double	i_2;
-	double	j_2;
-	double	k_2;
-	double	xp_2;
-	double	yp_2;
-	double	zp_2;
-	double	xm_2;
-	double	ym_2;
-	double	zm_2;
-	double	radius_2;
+	double		radius_2;
+	t_vector	va;
+	t_vector	ra;
 }	t_math;
 
 typedef struct s_data	t_data;
+
+typedef struct s_img
+{
+	int		w;
+	int		h;
+	int		bpp;
+	int		endian;
+	int		line_len;
+	char	*addr;
+	void	*mlx_img;
+}	t_img;
 
 typedef struct s_objs
 {
 	int			type;
 	int			cam_is_inside;
+	int			from_light;
 	t_color		color;
 	t_vector	pos;
 	t_vector	dir;
+	t_vector	dir_y;
+	t_vector	dir_x;
 	t_vector	normal;
 	t_vector	cap_1;
 	t_vector	cap_2;
@@ -96,24 +85,19 @@ typedef struct s_objs
 	void		*gui_func;
 	void		*print_func;
 	t_math		math;
+	t_img		icon;
 }	t_objs;
 
-typedef struct s_img
-{
-	int		w;
-	int		h;
-	int		bpp;
-	int		endian;
-	int		line_len;
-	char	*addr;
-	void	*mlx_img;
-}	t_img;
 
 typedef struct s_data
 {
 	void			*win_ptr;
 	void			*mlx_ptr;
 	t_img			img;
+	t_img			menu_back;
+	int				display_gui;
+	int				rec_col;
+	int				img_changed;
 
 	double			fov;
 	double			cam_len;

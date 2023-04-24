@@ -12,24 +12,43 @@
 
 #include "minirt.h"
 
-void	mlx_putstr(t_data *d, int x, int y, char *str)
+void	print_menu_details(t_data *d)
 {
-	mlx_string_put(d->mlx_ptr, d->win_ptr, x, y, COLOR_WHITE, str);
+	d->rec_col = 0x00505050;
+	put_rect(d, vector(0,0,0), WIDTH - 1, GUI_HEIGHT - 1);
+	draw_column(d, 380, 0, GUI_HEIGHT - 1);
+	draw_line(d, 0, 30, WIDTH);
+	d->rec_col = WHITE;
+	put_rect(d, vector(390, 60, 0), 100, 120);
+	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, \
+	d->menu_back.mlx_img, 0, HEIGHT - GUI_HEIGHT);
+	mlx_putstr(d, (WIDTH + 350) / 2, HEIGHT - GUI_HEIGHT + 20, "Objects");
+	mlx_putstr(d, 392, HEIGHT - 140, "< - Selected + >");
 }
 
-void	print_menu(t_data *d)
+void	print_menu_back(t_data *d)
 {
+	int		i;
+	int		j;
 	int		y;
 
-	y = HEIGHT + 10;
-	mlx_putstr(d, 45, y += 20, "< How to Use >");
-	mlx_putstr(d, 35, y += 20, "Arrow Keys: Move X/Y");
-	mlx_putstr(d, 35, y += 20, "Key Z/X: Move Z");
-	mlx_putstr(d, 35, y += 20, "Key Q/A: Rotate X");
-	mlx_putstr(d, 35, y += 20, "Key W/S: Rotate Y");
-	mlx_putstr(d, 35, y += 20, "Key E/D: Rotate Z");
-	mlx_putstr(d, 35, y += 20, "Key U/I: Height");
-	mlx_putstr(d, 35, y += 20, "Key J/K: radius");
+	i = 0;
+	j = 0;
+	y = HEIGHT - GUI_HEIGHT;
+	while (i < WIDTH)
+	{
+		j = 0;
+		while (j < GUI_HEIGHT)
+		{
+			if (j <= 30)
+				img_pix_darken(d, i, y + j, 0.2);
+			else
+				img_pix_darken(d, i, y + j, 0.3);
+			j++;
+		}
+		i++;
+	}
+	print_menu_details(d);
 }
 
 int	draw_gui(t_data *d)
@@ -38,8 +57,8 @@ int	draw_gui(t_data *d)
 	int		x;
 
 	i = d->index;
-	x = 200;
-	mlx_putstr(d, 215, HEIGHT + 30, "Selected");
+	x = 400;
+	print_menu_back(d);
 	while (i < d->nbr_objs)
 	{
 		((void (*)(t_data *, t_objs, int))
