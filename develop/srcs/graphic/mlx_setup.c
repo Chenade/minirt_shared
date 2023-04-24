@@ -39,8 +39,6 @@ void	init_icons(t_data *d)
 	{
 		d->objs[i].icon.w = 80;
 		d->objs[i].icon.h = 80;
-		// if (d->objs[i].type != PL) // for now !!
-		// {
 		img_name = get_icon_name(d->objs[i].type);
 		d->objs[i].icon.mlx_img = mlx_xpm_file_to_image(d->mlx_ptr, \
 		img_name, &d->objs[i].icon.w, &d->objs[i].icon.h);
@@ -52,7 +50,6 @@ void	init_icons(t_data *d)
 		if (d->objs[i].type != CAM)
 			paint_image(&d->objs[i].icon, encode_rgb(d->objs[i].color), \
 			WHITE);
-		// }
 		i++;
 	}
 }
