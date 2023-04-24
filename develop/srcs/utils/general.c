@@ -14,16 +14,15 @@
 
 void	free_icons(t_data *d)
 {
-	if (d->cam_icon.mlx_img)
-		mlx_destroy_image(d->mlx_ptr, d->cam_icon.mlx_img);
-	if (d->light_icon.mlx_img)
-		mlx_destroy_image(d->mlx_ptr, d->light_icon.mlx_img);
-	if (d->amb_icon.mlx_img)
-		mlx_destroy_image(d->mlx_ptr, d->amb_icon.mlx_img);
-	if (d->sp_icon.mlx_img)
-		mlx_destroy_image(d->mlx_ptr, d->sp_icon.mlx_img);
-	if (d->cy_icon.mlx_img)
-		mlx_destroy_image(d->mlx_ptr, d->cy_icon.mlx_img);
+	int	i;
+
+	i = 0;
+	while (i < d->nbr_objs)
+	{
+		if (d->objs[i].icon.mlx_img)
+			mlx_destroy_image(d->mlx_ptr, d->objs[i].icon.mlx_img);
+		i++;
+	}
 }
 
 void	free_data(t_data *d)

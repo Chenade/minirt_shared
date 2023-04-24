@@ -48,6 +48,17 @@ typedef struct s_math
 
 typedef struct s_data	t_data;
 
+typedef struct s_img
+{
+	int		w;
+	int		h;
+	int		bpp;
+	int		endian;
+	int		line_len;
+	char	*addr;
+	void	*mlx_img;
+}	t_img;
+
 typedef struct s_objs
 {
 	int			type;
@@ -74,29 +85,15 @@ typedef struct s_objs
 	void		*gui_func;
 	void		*print_func;
 	t_math		math;
+	t_img		icon;
 }	t_objs;
 
-typedef struct s_img
-{
-	int		w;
-	int		h;
-	int		bpp;
-	int		endian;
-	int		line_len;
-	char	*addr;
-	void	*mlx_img;
-}	t_img;
 
 typedef struct s_data
 {
 	void			*win_ptr;
 	void			*mlx_ptr;
 	t_img			img;
-	t_img			cam_icon;
-	t_img			light_icon;
-	t_img			amb_icon;
-	t_img			sp_icon;
-	t_img			cy_icon;
 	t_img			menu_back;
 	int				display_gui;
 	int				rec_col;
