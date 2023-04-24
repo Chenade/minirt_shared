@@ -86,14 +86,15 @@ double	hit_cap(t_vector dir, t_data *d, t_vector p, t_vector center, double radi
 		- dir.y * (p.y - center.y) \
 		- dir.z * (p.z - center.z)) / \
 		(dir.x * v.x + dir.y * v.y + dir.z * v.z);
-	// hit_point = p + t*v; vec_sum(p, vec_scaler(v, t));
-	// dist between hit_point and center <= radius;
 	if (t > 0 && \
 	fabs(get_vec_norm(vec_sub(center, vec_sum(p, vec_scale(v, t))))) < radius)
 		return (t);
 	return (-1);
 }
 
+// for each plane, check for collisions;
+// then check if the distance between the pos of plane (center
+// of the cap) and the hit_point is smaller or equal to the cyl radius;
 double	calculate_scaler_caps(t_objs *cyl, t_data *d, t_vector p)
 {
 	double	t1;
@@ -108,9 +109,6 @@ double	calculate_scaler_caps(t_objs *cyl, t_data *d, t_vector p)
 	else
 		cyl->normal = vec_scale(cyl->dir, -1);
 	return (res);
-	// for each plane, check for collisions;
-	// then check if the distance between the pos of plane (center
-	// of the cap) and the hit_point is smaller or equal to the cyl radius;
 }
 
 double	limit_cyl(t_objs *obj, t_data *d, t_vector p, double t)
@@ -146,13 +144,14 @@ double	calculate_scaler_cy(t_objs *obj, t_data *d, t_vector p)
 	b = dot_product(vec_scale(obj->math.ra, 2), obj->math.va);
 	c = dot_product(obj->math.ra, obj->math.ra) - obj->radius * obj->radius;
 	t = limit_cyl(obj, d, p, quadratic_solve(a, b, c, obj));
-	// if the tube is not hit, check for the caps :
 	if (t < 0)
 		return (calculate_scaler_caps(obj, d, p));
 	obj->normal = calculate_cyl_normal(obj, vec_sum(d->cam->pos, \
 	vec_scale(v, t)));
 	return (t);
 }
+
+// if (t < 0) // if the tube is not hit, check for the caps :
 
 // -------------------------------DEPRECATED-----------------------------------
 
@@ -198,33 +197,43 @@ double	calculate_scaler_cy(t_objs *obj, t_data *d, t_vector p)
 // 	v = d->cur_p.dir;
 // 	update_math(obj, d, p);
 // 	m = obj->math;
-// 	m._a = m.k_2 * (m.b_2 + m.a_2) + \
-// 		m.j_2 * (m.c_2 + m.a_2) + \
-// 		m.i_2 * (m.c_2 + m.b_2) - \
-// 		2 * (m.b * m.c * m.k * m.j + m.a * m.c * m.i * m.k + m.a * m.b * m.j * m.i);
-// 	m._b = 2 * (m.k * m.zp * (m.b_2 + m.a_2) + m.j * m.yp * (m.c_2 + m.a_2) + m.i * m.xp * (m.c_2 + m.b_2) + \
-// 		m.k * (-m.b_2 * m.zm + m.b * m.c * m.ym + m.a * m.c * m.xm - m.a_2 * m.zm) + \
-// 		m.j * (m.b * m.c * m.zm - m.c_2 * m.ym - m.a_2 * m.ym + m.a * m.b * m.xm) + \
-// 		m.i * (-m.c_2 * m.xm + m.a * m.c * m.zm + m.a * m.b * m.ym - m.b_2 * m.xm) - \
-// 		m.b * m.c * (m.k * m.yp + m.j * m.zp) - \
-// 		m.a * m.c * (m.i * m.zp + m.k * m.xp) - \
+// 	m._a = m.k_2 * (m.b_2 + m.a_2) + //
+// 		m.j_2 * (m.c_2 + m.a_2) + //
+// 		m.i_2 * (m.c_2 + m.b_2) - //
+// 		2 * (m.b * m.c * m.k * m.j + m.a * m.c * m.i * m.k + //
+//		m.a * m.b * m.j * m.i);
+// 	m._b = 2 * (m.k * m.zp * (m.b_2 + m.a_2) + //
+//			m.j * m.yp * (m.c_2 + m.a_2) + m.i * m.xp * (m.c_2 + m.b_2) + //
+// 		m.k * (-m.b_2 * m.zm + m.b * m.c * m.ym + // 
+//		m.a * m.c * m.xm - m.a_2 * m.zm) + //
+// 		m.j * (m.b * m.c * m.zm - m.c_2 * m.ym - //
+//		m.a_2 * m.ym + m.a * m.b * m.xm) + //
+// 		m.i * (-m.c_2 * m.xm + m.a * m.c * m.zm + //
+//		m.a * m.b * m.ym - m.b_2 * m.xm) - //
+// 		m.b * m.c * (m.k * m.yp + m.j * m.zp) - //
+// 		m.a * m.c * (m.i * m.zp + m.k * m.xp) - //
 // 		m.a * m.b * (m.j * m.xp + m.i * m.yp));
-// 	m._c = -obj->math.radius_2 * (m.a_2 + m.b_2 + m.c_2) + \
-// 		m.b_2 * (m.zm_2 + m.xm_2) + \
-// 		m.c_2 * (m.ym_2 + m.xm_2) + \
-// 		m.a_2 * (m.zm_2 + m.ym_2) + \
-// 		2 * (- m.b * m.c * m.zm * m.ym - m.a * m.c * m.zm * m.xm - m.a * m.b * m.ym * m.xm) + \
-// 		m.zp_2 * (m.b_2 + m.a_2) + \
-// 		m.yp_2 * (m.a_2 + m.c_2) + \
-// 		m.xp_2 * (m.c_2 + m.b_2) + \
-// 		2 * (m.zp * (-m.b_2 * m.zm + m.b * m.c * m.ym + m.a * m.c * m.xm - m.a_2 * m.zm) + \
-// 		m.yp * (m.b * m.c * m.zm - m.c_2 * m.ym - m.a_2 * m.ym + m.a * m.b * m.xm) + \
-// 		m.xp * (-m.c_2 * m.xm + m.a * m.c * m.zm + m.a * m.b * m.ym - m.b_2 * m.xm) - \
-// 		m.b * m.c * m.zp * m.yp - m.a * m.c * m.xp * m.zp - m.a * m.b * m.xp * m.yp);
+// 	m._c = -obj->math.radius_2 * (m.a_2 + m.b_2 + m.c_2) + //
+// 		m.b_2 * (m.zm_2 + m.xm_2) + //
+// 		m.c_2 * (m.ym_2 + m.xm_2) + //
+// 		m.a_2 * (m.zm_2 + m.ym_2) + //
+// 		2 * (- m.b * m.c * m.zm * m.ym - m.a * m.c * m.zm * m.xm - //
+//		m.a * m.b * m.ym * m.xm) + //
+// 		m.zp_2 * (m.b_2 + m.a_2) + //
+// 		m.yp_2 * (m.a_2 + m.c_2) + //
+// 		m.xp_2 * (m.c_2 + m.b_2) + //
+// 		2 * (m.zp * (-m.b_2 * m.zm + m.b * m.c * m.ym + //
+//		m.a * m.c * m.xm - m.a_2 * m.zm) + //
+// 		m.yp * (m.b * m.c * m.zm - m.c_2 * m.ym - //
+//		m.a_2 * m.ym + m.a * m.b * m.xm) + //
+// 		m.xp * (-m.c_2 * m.xm + m.a * m.c * m.zm + //
+//		m.a * m.b * m.ym - m.b_2 * m.xm) - //
+// 		m.b * m.c * m.zp * m.yp - m.a * m.c * m.xp * m.zp - //
+//		m.a * m.b * m.xp * m.yp);
 // 	t = limit_cyl(obj, d, p, quadratic_solve(m._a, m._b, m._c, obj));
 // 	if (t < 0)
 // 		return (calculate_scaler_caps(obj, d, p));
-// 	obj->normal = calculate_cyl_normal(obj, vec_sum(d->cam->pos, \
+// 	obj->normal = calculate_cyl_normal(obj, vec_sum(d->cam->pos, //
 // 	vec_scale(v, t)));
 // 	return (t);
 // }

@@ -44,7 +44,6 @@ t_pixel	plane_shadow(struct s_objs *obj, struct s_data *d, t_vector p)
 		return (pixel);
 	}
 	pixel.scaler = scaler;
-	// printf("%s\n", __func__);
 	return (pixel);
 }
 

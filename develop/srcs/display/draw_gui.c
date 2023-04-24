@@ -15,7 +15,7 @@
 void	print_menu_details(t_data *d)
 {
 	d->rec_col = 0x00505050;
-	put_rect(d, vector(0,0,0), WIDTH - 1, GUI_HEIGHT - 1);
+	put_rect(d, vector(0, 0, 0), WIDTH - 1, GUI_HEIGHT - 1);
 	draw_column(d, 380, 0, GUI_HEIGHT - 1);
 	draw_line(d, 0, 30, WIDTH);
 	d->rec_col = WHITE;

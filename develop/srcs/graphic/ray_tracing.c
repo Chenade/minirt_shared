@@ -41,22 +41,19 @@ int	ray_tracing(t_data *d, int x, int y)
 	t_pixel	pixel;
 	int		color;
 
-	i = 0;
+	i = -1;
 	ft_bzero(&pixel, sizeof(t_pixel));
 	pixel.scaler = -1;
 	pixel.is_light = 0;
 	get_cur_vec(d, x, y);
-	while (i < d->nbr_objs)
+	while (++i < d->nbr_objs)
 	{
 		objs = d->objs[i];
 		objs.from_light = 0;
 		if (objs.collision_func)
-		{
 			pixel = min_scaler(i, pixel,
 					((t_pixel (*)(struct s_objs *, struct s_data *, t_vector p))
 						objs.collision_func)(&objs, d, d->cam->pos));
-		}
-		i++;
 	}
 	pixel.pos = vec_sum(d->cam->pos, vec_scale(pixel.dir, pixel.scaler));
 	if (pixel.scaler > 0 && pixel.is_light == 0)

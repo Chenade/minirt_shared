@@ -39,7 +39,6 @@ void	img_pix_darken(t_data *d, int x, int y, double amount)
 		r = ((*(unsigned int *)prev_p & 16711680) >> 16) * amount;
 		g = ((*(unsigned int *)prev_p & 65280) >> 8) * amount;
 		b = (*(unsigned int *)prev_p & 255) * amount;
-		// printf("%d, %d, %d\n", r, g, b);
 		*(unsigned int *)new_p = (r << 16) + (g << 8) + (b);
 	}
 }

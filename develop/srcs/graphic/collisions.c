@@ -60,7 +60,6 @@ t_pixel	hit_plane(struct s_objs *obj, struct s_data *d, t_vector p)
 	obj->cam_is_inside = check_side_pl(obj, d->cam->pos);
 	if (obj->cam_is_inside == 1)
 		pixel.normal = vec_scale(pixel.normal, -1);
-	// printf("%s\n", __func__);
 	return (pixel);
 }
 
@@ -87,7 +86,6 @@ t_pixel	hit_light(struct s_objs *obj, struct s_data *d, t_vector p)
 {
 	double	scaler;
 	t_pixel	pixel;
-	// double	delta;
 
 	pixel.is_light = 1;
 	scaler = calculate_scaler_sp(obj, d, p);

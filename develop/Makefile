@@ -79,6 +79,7 @@ SRCS_PAR	=	parsing/setup.c				\
 				parsing/parse.c				\
 
 SRCS_MLX	=	graphic/mlx_setup.c			\
+				graphic/keyboard_handle.c	\
 				graphic/keyboard_env.c		\
 				graphic/keyboard_obj.c		\
 				graphic/transla_rota.c		\
