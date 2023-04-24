@@ -25,7 +25,7 @@ int	map_check_sphere(t_data *d, char **line, int index)
 		return (print_err("Error\n: Invalid Map: Sphere", d), 1);
 	d->objs[index].radius = diameter / 2;
 	if (set_color(&d->objs[index].color, line[3]))
-		return (1);
+		return (print_err("Error\n: Invalid Map: Sphere", d), 1);
 	init_sp(d, index);
 	return (0);
 }
@@ -40,7 +40,7 @@ int	map_check_plane(t_data *d, char **line, int index)
 		return (print_err("Error\n: Invalid Map: Plane", d), 1);
 	d->objs[index].dir = normalize_vect(d->objs[index].dir);
 	if (set_color(&d->objs[index].color, line[3]))
-		return (1);
+		return (print_err("Error\n: Invalid Map: Plane", d), 1);
 	init_pl(d, index);
 	return (0);
 }
@@ -61,9 +61,9 @@ int	map_check_cylinder(t_data *d, char **line, int index)
 	height = ft_strtod(line[4]);
 	d->objs[index].height = height;
 	if (set_dir(&d->objs[index].dir, line[2]))
-		return (1);
+		return (print_err("Error\n: Invalid Map: Cylinder", d), 1);
 	if (set_color(&d->objs[index].color, line[5]))
-		return (1);
+		return (print_err("Error\n: Invalid Map: Cylinder", d), 1);
 	init_cyl(d, index);
 	return (0);
 }

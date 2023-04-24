@@ -36,6 +36,8 @@ int	set_dir(t_vector *v, char *str)
 	v->x = ft_strtod(arr[0]);
 	v->y = ft_strtod(arr[1]);
 	v->z = ft_strtod(arr[2]);
+	if (v->x == 0 && v->y == 0 && v->z == 0)
+		return (1);
 	ft_free_array(arr);
 	*v = normalize_vect(*v);
 	return (0);
