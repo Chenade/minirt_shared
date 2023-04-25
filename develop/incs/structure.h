@@ -42,6 +42,11 @@ typedef struct s_pixel
 typedef struct s_math
 {
 	double		radius_2;
+	double		vs;
+	double		w;
+	double		h0;
+	double		w_2;
+	double		rh_2;
 	t_vector	va;
 	t_vector	ra;
 }	t_math;

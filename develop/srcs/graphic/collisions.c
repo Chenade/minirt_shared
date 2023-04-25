@@ -83,6 +83,25 @@ t_pixel	hit_cylinder(struct s_objs *obj, struct s_data *d, t_vector p)
 	return (pixel);
 }
 
+t_pixel	hit_cone(struct s_objs *obj, struct s_data *d, t_vector p)
+{
+	double	scaler;
+	t_pixel	pixel;
+
+	pixel.is_light = 0;
+	scaler = calculate_scaler_co(obj, d, p);
+	pixel.scaler = scaler;
+	if (scaler == -1)
+		return (pixel);
+	pixel.dir = d->cur_p.dir;
+	pixel.normal = obj->normal;
+	pixel.color = obj->color;
+	// obj->cam_is_inside = check_inside_co(obj, d->cam->pos);
+	// if (obj->cam_is_inside == 1)
+		// pixel.normal = vec_scale(pixel.normal, -1);
+	return (pixel);
+}
+
 t_pixel	hit_light(struct s_objs *obj, struct s_data *d, t_vector p)
 {
 	double	scaler;

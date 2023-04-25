@@ -50,3 +50,20 @@ void	init_cyl(t_data *d, int index)
 	d->objs[index].math.radius_2 = \
 	d->objs[index].radius * d->objs[index].radius;
 }
+
+void	init_cone(t_data *d, int index)
+{
+	d->objs[index].type = CO;
+	d->objs[index].collision_func = hit_cone;
+	d->objs[index].shadow_func = cone_shadow;
+	d->objs[index].keyboard_func = key_cone;
+	d->objs[index].gui_func = gui_cone;
+	d->objs[index].print_func = print_cone;
+	d->objs[index].dir = normalize_vect(d->objs[index].dir);
+	d->objs[index].cap_1 = vec_sum(d->objs[index].pos, \
+	vec_scale(d->objs[index].dir, d->objs[index].height / 2));
+	d->objs[index].cap_2 = vec_sum(d->objs[index].pos, \
+	vec_scale(d->objs[index].dir, -d->objs[index].height / 2));
+	d->objs[index].math.radius_2 = \
+	d->objs[index].radius * d->objs[index].radius;
+}

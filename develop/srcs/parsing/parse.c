@@ -21,15 +21,17 @@ int	define_obj(t_data *d, char	**tmp, int index)
 	if (ft_strcmp(tmp[0], "C") == 0)
 		status = map_check_cam(d, tmp, index);
 	else if (ft_strcmp(tmp[0], "A") == 0)
-		status = map_check_ambient (d, tmp, index);
+		status = map_check_ambient(d, tmp, index);
 	else if (ft_strcmp(tmp[0], "L") == 0)
-		status = map_check_light (d, tmp, index);
+		status = map_check_light(d, tmp, index);
 	else if (ft_strcmp(tmp[0], "sp") == 0)
-		status = map_check_sphere (d, tmp, index);
+		status = map_check_sphere(d, tmp, index);
 	else if (ft_strcmp(tmp[0], "pl") == 0)
-		status = map_check_plane (d, tmp, index);
+		status = map_check_plane(d, tmp, index);
 	else if (ft_strcmp(tmp[0], "cy") == 0)
-		status = map_check_cylinder (d, tmp, index);
+		status = map_check_cylinder(d, tmp, index);
+	else if (ft_strcmp(tmp[0], "co") == 0)
+		status = map_check_cone(d, tmp, index);
 	else if (ft_strcmp(tmp[0], "#") == 0)
 		return (0);
 	ft_free_array(tmp);

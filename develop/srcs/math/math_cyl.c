@@ -13,21 +13,21 @@
 #include "minirt.h"
 
 /*
-cylinder equations :
+Cylinder equations :
 
 first, interaction with an infinite tube:
 
-at^2 + bt + c = 0 (like the spheres);
+at^2 + bt + c = 0;
 
 a = va.va     -> va = (s x v x s);      ->  *
 
-b = 2ra.va;   -> ra = s x (r0 - rt) x s;
+b = 2ra.va;   -> ra = s x (r_origin - obj_pos) x s;
 
 c = ra.ra - R^2;
 
 v = direction vector of the ray;
-r0 = pos of the point of emission (cam->pos);
-rt = pos of obj;
+r_origin = pos of the point of emission (cam->pos for example);
+obj_pos = position of the obj;
 s = direction vector of the tube;
 R = radius of tube;
 
@@ -41,18 +41,18 @@ we have to check for 2 conditions :
 
 (hit_p - ra1).s > 0         &&         (hit_p - ra2).s < 0
 
-hit_p = r0 + v*t (so the position of the point of intersection between
-		the ray and the tube at t time in the v direction starting at r0,
-		r0 being 'p' in my functions);
+hit_p = r_origin + v*t (so the position of the point of intersection between
+		the ray and the tube at t time in the v direction starting at r_origin,
+		r_origin being 'p' in my functions);
 
 ra1 & ra2 = positions of the 2 extremities of the central axis
-			relative to the starting point of the ray (r0 or 'p');
+			relative to the starting point of the ray (r_origin or 'p');
 
 s = same as above, direction vector of the tube;
 
 --------------------------------------------------
 
-and finally, we check for the planes at each end of the tube;
+if the ray didnt hit the tube, we check for the planes at each end of the tube;
 
 pos of pl_1 : pos of the cyl + direction vector(normalized) * height / 2;
 pos of pl_2 : pos of the cyl + direction vector(normalized) * -height / 2;

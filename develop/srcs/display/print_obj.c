@@ -57,3 +57,21 @@ void	print_cylinder(t_data *d, int index, int fd)
 	print_color(obj.color, fd);
 	ft_putstr_fd("\n", fd);
 }
+
+void	print_cone(t_data *d, int index, int fd)
+{
+	t_objs	obj;
+
+	obj = d->objs[index];
+	ft_putstr_fd("co ", fd);
+	print_vector(obj.pos, fd, 0);
+	ft_putstr_fd(" ", fd);
+	print_vector(obj.dir, fd, 1);
+	ft_putstr_fd(" ", fd);
+	ft_putnbr_fd(obj.radius * 2, fd);
+	ft_putstr_fd(" ", fd);
+	ft_putnbr_fd(obj.height, fd);
+	ft_putstr_fd(" ", fd);
+	print_color(obj.color, fd);
+	ft_putstr_fd("\n", fd);
+}

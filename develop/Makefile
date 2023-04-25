@@ -59,7 +59,8 @@ INCS_DIR	=	incs
 
 OBJS_DIR	=	objs
 
-SRCS_MAT	= 	math/math_cyl.c				\
+SRCS_MAT	= 	math/math_co.c				\
+				math/math_cyl.c				\
 				math/math_pl.c				\
 				math/math_sp.c				\
 				math/check_inside.c			\

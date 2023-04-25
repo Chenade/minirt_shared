@@ -58,3 +58,14 @@ t_pixel	cylinder_shadow(struct s_objs *obj, struct s_data *d, t_vector p)
 	pixel.scaler = scaler;
 	return (pixel);
 }
+
+t_pixel	cone_shadow(struct s_objs *obj, struct s_data *d, t_vector p)
+{
+	double	scaler;
+	t_pixel	pixel;
+
+	pixel.is_light = 0;
+	scaler = calculate_scaler_co(obj, d, p);
+	pixel.scaler = scaler;
+	return (pixel);
+}
