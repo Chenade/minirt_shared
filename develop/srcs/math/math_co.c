@@ -16,7 +16,7 @@ void	cone_math(t_data *d, t_objs *obj, t_vector p)
 {
 	obj->math.radius_2 = obj->radius * obj->radius;
 	obj->math.vs = dot_product(d->cur_p.dir, obj->dir);
-	obj->math.h0 = dot_product(vec_sub(p, obj->pos), obj->dir);
+	obj->math.h0 = dot_product(vec_sub(p, obj->cap_2), obj->dir);
 	obj->math.w = obj->height - obj->math.h0;
 	obj->math.w_2 = obj->math.w * obj->math.w;
 	obj->math.rh_2 = obj->math.radius_2 / (obj->height * obj->height);
@@ -110,11 +110,11 @@ double	calculate_scaler_co(t_objs *obj, t_data *d, t_vector p)
 	a = dot_product(m.va, m.va) - (m.vs * m.vs) * m.rh_2;
 	b = dot_product(vec_scale(m.ra, 2), m.va) + 2 * m.w * m.vs * m.rh_2;
 	c = dot_product(m.ra, m.ra) - m.w_2 * m.rh_2;
-	// t = limit_cone(obj, d, p, quadratic_solve(a, b, c, obj));
-	t = quadratic_solve(a, b, c, obj);
+	t = limit_cone(obj, d, p, quadratic_solve(a, b, c, obj));
+	// t = quadratic_solve(a, b, c, obj);
 	// if the cone is not hit, check for the base :
-	// if (t < 0)
-	// 	return (calculate_scaler_base(obj, d, p));
+	if (t < 0)
+		return (calculate_scaler_base(obj, d, p));
 	obj->normal = calculate_cone_normal(obj, vec_sum(d->cam->pos, \
 	vec_scale(d->cur_p.dir, t)));
 	return (t);
