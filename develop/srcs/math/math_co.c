@@ -52,8 +52,6 @@ double	hit_base(t_objs *cone, t_data *d, t_vector p)
 		- dir.y * (p.y - center.y) \
 		- dir.z * (p.z - center.z)) / \
 		(dir.x * v.x + dir.y * v.y + dir.z * v.z);
-	// hit_point = p + t*v; vec_sum(p, vec_scaler(v, t));
-	// dist between hit_point and center <= radius;
 	if (t > 0 && \
 	fabs(get_vec_norm(vec_sub(center, vec_sum(p, vec_scale(v, t))))) < \
 	cone->radius)
@@ -64,20 +62,9 @@ double	hit_base(t_objs *cone, t_data *d, t_vector p)
 double	calculate_scaler_base(t_objs *cone, t_data *d, t_vector p)
 {
 	double	t;
-	// double	t2;
-	// double	res;
-
-	// t1 = hit_cap(cyl->dir, d, p, cyl->cap_1, cyl->radius);
 	t = hit_base(cone, d, p);
-	// res = smallest_positive(t1, t2);
-	// if (res == t1)
-	// 	cyl->normal = cyl->dir;
-	// else
 	cone->normal = vec_scale(cone->dir, -1);
 	return (t);
-	// for each plane, check for collisions;
-	// then check if the distance between the pos of plane (center
-	// of the cap) and the hit_point is smaller or equal to the cyl radius;
 }
 
 double	limit_cone(t_objs *obj, t_data *d, t_vector p, double t)
@@ -184,6 +171,9 @@ we check for intersections on the plane, xinside the radius of the cone;
 
 /*
 TODO
+
+IMPORTANT !! : change limitation of cones and cylinders because the invisible
+part of the cone/cylinder is hiding the visible part :((
 
 bonus :
 	- hide objects;

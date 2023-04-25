@@ -24,9 +24,10 @@ char	*get_icon_name(int type)
 		return ("./images/sp_icon.xpm");
 	if (type == PL)
 		return ("./images/pl_icon3.xpm");
-	return ("./images/cy_icon.xpm");
+	if (type == CY)
+		return ("./images/cy_icon.xpm");
+	return ("./images/co_icon.xpm");
 	// if (type == CO)
-	// 	return ("./images/co_icon.xpm");
 }
 
 void	init_icons(t_data *d)
