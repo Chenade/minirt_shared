@@ -173,8 +173,6 @@ double	calculate_scaler_co(t_objs *obj, t_data *d, t_vector p)
 	return (smallest_visible_positive_co(obj, d, p, obj->math));
 }
 
-
-
 /*
 TODO
 
