@@ -66,4 +66,6 @@ void	init_cone(t_data *d, int index)
 	vec_scale(d->objs[index].dir, -d->objs[index].height / 2));
 	d->objs[index].math.radius_2 = \
 	d->objs[index].radius * d->objs[index].radius;
+	d->objs[index].cone_angle = atan(d->objs[index].radius / \
+	d->objs[index].height);
 }

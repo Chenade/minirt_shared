@@ -91,6 +91,7 @@ typedef struct s_objs
 	double		angle_x;
 	double		angle_y;
 	double		angle_z;
+	double		cone_angle;
 	void		*collision_func;
 	void		*shadow_func;
 	void		*keyboard_func;

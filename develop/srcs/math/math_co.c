@@ -96,11 +96,16 @@ t_vector	calculate_cone_normal(t_objs *cone, t_vector hit_pt)
 	double		t;
 	t_vector	pt;
 	t_vector	base;
+	t_vector	rota;
+	t_vector	res;
 
 	base = cone->cap_2;
 	t = dot_product(vec_sub(hit_pt, base), cone->dir);
 	pt = vec_sum(base, vec_scale(cone->dir, t));
-	return (normalize_vect(vec_sub(hit_pt, pt)));
+	res = normalize_vect(vec_sub(hit_pt, pt));
+	rota = cross_product(res, cone->dir);
+	rot_v_around_v(&res, &rota, cone->cone_angle);
+	return (res);
 }
 
 double	hit_base(t_objs *cone, t_data *d, t_vector p)
@@ -174,6 +179,7 @@ double	calculate_scaler_co(t_objs *obj, t_data *d, t_vector p)
 TODO
 
 bonus :
+	- CHECK INSIDE CONES !!
 	- hide objects;
 	- add specular;
 	- textures;
