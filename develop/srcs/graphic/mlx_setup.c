@@ -104,8 +104,12 @@ int	render_frame(t_data *d)
 		if (d->display_gui == 1)
 			draw_gui(d);
 		else
-			mlx_putstr(d, WIDTH - 150, HEIGHT - 10, \
-			"Press M to show the menu"); //"toggle" menu ?
+		{
+			mlx_putstr(d, 10, HEIGHT - 10, \
+			"Press M to hide the menu");
+			mlx_putstr(d, WIDTH - 158, HEIGHT - 10, \
+			"Press P to save the scene");
+		}
 		d->img_changed = 0;
 	}
 	return (0);

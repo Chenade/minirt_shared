@@ -51,32 +51,6 @@ void	quadratic_solve_cyl_co(t_data *d, t_objs *obj, t_vector p)
 	m->s2 = -1;
 }
 
-double	smallest_visible_positive_co(t_objs *obj, t_data *d, t_vector p, \
-		t_math m)
-{
-	if (m.s1 < 0 && m.s2 < 0 && m.s_base < 0)
-		return (-1);
-	if (m.s2 < 0 && m.s1 > 0)
-	{
-		if (m.s1 < m.s_base)
-			return (obj->normal = calculate_cone_normal(obj, \
-			vec_sum(p, vec_scale(d->cur_p.dir, m.s1))), m.s1);
-		return (obj->normal = m.base_normal, m.s_base);
-	}
-	if (m.s1 < 0 && m.s2 > 0)
-	{
-		if (m.s2 < m.s_base)
-			return (obj->normal = calculate_cone_normal(obj, \
-			vec_sum(p, vec_scale(d->cur_p.dir, m.s2))), m.s2);
-		return (obj->normal = m.base_normal, m.s_base);
-	}
-	if (m.s1 < m.s2)
-		return (obj->normal = calculate_cone_normal(obj, \
-		vec_sum(p, vec_scale(d->cur_p.dir, m.s1))), m.s1);
-	return (obj->normal = calculate_cone_normal(obj, \
-	vec_sum(p, vec_scale(d->cur_p.dir, m.s2))), m.s2);
-}
-
 double	smallest_visible_positive_cyl(t_objs *obj, t_data *d, t_vector p, \
 		t_math m)
 {
@@ -86,14 +60,14 @@ double	smallest_visible_positive_cyl(t_objs *obj, t_data *d, t_vector p, \
 		return (obj->normal = m.base_normal, m.s_base);
 	if (m.s2 < 0 && m.s1 > 0)
 	{
-		if (m.s1 < m.s_base)
+		if (m.s1 < m.s_base || m.s_base < 0)
 			return (obj->normal = calculate_cyl_normal(obj, \
 			vec_sum(p, vec_scale(d->cur_p.dir, m.s1))), m.s1);
 		return (obj->normal = m.base_normal, m.s_base);
 	}
 	if (m.s1 < 0 && m.s2 > 0)
 	{
-		if (m.s2 < m.s_base)
+		if (m.s2 < m.s_base || m.s_base < 0)
 			return (obj->normal = calculate_cyl_normal(obj, \
 			vec_sum(p, vec_scale(d->cur_p.dir, m.s2))), m.s2);
 		return (obj->normal = m.base_normal, m.s_base);
@@ -102,5 +76,33 @@ double	smallest_visible_positive_cyl(t_objs *obj, t_data *d, t_vector p, \
 		return (obj->normal = calculate_cyl_normal(obj, \
 		vec_sum(p, vec_scale(d->cur_p.dir, m.s1))), m.s1);
 	return (obj->normal = calculate_cyl_normal(obj, \
+	vec_sum(p, vec_scale(d->cur_p.dir, m.s2))), m.s2);
+}
+
+double	smallest_visible_positive_co(t_objs *obj, t_data *d, t_vector p, \
+		t_math m)
+{
+	if (m.s1 < 0 && m.s2 < 0 && m.s_base < 0)
+		return (-1);
+	if (m.s1 < 0 && m.s2 < 0)
+		return (obj->normal = m.base_normal, m.s_base);
+	if (m.s2 < 0 && m.s1 > 0)
+	{
+		if (m.s1 < m.s_base || m.s_base < 0)
+			return (obj->normal = calculate_cone_normal(obj, \
+			vec_sum(p, vec_scale(d->cur_p.dir, m.s1))), m.s1);
+		return (obj->normal = m.base_normal, m.s_base);
+	}
+	if (m.s1 < 0 && m.s2 > 0)
+	{
+		if (m.s2 < m.s_base || m.s_base < 0)
+			return (obj->normal = calculate_cone_normal(obj, \
+			vec_sum(p, vec_scale(d->cur_p.dir, m.s2))), m.s2);
+		return (obj->normal = m.base_normal, m.s_base);
+	}
+	if (m.s1 < m.s2)
+		return (obj->normal = calculate_cone_normal(obj, \
+		vec_sum(p, vec_scale(d->cur_p.dir, m.s1))), m.s1);
+	return (obj->normal = calculate_cone_normal(obj, \
 	vec_sum(p, vec_scale(d->cur_p.dir, m.s2))), m.s2);
 }

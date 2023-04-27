@@ -178,6 +178,7 @@ double		calculate_scaler_pl(t_objs *obj, t_data *d, double x, double y);
 double		calculate_scaler_pl2(t_objs *obj, t_data *d, t_vector p);
 
 //math_co.c
+int			check_inside_co(t_objs *obj, t_vector p);
 double		smallest_visible_positive_co(t_objs *obj, t_data *d, t_vector p, \
 			t_math m);
 void		cone_math(t_data *d, t_objs *obj, t_vector p);

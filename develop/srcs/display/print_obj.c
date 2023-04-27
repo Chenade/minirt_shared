@@ -20,7 +20,7 @@ void	print_sphere(t_data *d, int index, int fd)
 	ft_putstr_fd("sp ", fd);
 	print_vector(obj.pos, fd, 0);
 	ft_putstr_fd(" ", fd);
-	ft_putnbr_fd(obj.radius, fd);
+	ft_putnbr_fd(obj.radius * 2, fd);
 	ft_putstr_fd(" ", fd);
 	print_color(obj.color, fd);
 	ft_putstr_fd("\n", fd);

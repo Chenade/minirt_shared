@@ -96,9 +96,9 @@ t_pixel	hit_cone(struct s_objs *obj, struct s_data *d, t_vector p)
 	pixel.dir = d->cur_p.dir;
 	pixel.normal = obj->normal;
 	pixel.color = obj->color;
-	// obj->cam_is_inside = check_inside_co(obj, d->cam->pos);
-	// if (obj->cam_is_inside == 1)
-		// pixel.normal = vec_scale(pixel.normal, -1);
+	obj->cam_is_inside = check_inside_co(obj, d->cam->pos);
+	if (obj->cam_is_inside == 1)
+		pixel.normal = vec_scale(pixel.normal, -1);
 	return (pixel);
 }
 
