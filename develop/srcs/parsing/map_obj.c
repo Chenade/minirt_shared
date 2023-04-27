@@ -92,6 +92,5 @@ int	map_check_cone(t_data *d, char **line, int index)
 	if (set_color(&d->objs[index].color, line[5]))
 		return (1);
 	init_cone(d, index);
-	printf("%f, %f\n", d->objs[index].height, d->objs[index].radius);
 	return (0);
 }

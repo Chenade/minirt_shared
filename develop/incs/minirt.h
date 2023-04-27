@@ -160,6 +160,8 @@ double		quadratic_solve(double a, double b, double c, t_objs *obj);
 double		check_solutions_cy(t_objs *obj, t_data *d, t_vector p);
 double		calculate_scaler_cy(t_objs *obj, t_data *d, t_vector p);
 double		calculate_scaler_cy_maha(t_objs *obj, t_data *d, t_vector p);
+double		smallest_visible_positive_cyl(t_objs *obj, t_data *d, t_vector p, \
+			t_math m);
 t_vector	calculate_cyl_normal(t_objs *cyl, t_vector hit_point);
 
 //math_sp.c
@@ -176,7 +178,13 @@ double		calculate_scaler_pl(t_objs *obj, t_data *d, double x, double y);
 double		calculate_scaler_pl2(t_objs *obj, t_data *d, t_vector p);
 
 //math_co.c
+double		smallest_visible_positive_co(t_objs *obj, t_data *d, t_vector p, \
+			t_math m);
+void		cone_math(t_data *d, t_objs *obj, t_vector p);
+double		limit_cone(t_objs *obj, t_data *d, t_vector p, double t);
+void		quadratic_solve_cyl_co(t_data *d, t_objs *obj, t_vector p);
 double		calculate_scaler_co(t_objs *obj, t_data *d, t_vector p);
+t_vector	calculate_cone_normal(t_objs *cone, t_vector hit_pt);
 
 //vectors.c
 void		print_vec(t_vector v);

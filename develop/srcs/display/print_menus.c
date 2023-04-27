@@ -26,11 +26,12 @@ void	print_move_menu(t_data *d, char *n_type, int type)
 	mlx_putstr(d, 64, y += 20, \
 	"Along   (Forwards/Backwards) : Up / Down Arrows");
 	mlx_putstr_b(d, 100, y, "Z");
-	if (type == SP || type == CY)
+	if (type == SP || type == CY || type == CO)
 	{
 		y = HEIGHT - GUI_HEIGHT + 110;
-		mlx_putstr(d, 20 + 180 * (type == CY), y += 20, "Resize :");
-		mlx_putstr(d, 20 + 180 * (type == CY), y += 20, \
+		mlx_putstr(d, 20 + 180 * (type == CY || type == CO), y += 20, \
+		"Resize :");
+		mlx_putstr(d, 20 + 180 * (type == CY || type == CO), y += 20, \
 		"Diameter (+/-) : J / K");
 	}
 }
@@ -48,7 +49,7 @@ void	print_complete_menu(t_data *d, char *n_type, int type)
 	mlx_putstr_g(d, 117, y, "Y");
 	mlx_putstr(d, 74, y += 20, "Around   : E / Q");
 	mlx_putstr_b(d, 117, y, "Z");
-	if (type == CY)
+	if (type == CY || type == CO)
 		mlx_putstr(d, 200, y, "Height (+/-) : U / I");
 }
 
