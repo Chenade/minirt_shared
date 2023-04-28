@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <stdint.h>
 # include <fcntl.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
@@ -109,6 +110,7 @@ int			key_light(t_data *d, int keysym);
 int			key_saved(t_data *d);
 
 // print.c
+char		*ft_putdouble_fd2(double d, int fd);
 void		print_vector(t_vector v, int fd, int isnormal);
 void		print_color(t_color c, int fd);
 void		print_sphere(t_data *d, int index, int fd);

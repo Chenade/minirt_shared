@@ -24,6 +24,9 @@ int	minirt(char *filename)
 	printf("fov : %f\n", d.fov);
 	get_cam_len(&d);
 	printf("cam_len : %f\n", d.cam_len);
+	ft_putdouble_fd2(8., 1);
+	ft_putdouble_fd2(5657.6403462, 1);
+	ft_putdouble_fd2(-5657.6453467, 1);
 	d.display_gui = 1;
 	d.img_changed = 1;
 	draw_imgs(&d);
