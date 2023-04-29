@@ -12,6 +12,19 @@
 
 #include "minirt.h"
 
+// int	num_binary_digits(int n)
+// {
+// 	int	count;
+
+// 	count = 0;
+// 	while (n != 0)
+// 	{
+// 		n /= 2;
+// 		count++;
+// 	}
+// 	return (count);
+// }
+
 void	print_sphere(t_data *d, int index, int fd)
 {
 	t_objs	obj;
@@ -20,7 +33,7 @@ void	print_sphere(t_data *d, int index, int fd)
 	ft_putstr_fd("sp ", fd);
 	print_vector(obj.pos, fd, 0);
 	ft_putstr_fd(" ", fd);
-	ft_putnbr_fd(obj.radius, fd);
+	ft_putnbr_fd(obj.radius * 2, fd);
 	ft_putstr_fd(" ", fd);
 	print_color(obj.color, fd);
 	ft_putstr_fd("\n", fd);
@@ -68,3 +81,20 @@ void	print_cylinder(t_data *d, int index, int fd)
 // # cy -100,100,200 1,-1,0 100 100 0,155,255
 // pl 0,0,0 0.0,1.0,0.0 255,255,255
 // pl 0,0,500 0.0,0.0,-1.0 255,255,255
+void	print_cone(t_data *d, int index, int fd)
+{
+	t_objs	obj;
+
+	obj = d->objs[index];
+	ft_putstr_fd("co ", fd);
+	print_vector(obj.pos, fd, 0);
+	ft_putstr_fd(" ", fd);
+	print_vector(obj.dir, fd, 1);
+	ft_putstr_fd(" ", fd);
+	ft_putnbr_fd(obj.radius * 2, fd);
+	ft_putstr_fd(" ", fd);
+	ft_putnbr_fd(obj.height, fd);
+	ft_putstr_fd(" ", fd);
+	print_color(obj.color, fd);
+	ft_putstr_fd("\n", fd);
+}

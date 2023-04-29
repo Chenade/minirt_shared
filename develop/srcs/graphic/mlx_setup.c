@@ -23,10 +23,12 @@ char	*get_icon_name(int type)
 	if (type == SP)
 		return ("./images/sp_icon.xpm");
 	if (type == PL)
-		return ("./images/pl_icon2.xpm");
-	return ("./images/cy_icon.xpm");
-	// if (type == CO)
-	// 	return ("./images/co_icon.xpm");
+		return ("./images/pl_icon3.xpm");
+	if (type == CY)
+		return ("./images/cy_icon.xpm");
+	if (type == CO)
+		return ("./images/co_icon.xpm");
+	return (NULL);
 }
 
 void	init_icons(t_data *d)
@@ -39,9 +41,9 @@ void	init_icons(t_data *d)
 	{
 		d->objs[i].icon.w = 80;
 		d->objs[i].icon.h = 80;
-		// if (d->objs[i].type != PL) // for now !!
-		// {
 		img_name = get_icon_name(d->objs[i].type);
+		if (!img_name)
+			print_err("mlx_img icon error", d);
 		d->objs[i].icon.mlx_img = mlx_xpm_file_to_image(d->mlx_ptr, \
 		img_name, &d->objs[i].icon.w, &d->objs[i].icon.h);
 		if (!d->objs[i].icon.mlx_img)
@@ -52,7 +54,6 @@ void	init_icons(t_data *d)
 		if (d->objs[i].type != CAM)
 			paint_image(&d->objs[i].icon, encode_rgb(d->objs[i].color), \
 			WHITE);
-		// }
 		i++;
 	}
 }
@@ -105,6 +106,13 @@ int	render_frame(t_data *d)
 		mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, d->img.mlx_img, 0, 0);
 		if (d->display_gui == 1)
 			draw_gui(d);
+		else
+		{
+			mlx_putstr(d, 10, HEIGHT - 10, \
+			"Press M to hide the menu");
+			mlx_putstr(d, WIDTH - 158, HEIGHT - 10, \
+			"Press P to save the scene");
+		}
 		d->img_changed = 0;
 	}
 	return (0);

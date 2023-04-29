@@ -67,3 +67,28 @@ int	map_check_cylinder(t_data *d, char **line, int index)
 	init_cyl(d, index);
 	return (0);
 }
+
+int	map_check_cone(t_data *d, char **line, int index)
+{
+	double	diameter;
+	double	height;
+
+	if (ft_array_len(line) != 6)
+		return (1);
+	if (set_vector(&d->objs[index].pos, line[1]))
+		return (1);
+	diameter = ft_strtod(line[3]);
+	if (diameter > 1000)
+		return (1);
+	d->objs[index].radius = diameter / 2;
+	height = ft_strtod(line[4]);
+	if (height > 1000)
+		return (1);
+	d->objs[index].height = height;
+	if (set_dir(&d->objs[index].dir, line[2]))
+		return (1);
+	if (set_color(&d->objs[index].color, line[5]))
+		return (1);
+	init_cone(d, index);
+	return (0);
+}

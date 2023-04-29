@@ -41,7 +41,19 @@ typedef struct s_pixel
 
 typedef struct s_math
 {
+	double		a;
+	double		b;
+	double		c;
 	double		radius_2;
+	double		vs;
+	double		w;
+	double		h0;
+	double		w_2;
+	double		rh_2;
+	double		s1;
+	double		s2;
+	double		s_base;
+	t_vector	base_normal;
 	t_vector	va;
 	t_vector	ra;
 }	t_math;
@@ -79,6 +91,7 @@ typedef struct s_objs
 	double		angle_x;
 	double		angle_y;
 	double		angle_z;
+	double		cone_angle;
 	void		*collision_func;
 	void		*shadow_func;
 	void		*keyboard_func;
@@ -87,7 +100,6 @@ typedef struct s_objs
 	t_math		math;
 	t_img		icon;
 }	t_objs;
-
 
 typedef struct s_data
 {

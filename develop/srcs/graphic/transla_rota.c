@@ -30,7 +30,7 @@ Formula for rotating vector v around axis w by a given angle :
 (Rodrigues' formula
 https://en.wikipedia.org/wiki/Rodrigues%27_rotation_formula).
 
-t_vector	rot_v_arount_v(t_vector v, t_vector w, double angle)
+t_vector	rot_v_around_v(t_vector v, t_vector w, double angle)
 {
 	t_vector	v_rot;
 
@@ -83,17 +83,17 @@ int	ft_move(t_data *d, t_objs *obj, int keysym)
 int	ft_dir(t_data *d, t_objs *obj, int keycode)
 {
 	if (keycode == XK_q)
-		return (rot_v_arount_v(&obj->dir, &d->cam->dir, 0.1), 1);
+		return (rot_v_around_v(&obj->dir, &d->cam->dir, 0.1), 1);
 	if (keycode == XK_e)
-		return (rot_v_arount_v(&obj->dir, &d->cam->dir, -0.1), 1);
+		return (rot_v_around_v(&obj->dir, &d->cam->dir, -0.1), 1);
 	if (keycode == XK_s)
-		return (rot_v_arount_v(&obj->dir, &d->cam->dir_x, -0.1), 1);
+		return (rot_v_around_v(&obj->dir, &d->cam->dir_x, -0.1), 1);
 	if (keycode == XK_w)
-		return (rot_v_arount_v(&obj->dir, &d->cam->dir_x, 0.1), 1);
+		return (rot_v_around_v(&obj->dir, &d->cam->dir_x, 0.1), 1);
 	if (keycode == XK_d)
-		return (rot_v_arount_v(&obj->dir, &d->cam->dir_y, -0.1), 1);
+		return (rot_v_around_v(&obj->dir, &d->cam->dir_y, -0.1), 1);
 	if (keycode == XK_a)
-		return (rot_v_arount_v(&obj->dir, &d->cam->dir_y, 0.1), 1);
+		return (rot_v_around_v(&obj->dir, &d->cam->dir_y, 0.1), 1);
 	return (0);
 }
 
@@ -103,23 +103,23 @@ int	ft_rotate_cam(t_objs *obj, int keycode)
 		return (obj->dir = vec_scale(obj->dir, -1), \
 		obj->dir_x = vec_scale(obj->dir_x, -1), 1);
 	if (keycode == XK_q)
-		return (rot_v_arount_v(&obj->dir_x, &obj->dir, 0.05), \
-		rot_v_arount_v(&obj->dir_y, &obj->dir, 0.05), 1);
+		return (rot_v_around_v(&obj->dir_x, &obj->dir, 0.05), \
+		rot_v_around_v(&obj->dir_y, &obj->dir, 0.05), 1);
 	if (keycode == XK_e)
-		return (rot_v_arount_v(&obj->dir_x, &obj->dir, -0.05), \
-		rot_v_arount_v(&obj->dir_y, &obj->dir, -0.05), 1);
+		return (rot_v_around_v(&obj->dir_x, &obj->dir, -0.05), \
+		rot_v_around_v(&obj->dir_y, &obj->dir, -0.05), 1);
 	if (keycode == XK_s)
-		return (rot_v_arount_v(&obj->dir, &obj->dir_x, 0.05), \
-		rot_v_arount_v(&obj->dir_y, &obj->dir_x, 0.05), 1);
+		return (rot_v_around_v(&obj->dir, &obj->dir_x, 0.05), \
+		rot_v_around_v(&obj->dir_y, &obj->dir_x, 0.05), 1);
 	if (keycode == XK_w)
-		return (rot_v_arount_v(&obj->dir, &obj->dir_x, -0.05), \
-		rot_v_arount_v(&obj->dir_y, &obj->dir_x, -0.05), 1);
+		return (rot_v_around_v(&obj->dir, &obj->dir_x, -0.05), \
+		rot_v_around_v(&obj->dir_y, &obj->dir_x, -0.05), 1);
 	if (keycode == XK_d)
-		return (rot_v_arount_v(&obj->dir, &obj->dir_y, 0.05), \
-		rot_v_arount_v(&obj->dir_x, &obj->dir_y, 0.05), 1);
+		return (rot_v_around_v(&obj->dir, &obj->dir_y, 0.05), \
+		rot_v_around_v(&obj->dir_x, &obj->dir_y, 0.05), 1);
 	if (keycode == XK_a)
-		return (rot_v_arount_v(&obj->dir, &obj->dir_y, -0.05), \
-		rot_v_arount_v(&obj->dir_x, &obj->dir_y, -0.05), 1);
+		return (rot_v_around_v(&obj->dir, &obj->dir_y, -0.05), \
+		rot_v_around_v(&obj->dir_x, &obj->dir_y, -0.05), 1);
 	return (0);
 }
 

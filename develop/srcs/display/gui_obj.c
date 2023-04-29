@@ -33,6 +33,13 @@ void	gui_cylinder(t_data *d, t_objs obj, int x)
 	mlx_putstr(d, x + 17, HEIGHT - 20, "Cylinder");
 }
 
+void	gui_cone(t_data *d, t_objs obj, int x)
+{
+	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, \
+	obj.icon.mlx_img, x, HEIGHT - 120);
+	mlx_putstr(d, x + 27, HEIGHT - 20, "Cone");
+}
+
 	// int		i;
 	// int		j;
 

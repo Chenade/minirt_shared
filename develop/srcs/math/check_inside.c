@@ -62,3 +62,22 @@ int	check_inside_cy(t_objs *obj, t_vector p)
 		return (1);
 	return (0);
 }
+
+int	check_inside_co(t_objs *obj, t_vector p)
+{
+	double		proj_len;
+	t_vector	p_to_center;
+	t_vector	project;
+	t_vector	project_to_p;
+
+	p_to_center = vec_sub(p, obj->pos);
+	proj_len = dot_product(p_to_center, obj->dir);
+	project = vec_scale(obj->dir, proj_len);
+	if (get_vec_norm(vec_sub(project, obj->pos)) > (obj->height / 2))
+		return (0);
+	project_to_p = vec_sub(p, project);
+	if (get_vec_norm(project_to_p) < (obj->radius * \
+	(1 - (proj_len + obj->height / 2) / obj->height)))
+		return (1);
+	return (0);
+}

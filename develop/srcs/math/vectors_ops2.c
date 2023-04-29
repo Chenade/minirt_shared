@@ -43,7 +43,7 @@ t_vector	cross_product(t_vector v1, t_vector v2)
 	return (v);
 }
 
-void	rot_v_arount_v(t_vector *v, t_vector *w, double angle)
+void	rot_v_around_v(t_vector *v, t_vector *w, double angle)
 {
 	t_vector	v_rot;
 

@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <stdint.h>
 # include <fcntl.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
@@ -63,6 +64,7 @@ void		get_cam_axes(t_objs *cam);
 void		init_math(t_objs *obj);
 void		update_math(t_objs *obj, t_data *d, t_vector p);
 void		init_cyl(t_data *d, int index);
+void		init_cone(t_data *d, int index);
 void		init_sp(t_data *d, int index);
 void		init_pl(t_data *d, int index);
 void		init_cam(t_data *d, int index);
@@ -74,11 +76,13 @@ int			map_check_light(t_data *d, char **line, int index);
 int			map_check_sphere(t_data *d, char **line, int index);
 int			map_check_plane(t_data *d, char **line, int index);
 int			map_check_cylinder(t_data *d, char **line, int index);
+int			map_check_cone(t_data *d, char **line, int index);
 
 // collision.c
 t_pixel		hit_sphere(struct s_objs *obj, struct s_data *d, t_vector p);
 t_pixel		hit_plane(struct s_objs *obj, struct s_data *d, t_vector p);
 t_pixel		hit_cylinder(struct s_objs *obj, struct s_data *d, t_vector p);
+t_pixel		hit_cone(struct s_objs *obj, struct s_data *d, t_vector p);
 t_pixel		hit_light(struct s_objs *obj, struct s_data *d, t_vector p);
 t_pixel		min_scaler(int i, t_pixel p1, t_pixel p2);
 int			ray_tracing(t_data *d, int x, int y);
@@ -89,6 +93,7 @@ void		get_shadow(t_pixel *p, t_data *d);
 t_pixel		sphere_shadow(struct s_objs *obj, struct s_data *d, t_vector p);
 t_pixel		plane_shadow(struct s_objs *obj, struct s_data *d, t_vector p);
 t_pixel		cylinder_shadow(struct s_objs *obj, struct s_data *d, t_vector p);
+t_pixel		cone_shadow(struct s_objs *obj, struct s_data *d, t_vector p);
 t_vector	put_ambient(t_pixel pixel, t_pixel *p, t_data *d);
 void		put_diffuse(t_pixel pixel, t_pixel *p, t_data *d);
 
@@ -99,16 +104,19 @@ int			ft_rotate_cam(t_objs *obj, int keycode);
 int			key_sphere(t_data *d, int keysym);
 int			key_plane(t_data *d, int keysym);
 int			key_cylinder(t_data *d, int keysym);
+int			key_cone(t_data *d, int keysym);
 int			key_camera(t_data *d, int keysym);
 int			key_light(t_data *d, int keysym);
 int			key_saved(t_data *d);
 
 // print.c
+char		*ft_putdouble_fd2(double d, int fd);
 void		print_vector(t_vector v, int fd, int isnormal);
 void		print_color(t_color c, int fd);
 void		print_sphere(t_data *d, int index, int fd);
 void		print_plane(t_data *d, int index, int fd);
 void		print_cylinder(t_data *d, int index, int fd);
+void		print_cone(t_data *d, int index, int fd);
 void		print_camera(t_data *d, int index, int fd);
 void		print_light(t_data *d, int index, int fd);
 void		print_ambient(t_data *d, int index, int fd);
@@ -119,6 +127,7 @@ int			draw_gui(t_data *d);
 void		gui_sphere(t_data *d, t_objs obj, int x);
 void		gui_plane(t_data *d, t_objs obj, int x);
 void		gui_cylinder(t_data *d, t_objs obj, int x);
+void		gui_cone(t_data *d, t_objs obj, int x);
 void		gui_camera(t_data *d, t_objs obj, int x);
 void		gui_light(t_data *d, t_objs obj, int x);
 void		gui_ambient(t_data *d, t_objs obj, int x);
@@ -153,6 +162,8 @@ double		quadratic_solve(double a, double b, double c, t_objs *obj);
 double		check_solutions_cy(t_objs *obj, t_data *d, t_vector p);
 double		calculate_scaler_cy(t_objs *obj, t_data *d, t_vector p);
 double		calculate_scaler_cy_maha(t_objs *obj, t_data *d, t_vector p);
+double		smallest_visible_positive_cyl(t_objs *obj, t_data *d, t_vector p, \
+			t_math m);
 t_vector	calculate_cyl_normal(t_objs *cyl, t_vector hit_point);
 
 //math_sp.c
@@ -168,10 +179,20 @@ double		check_vn2(t_objs *obj, t_data *d);
 double		calculate_scaler_pl(t_objs *obj, t_data *d, double x, double y);
 double		calculate_scaler_pl2(t_objs *obj, t_data *d, t_vector p);
 
+//math_co.c
+int			check_inside_co(t_objs *obj, t_vector p);
+double		smallest_visible_positive_co(t_objs *obj, t_data *d, t_vector p, \
+			t_math m);
+void		cone_math(t_data *d, t_objs *obj, t_vector p);
+double		limit_cone(t_objs *obj, t_data *d, t_vector p, double t);
+void		quadratic_solve_cyl_co(t_data *d, t_objs *obj, t_vector p);
+double		calculate_scaler_co(t_objs *obj, t_data *d, t_vector p);
+t_vector	calculate_cone_normal(t_objs *cone, t_vector hit_pt);
+
 //vectors.c
 void		print_vec(t_vector v);
 int			compare_vecs(t_vector v, t_vector w);
-void		rot_v_arount_v(t_vector *v, t_vector *w, double angle);
+void		rot_v_around_v(t_vector *v, t_vector *w, double angle);
 t_vector	vector(double x, double y, double z);
 int			init_vector(t_vector *v, int x, int y, int z);
 double		get_norm(double x, double y, double z);

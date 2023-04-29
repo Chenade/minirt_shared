@@ -36,17 +36,9 @@ t_pixel	hit_plane(struct s_objs *obj, struct s_data *d, t_vector p)
 {
 	t_pixel	pixel;
 	double	scaler;
-	// double	vn;
 
 	obj->dir = normalize_vect(obj->dir);
-	// vn = check_vn2(obj, d);
 	pixel.is_light = 0;
-	// if (vn >= -0.00001 && vn <= 0.00001)
-	// {
-	// 	pixel.scaler = -1;
-	// 	return (pixel);								??????????
-	// 	//need to fix this cause its weird;
-	// }
 	scaler = calculate_scaler_pl2(obj, d, p);
 	if (scaler < 0)
 	{
@@ -77,6 +69,25 @@ t_pixel	hit_cylinder(struct s_objs *obj, struct s_data *d, t_vector p)
 	pixel.normal = obj->normal;
 	pixel.color = obj->color;
 	obj->cam_is_inside = check_inside_cy(obj, d->cam->pos);
+	if (obj->cam_is_inside == 1)
+		pixel.normal = vec_scale(pixel.normal, -1);
+	return (pixel);
+}
+
+t_pixel	hit_cone(struct s_objs *obj, struct s_data *d, t_vector p)
+{
+	double	scaler;
+	t_pixel	pixel;
+
+	pixel.is_light = 0;
+	scaler = calculate_scaler_co(obj, d, p);
+	pixel.scaler = scaler;
+	if (scaler == -1)
+		return (pixel);
+	pixel.dir = d->cur_p.dir;
+	pixel.normal = obj->normal;
+	pixel.color = obj->color;
+	obj->cam_is_inside = check_inside_co(obj, d->cam->pos);
 	if (obj->cam_is_inside == 1)
 		pixel.normal = vec_scale(pixel.normal, -1);
 	return (pixel);

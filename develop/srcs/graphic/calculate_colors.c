@@ -49,6 +49,8 @@ void	put_diffuse(t_pixel pixel, t_pixel *p, t_data *d)
 	t_vector	color_ratio;
 
 	angle = dot_product(d->cur_p.dir, p->normal);
+	if (angle < 0)
+		angle = 0;
 	color_ratio = put_ambient(pixel, p, d);
 	p->color.r += color_ratio.x * d->light->color.r \
 	* d->light->intensity * angle;

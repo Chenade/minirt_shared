@@ -24,6 +24,10 @@ void	print_menu_details(t_data *d)
 	d->menu_back.mlx_img, 0, HEIGHT - GUI_HEIGHT);
 	mlx_putstr(d, (WIDTH + 350) / 2, HEIGHT - GUI_HEIGHT + 20, "Objects");
 	mlx_putstr(d, 392, HEIGHT - 140, "< - Selected + >");
+	mlx_putstr(d, 10, HEIGHT - GUI_HEIGHT - 10, \
+	"Press M to hide the menu");
+	mlx_putstr(d, WIDTH - 158, HEIGHT - GUI_HEIGHT - 10, \
+	"Press P to save the scene");
 }
 
 void	print_menu_back(t_data *d)
