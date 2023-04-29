@@ -26,6 +26,7 @@ int	minirt(char *filename)
 	printf("cam_len : %f\n", d.cam_len);
 	d.display_gui = 1;
 	d.img_changed = 1;
+	printf("%f\n", ft_strtod("0.5"));
 	draw_imgs(&d);
 	mlx_loop_hook(d.mlx_ptr, render_frame, &d);
 	mlx_hook(d.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &d);

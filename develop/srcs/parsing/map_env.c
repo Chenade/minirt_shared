@@ -31,19 +31,19 @@ int	map_check_cam(t_data *d, char **line, int index)
 	double	fov;
 
 	if (d->nbr_camera != 0)
-		return (print_err("Error\n: Invalid Map: Camera", d), 1);
+		return (print_err("Error\n: Invalid Map: More than 1 Camera", d), 1);
 	d->nbr_camera += 1;
 	if (ft_array_len(line) != 4)
-		return (print_err("Error\n: Invalid Map: Camera", d), 1);
+		return (print_err("Error\n: Invalid Map: Camera Format", d), 1);
 	if (set_vector(&d->objs[index].pos, line[1]))
-		return (print_err("Error\n: Invalid Map: Camera", d), 1);
+		return (print_err("Error\n: Invalid Map: Camera Position", d), 1);
 	if (set_dir(&d->objs[index].dir, line[2]))
-		return (print_err("Error\n: Invalid Map: Camera", d), 1);
+		return (print_err("Error\n: Invalid Map: Camera Vector", d), 1);
 	if (d->objs[index].dir.x == 0 && d->objs[index].dir.y == 0
 		&& d->objs[index].dir.z == 0)
-		return (print_err("Error\n: Invalid Map: Camera", d), 1);
+		return (print_err("Error\n: Invalid Map: Camera vector", d), 1);
 	fov = ft_strtod(line[3]);
-	if (fov < 0 || fov > 180)
+	if (fov < 1 || fov > 179)
 		return (print_err("Error\n: Invalid Map: Camera", d), 1);
 	d->fov = fov;
 	init_cam(d, index);

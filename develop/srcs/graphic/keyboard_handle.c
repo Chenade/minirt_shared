@@ -36,6 +36,8 @@ int	handle_plus_minus(int keysym, t_data *d)
 
 int	handle_keypress(int keysym, t_data *d)
 {
+	if (d->img_changed)
+		return (0);
 	if (keysym == XK_Escape)
 	{
 		mlx_destroy_window(d->mlx_ptr, d->win_ptr);

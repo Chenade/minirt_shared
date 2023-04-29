@@ -41,9 +41,8 @@ int	define_obj(t_data *d, char	**tmp, int index)
 
 int	process_file(t_data *d, int fd)
 {
-	char	*l;
 	int		i;
-	char	**tmp;
+	char	*l;
 
 	while (42)
 	{
@@ -54,22 +53,21 @@ int	process_file(t_data *d, int fd)
 			ft_array_push(&d->raw, l);
 		free (l);
 	}
+	if (d->raw == NULL)
+		return (print_err("Error\n: Empty Map.", d), 1);
 	d->nbr_objs = ft_array_len(d->raw);
 	d->objs = ft_calloc(sizeof(t_objs), d->nbr_objs);
 	if (!d->objs)
 		return (print_err("Error\n: Malloc failed.", d), 1);
 	i = -1;
-	while (d->raw[++i])
-	{
-		tmp = ft_split(d->raw[i], ' ');
-		define_obj(d, tmp, i);
-	}
+	while (d->raw && d->raw[++i])
+		define_obj(d, ft_split(d->raw[i], ' '), i);
 	return (0);
 }
 
 int	read_file(t_data *d, char *name)
 {
-	int	fd;
+	int		fd;
 
 	fd = open(name, O_RDONLY);
 	process_file (d, fd);

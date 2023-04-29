@@ -19,7 +19,6 @@ void	paint_image(t_img *img, int color, int target)
 	int		j;
 
 	i = 0;
-	j = 0;
 	while (i < 80)
 	{
 		j = 0;

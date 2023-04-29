@@ -37,7 +37,6 @@ void	print_menu_back(t_data *d)
 	int		y;
 
 	i = 0;
-	j = 0;
 	y = HEIGHT - GUI_HEIGHT;
 	while (i < WIDTH)
 	{
@@ -71,7 +70,7 @@ int	draw_gui(t_data *d)
 		i += 1;
 	}
 	i = 0;
-	while (i <= d->index)
+	while (i < d->index)
 	{
 		((void (*)(t_data *, t_objs, int))
 			(d->objs[i].gui_func))(d, d->objs[i], x);
