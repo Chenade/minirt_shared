@@ -43,7 +43,7 @@ int	map_check_cam(t_data *d, char **line, int index)
 		&& d->objs[index].dir.z == 0)
 		return (print_err("Error\n: Invalid Map: Camera vector", d), 1);
 	fov = ft_strtod(line[3]);
-	if (fov < 1 || fov > 179)
+	if (fov < 0 || fov > 180)
 		return (print_err("Error\n: Invalid Map: Camera", d), 1);
 	d->fov = fov;
 	init_cam(d, index);
