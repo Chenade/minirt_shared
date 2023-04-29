@@ -49,6 +49,7 @@ int	main(int argc, char **argv)
 		ft_printf("Error\n: Cannot open file.\n");
 	else
 		status = minirt(argv[1]);
-	close (fd);
+	if (fd >= 0)
+		close (fd);
 	return (status);
 }
