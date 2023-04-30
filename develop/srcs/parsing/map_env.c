@@ -73,8 +73,8 @@ int	map_check_light(t_data *d, char **line, int index)
 {
 	double	intensity;
 
-	if (d->nbr_light != 0)
-		return (1);
+	// if (d->nbr_light != 0)
+	// 	return (1);
 	d->nbr_light += 1;
 	if (ft_array_len(line) != 4)
 		return (1);

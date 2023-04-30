@@ -106,7 +106,7 @@ int	render_frame(t_data *d)
 		else
 		{
 			mlx_putstr(d, 10, HEIGHT - 10, \
-			"Press M to hide the menu");
+			"Press M to show the menu");
 			mlx_putstr(d, WIDTH - 158, HEIGHT - 10, \
 			"Press P to save the scene");
 		}

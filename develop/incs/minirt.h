@@ -94,8 +94,9 @@ t_pixel		sphere_shadow(struct s_objs *obj, struct s_data *d, t_vector p);
 t_pixel		plane_shadow(struct s_objs *obj, struct s_data *d, t_vector p);
 t_pixel		cylinder_shadow(struct s_objs *obj, struct s_data *d, t_vector p);
 t_pixel		cone_shadow(struct s_objs *obj, struct s_data *d, t_vector p);
-t_vector	put_ambient(t_pixel pixel, t_pixel *p, t_data *d);
-void		put_diffuse(t_pixel pixel, t_pixel *p, t_data *d);
+void		put_ambient(t_pixel *p, t_data *d, t_color *c);
+t_color		put_diffuse(t_pixel *p, t_color *c, t_data *d);
+void		reset_color_ratio(t_pixel *p);
 
 // keyboard.c
 int			ft_move(t_data *d, t_objs *obj, int keysym);
