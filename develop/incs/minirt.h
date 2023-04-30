@@ -96,6 +96,7 @@ t_pixel		cylinder_shadow(struct s_objs *obj, struct s_data *d, t_vector p);
 t_pixel		cone_shadow(struct s_objs *obj, struct s_data *d, t_vector p);
 void		put_ambient(t_pixel *p, t_data *d, t_color *c);
 t_color		put_diffuse(t_pixel *p, t_color *c, t_data *d);
+t_color		put_specular(t_pixel *p, t_color *c, t_data *d);
 void		reset_color_ratio(t_pixel *p);
 
 // keyboard.c

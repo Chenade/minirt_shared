@@ -41,33 +41,28 @@ t_color	trace_shadow2(t_data *d, t_pixel *p)
 	t_pixel	pixel;
 	t_color	c;
 
-	i = 0;
-	c.r = 0;
-	c.g = 0;
-	c.b = 0;
+	i = -1;
+	ft_bzero(&c, sizeof(t_color));
 	ft_bzero(&pixel, sizeof(t_pixel));
 	pixel.scaler = -1;
-	while (i < d->nbr_objs)
+	while (i++ < d->nbr_objs)
 	{
 		objs = d->objs[i];
 		objs.from_light = 0;
 		if (objs.shadow_func)
 		{
-			pixel = min_scaler(i, pixel,
-					((t_pixel (*)(struct s_objs *, struct s_data *, t_vector p))
-						objs.shadow_func)(&objs, d, vec_sum(d->cam->pos, \
-						vec_scale(vec_sum(p->dir, vec_scale(p->normal, 0.00001)), p->scaler))));
+			pixel = min_scaler(i, pixel, \
+			((t_pixel (*)(struct s_objs *, struct s_data *, t_vector p)) \
+			objs.shadow_func)(&objs, d, vec_sum(d->cam->pos, \
+			vec_scale(vec_sum(p->dir, \
+			vec_scale(p->normal, 0.00001)), p->scaler))));
 		}
 		if (pixel.scaler > 0 && pixel.scaler < d->cur_p.dir.norm)
-		{
-			c.r = 0;
-			c.g = 0;
-			c.b = 0;
-			return (c);
-		}
-		i++;
+			return (ft_bzero(&c, sizeof(t_color)), c);
 	}
-	return (put_diffuse(p, &c, d), c);
+	put_diffuse(p, &c, d);
+	put_specular(p, &c, d);
+	return (c);
 }
 
 void	trace_shadow(t_pixel *p, t_data *d, t_vector v)
@@ -78,9 +73,7 @@ void	trace_shadow(t_pixel *p, t_data *d, t_vector v)
 
 	(void)v;
 	i = 0;
-	new_c.r = 0;
-	new_c.g = 0;
-	new_c.b = 0;
+	ft_bzero(&new_c, sizeof(t_color));
 	while (i < d->nbr_objs)
 	{
 		if (d->objs[i].type == LIGHT)
