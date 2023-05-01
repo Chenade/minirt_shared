@@ -67,6 +67,8 @@ double	get_re_pow(t_data *d, t_pixel *p, t_vector r, int n)
 {
 	double	re;
 
+	if (n == 0)
+		return (0);
 	re = dot_product(r, \
 	vec_scale(normalize_vect(vec_sub(p->pos, d->cam->pos)), -1));
 	if (re < 0)
@@ -92,7 +94,7 @@ t_color	put_specular(t_pixel *p, t_color *c, t_data *d)
 	angle = acos((dot) / \
 	(get_vec_norm(d->cur_p.dir) * get_vec_norm(p->normal)));
 	r = vec_sum(vec_scale(d->cur_p.dir, -1), vec_scale(p->normal, 2 * dot));
-	re = get_re_pow(d, p, r, 4);
+	re = get_re_pow(d, p, r, 0);
 	if (re == 0)
 		return (*c);
 	ratio.x = 0.8 * (double)p->color.r / 255 + 0.8;
