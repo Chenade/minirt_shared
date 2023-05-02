@@ -17,11 +17,14 @@ int	key_sphere(t_data *d, int keysym)
 	int	i;
 
 	i = ft_move(d, &d->objs[d->index], keysym);
-	if (keysym == XK_j || keysym == XK_k)
+	if (((keysym == XK_j || keysym == XK_k) && d->objs[d->index].is_hidden == 0) \
+	|| keysym == XK_n)
 		i = 1;
-	if (keysym == XK_j)
+	if (keysym == XK_n)
+		d->objs[d->index].is_hidden = (d->objs[d->index].is_hidden == 0);
+	if (keysym == XK_j && d->objs[d->index].is_hidden == 0)
 		d->objs[d->index].radius += STEP;
-	else if (keysym == XK_k)
+	else if (keysym == XK_k && d->objs[d->index].is_hidden == 0)
 	{
 		if (d->objs[d->index].radius > STEP)
 			d->objs[d->index].radius -= STEP;
@@ -37,6 +40,10 @@ int	key_plane(t_data *d, int keysym)
 
 	i = ft_move(d, &d->objs[d->index], keysym);
 	i = (i || ft_dir(d, &d->objs[d->index], keysym));
+	if (keysym == XK_n)
+		i = 1;
+	if (keysym == XK_n)
+		d->objs[d->index].is_hidden = (d->objs[d->index].is_hidden == 0);
 	return (i);
 }
 
@@ -46,18 +53,19 @@ int	key_cylinder(t_data *d, int keysym)
 
 	i = ft_move(d, &d->objs[d->index], keysym);
 	i = (i || ft_dir(d, &d->objs[d->index], keysym));
-	if (keysym == XK_j || keysym == XK_k || keysym == XK_u || keysym == XK_i)
+	if (((keysym == XK_j || keysym == XK_k || keysym == XK_u || \
+	keysym == XK_i) && d->objs[d->index].is_hidden == 0) || keysym == XK_n)
 		i = 1;
-	if (keysym == XK_j)
+	if (keysym == XK_n)
+		d->objs[d->index].is_hidden = (d->objs[d->index].is_hidden == 0);
+	if (keysym == XK_j && d->objs[d->index].is_hidden == 0)
 		d->objs[d->index].radius += STEP;
-	else if (keysym == XK_k)
-	{
-		if (d->objs[d->index].radius > STEP)
-			d->objs[d->index].radius -= STEP;
-	}
-	if (keysym == XK_u)
+	else if (keysym == XK_k && d->objs[d->index].radius > STEP && \
+	d->objs[d->index].is_hidden == 0)
+		d->objs[d->index].radius -= STEP;
+	if (keysym == XK_u && d->objs[d->index].is_hidden == 0)
 		d->objs[d->index].height += STEP;
-	else if (keysym == XK_i)
+	else if (keysym == XK_i && d->objs[d->index].is_hidden == 0)
 	{
 		if (d->objs[d->index].height > STEP)
 			d->objs[d->index].height -= STEP;
@@ -72,18 +80,21 @@ int	key_cone(t_data *d, int keysym)
 
 	i = ft_move(d, &d->objs[d->index], keysym);
 	i = (i || ft_dir(d, &d->objs[d->index], keysym));
-	if (keysym == XK_j || keysym == XK_k || keysym == XK_u || keysym == XK_i)
+	if (((keysym == XK_j || keysym == XK_k || keysym == XK_u || \
+	keysym == XK_i) && d->objs[d->index].is_hidden == 0) || keysym == XK_n)
 		i = 1;
-	if (keysym == XK_j)
+	if (keysym == XK_n)
+		d->objs[d->index].is_hidden = (d->objs[d->index].is_hidden == 0);
+	if (keysym == XK_j && d->objs[d->index].is_hidden == 0)
 		d->objs[d->index].radius += STEP;
-	else if (keysym == XK_k)
+	else if (keysym == XK_k && d->objs[d->index].is_hidden == 0)
 	{
 		if (d->objs[d->index].radius > STEP)
 			d->objs[d->index].radius -= STEP;
 	}
-	if (keysym == XK_u)
+	if (keysym == XK_u && d->objs[d->index].is_hidden == 0)
 		d->objs[d->index].height += STEP;
-	else if (keysym == XK_i)
+	else if (keysym == XK_i && d->objs[d->index].is_hidden == 0)
 	{
 		if (d->objs[d->index].height > STEP)
 			d->objs[d->index].height -= STEP;

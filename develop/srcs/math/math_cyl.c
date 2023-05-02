@@ -76,11 +76,22 @@ t_vector	calculate_cyl_normal(t_objs *cyl, t_vector hit_pt)
 	return (normalize_vect(vec_sub(hit_pt, pt)));
 }
 
-double	hit_cap(t_vector dir, t_data *d, t_vector p, t_vector center, double radius)
+double	hit_cap(t_objs *cyl, t_data *d, t_vector p, int cap)
 {
 	double		t;
 	t_vector	v;
+	double		radius;
+	t_vector	center;
+	t_vector	dir;
 
+	radius = cyl->radius;
+	center = cyl->cap_1;
+	dir = cyl->dir;
+	if (cap == 2)
+	{
+		center = cyl->cap_2;
+		dir = vec_scale(cyl->dir, -1);
+	}
 	v = d->cur_p.dir;
 	t = (-dir.x * (p.x - center.x) \
 		- dir.y * (p.y - center.y) \
@@ -92,14 +103,17 @@ double	hit_cap(t_vector dir, t_data *d, t_vector p, t_vector center, double radi
 	return (-1);
 }
 
+// for each plane, check for collisions;
+// then check if the distance between the pos of plane (center
+// of the cap) and the hit_point is smaller or equal to the cyl radius;
 double	calculate_scaler_caps(t_objs *cyl, t_data *d, t_vector p)
 {
 	double	t1;
 	double	t2;
 	double	res;
 
-	t1 = hit_cap(cyl->dir, d, p, cyl->cap_1, cyl->radius);
-	t2 = hit_cap(vec_scale(cyl->dir, -1), d, p, cyl->cap_2, cyl->radius);
+	t1 = hit_cap(cyl, d, p, 1);
+	t2 = hit_cap(cyl, d, p, 2);
 	res = smallest_positive(t1, t2);
 	if (res == t1)
 		return (cyl->math.base_normal = cyl->dir, res);

@@ -94,14 +94,14 @@ t_color	put_specular(t_pixel *p, t_color *c, t_data *d)
 	angle = acos((dot) / \
 	(get_vec_norm(d->cur_p.dir) * get_vec_norm(p->normal)));
 	r = vec_sum(vec_scale(d->cur_p.dir, -1), vec_scale(p->normal, 2 * dot));
-	re = get_re_pow(d, p, r, 0);
+	re = get_re_pow(d, p, r, 4);
 	if (re == 0)
 		return (*c);
-	ratio.x = 0.8 * (double)p->color.r / 255 + 0.8;
-	ratio.y = 0.8 * (double)p->color.g / 255 + 0.8;
-	ratio.z = 0.8 * (double)p->color.b / 255 + 0.8;
-	c->r += d->light->color.r * d->light->intensity * 0.8 * re * ratio.x;
-	c->g += d->light->color.g * d->light->intensity * 0.8 * re * ratio.y;
-	c->b += d->light->color.b * d->light->intensity * 0.8 * re * ratio.z;
+	ratio.x = 0.7 * (double)p->color.r / 255 + 0.7;
+	ratio.y = 0.7 * (double)p->color.g / 255 + 0.7;
+	ratio.z = 0.7 * (double)p->color.b / 255 + 0.7;
+	c->r += d->light->color.r * d->light->intensity * 0.7 * re * ratio.x;
+	c->g += d->light->color.g * d->light->intensity * 0.7 * re * ratio.y;
+	c->b += d->light->color.b * d->light->intensity * 0.7 * re * ratio.z;
 	return (*c);
 }

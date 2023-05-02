@@ -59,6 +59,8 @@ camera.
 
 int	ft_move(t_data *d, t_objs *obj, int keysym)
 {
+	if (obj->is_hidden == 1)
+		return (0);
 	if (keysym == XK_Left)
 		return (obj->pos = vec_sum(obj->pos, \
 		vec_scale(d->cam->dir_x, -STEP)), 1);
@@ -82,6 +84,8 @@ int	ft_move(t_data *d, t_objs *obj, int keysym)
 
 int	ft_dir(t_data *d, t_objs *obj, int keycode)
 {
+	if (obj->is_hidden == 1)
+		return (0);
 	if (keycode == XK_q)
 		return (rot_v_around_v(&obj->dir, &d->cam->dir, 0.1), 1);
 	if (keycode == XK_e)

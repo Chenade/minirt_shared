@@ -41,10 +41,9 @@ void	free_data(t_data *d)
 	free(d->mlx_ptr);
 	free(d->objs);
 	i = -1;
-	while (d->raw[++i])
+	while (d->raw && d->raw[++i])
 		free(d->raw[i]);
 	free(d->raw);
-	i = -1;
 }
 
 void	print_err(const char *err_msg, t_data *d)

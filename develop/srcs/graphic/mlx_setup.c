@@ -26,8 +26,9 @@ char	*get_icon_name(int type)
 		return ("./images/pl_icon3.xpm");
 	if (type == CY)
 		return ("./images/cy_icon.xpm");
-	// if (type == CO)
-	return ("./images/co_icon.xpm");
+	if (type == CO)
+		return ("./images/co_icon.xpm");
+	return (NULL);
 }
 
 void	init_icons(t_data *d)
@@ -41,6 +42,8 @@ void	init_icons(t_data *d)
 		d->objs[i].icon.w = 80;
 		d->objs[i].icon.h = 80;
 		img_name = get_icon_name(d->objs[i].type);
+		if (!img_name)
+			print_err("mlx_img icon error", d);
 		d->objs[i].icon.mlx_img = mlx_xpm_file_to_image(d->mlx_ptr, \
 		img_name, &d->objs[i].icon.w, &d->objs[i].icon.h);
 		if (!d->objs[i].icon.mlx_img)
@@ -82,7 +85,7 @@ void	draw_imgs(t_data *d)
 	int		i;
 	int		j;
 
-	// ft_bzero(d->img.addr, d->img.line_len * WIN_HEIGHT);
+	ft_bzero(d->img.addr, d->img.line_len * HEIGHT);
 	i = 0;
 	while (i < HEIGHT)
 	{
@@ -106,58 +109,11 @@ int	render_frame(t_data *d)
 		else
 		{
 			mlx_putstr(d, 10, HEIGHT - 10, \
-			"Press M to show the menu");
+			"Press M to hide the menu");
 			mlx_putstr(d, WIDTH - 158, HEIGHT - 10, \
 			"Press P to save the scene");
 		}
 		d->img_changed = 0;
 	}
-	return (0);
-}
-
-int	handle_exit(t_data *d)
-{
-	mlx_destroy_window(d->mlx_ptr, d->win_ptr);
-	d->win_ptr = NULL;
-	return (0);
-}
-
-int	handle_plus_minus(int keysym, t_data *d)
-{
-	if ((keysym == XK_equal || keysym == XK_minus) && d->display_gui == 1)
-	{
-		if (keysym == XK_equal)
-			d->index = (d->index + 1) % (d->nbr_objs);
-		else
-			d->index--;
-		if (d->index < 0)
-			d->index = d->nbr_objs - 1;
-		return (1);
-	}
-	return (0);
-}
-
-int	handle_keypress(int keysym, t_data *d)
-{
-	if (keysym == XK_Escape)
-	{
-		mlx_destroy_window(d->mlx_ptr, d->win_ptr);
-		d->win_ptr = NULL;
-	}
-	else if (handle_plus_minus(keysym, d))
-	{
-		d->img_changed = 1;
-		draw_gui(d);
-	}
-	else if (keysym == XK_p)
-		key_saved(d);
-	else if (keysym == XK_m)
-	{
-		d->display_gui = (d->display_gui == 0);
-		d->img_changed = 1;
-	}
-	else if (((int (*)(t_data *, int)) \
-	(d->objs[d->index].keyboard_func))(d, keysym))
-		draw_imgs(d);
 	return (0);
 }

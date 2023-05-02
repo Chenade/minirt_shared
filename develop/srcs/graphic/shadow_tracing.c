@@ -25,7 +25,7 @@ void	check_inside_objs(t_data *d)
 	{
 		objs = d->objs[i];
 		objs.from_light = 1;
-		if (objs.shadow_func)
+		if (objs.shadow_func && objs.is_hidden == 0)
 		{
 			((t_pixel (*)(struct s_objs *, struct s_data *, t_vector p))
 			objs.shadow_func)(&objs, d, d->light->pos);
@@ -49,7 +49,7 @@ t_color	trace_shadow2(t_data *d, t_pixel *p)
 	{
 		objs = d->objs[i];
 		objs.from_light = 0;
-		if (objs.shadow_func)
+		if (objs.shadow_func && objs.is_hidden == 0)
 		{
 			pixel = min_scaler(i, pixel, \
 			((t_pixel (*)(struct s_objs *, struct s_data *, t_vector p)) \

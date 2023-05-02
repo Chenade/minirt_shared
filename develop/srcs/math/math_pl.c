@@ -75,9 +75,7 @@ special case #2 : t < 0 -> the intersection between v and the plane is behind
 us which means we dont see it; (we only consider solutions >= 0);
 */
 
-
 // ------------------------------------------------------------------------
-
 
 // double	check_vn(t_objs *obj, t_data *d, double x, double y)
 // {

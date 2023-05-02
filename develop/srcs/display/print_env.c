@@ -63,7 +63,7 @@ void	print_light(t_data *d, int index, int fd)
 	ft_putstr_fd("L ", fd);
 	print_vector(obj.pos, fd, 0);
 	ft_putstr_fd(" ", fd);
-	ft_putnbr_fd(obj.intensity, fd);
+	ft_putdouble_fd(obj.intensity, fd);
 	ft_putstr_fd(" ", fd);
 	print_color(obj.color, fd);
 	ft_putstr_fd("\n", fd);

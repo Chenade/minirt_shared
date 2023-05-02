@@ -52,7 +52,7 @@ void	*ft_malloc(t_data *d, size_t size)
 	ptr = (void *) malloc (size);
 	if (!(ptr))
 	{
-		print_err("Error: Memory allocate failed", d);
+		print_err("Error\n: Memory allocate failed", d);
 		return (NULL);
 	}
 	ft_bzero(ptr, size);

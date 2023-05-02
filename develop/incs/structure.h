@@ -76,6 +76,7 @@ typedef struct s_objs
 	int			type;
 	int			cam_is_inside;
 	int			from_light;
+	int			is_hidden;
 	t_color		color;
 	t_vector	pos;
 	t_vector	dir;

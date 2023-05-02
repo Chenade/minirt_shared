@@ -23,7 +23,8 @@ int	key_saved(t_data *d)
 	i = 0;
 	while (i < d->nbr_objs)
 	{
-		((void (*)(t_data *, int, int))(d->objs[i].print_func))(d, i, fd);
+		((void (*)
+				(t_data *, int, int))(d->objs[i].print_func))(d, i, fd);
 		i += 1;
 	}
 	close(fd);
@@ -44,6 +45,12 @@ int	key_light(t_data *d, int keysym)
 {
 	int	i;
 
-	i = ft_move(d, &d->objs[d->index], keysym);
+	if (d->objs[d->index].is_hidden == 0)
+		i = ft_move(d, &d->objs[d->index], keysym);
+	if (keysym == XK_n)
+	{
+		d->objs[d->index].is_hidden = (d->objs[d->index].is_hidden == 0);
+		i = 1;
+	}
 	return (i);
 }

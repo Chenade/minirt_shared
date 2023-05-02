@@ -24,9 +24,6 @@ int	minirt(char *filename)
 	printf("fov : %f\n", d.fov);
 	get_cam_len(&d);
 	printf("cam_len : %f\n", d.cam_len);
-	ft_putdouble_fd2(8., 1);
-	ft_putdouble_fd2(5657.6403462, 1);
-	ft_putdouble_fd2(-5657.6453467, 1);
 	d.display_gui = 1;
 	d.img_changed = 1;
 	draw_imgs(&d);
@@ -46,11 +43,12 @@ int	main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	status = 1;
 	if (argc != 2 || !check_filename(argv[1], "rt"))
-		ft_printf("Error: Usage: ./rt {filename}.rt\n");
+		ft_printf("Error\n: Usage: ./rt {filename}.rt\n");
 	else if (fd < 0 || read(fd, 0, 0))
-		ft_printf("Error: Cannot open file.\n");
+		ft_printf("Error\n: Cannot open file.\n");
 	else
 		status = minirt(argv[1]);
-	close (fd);
+	if (fd >= 0)
+		close (fd);
 	return (status);
 }

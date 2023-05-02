@@ -17,7 +17,6 @@ int	define_obj(t_data *d, char	**tmp, int index)
 	int	status;
 
 	status = 1;
-	// printf("%s\n", tmp[0]);
 	if (ft_strcmp(tmp[0], "C") == 0)
 		status = map_check_cam(d, tmp, index);
 	else if (ft_strcmp(tmp[0], "A") == 0)
@@ -36,15 +35,14 @@ int	define_obj(t_data *d, char	**tmp, int index)
 		return (0);
 	ft_free_array(tmp);
 	if (status)
-		return (print_err("Error: Invalid Map.", d), 1);
+		return (print_err("Error\n: Invalid Map.", d), 1);
 	return (0);
 }
 
 int	process_file(t_data *d, int fd)
 {
-	char	*l;
 	int		i;
-	char	**tmp;
+	char	*l;
 
 	while (42)
 	{
@@ -55,29 +53,33 @@ int	process_file(t_data *d, int fd)
 			ft_array_push(&d->raw, l);
 		free (l);
 	}
+	if (d->raw == NULL)
+		return (print_err("Error\n: Empty Map.", d), 1);
 	d->nbr_objs = ft_array_len(d->raw);
-	// printf("nbr_objs: %d\n", d->nbr_objs);
 	d->objs = ft_calloc(sizeof(t_objs), d->nbr_objs);
 	if (!d->objs)
-		return (print_err("Error: Malloc failed.", d), 1);
+		return (print_err("Error\n: Malloc failed.", d), 1);
 	i = -1;
-	while (d->raw[++i])
-	{
-		tmp = ft_split(d->raw[i], ' ');
-		define_obj(d, tmp, i);
-	}
+	while (d->raw && d->raw[++i])
+		define_obj(d, ft_split(d->raw[i], ' '), i);
 	return (0);
 }
 
 int	read_file(t_data *d, char *name)
 {
-	int	fd;
+	int		fd;
 
 	fd = open(name, O_RDONLY);
 	process_file (d, fd);
 	close(fd);
 	if (d->nbr_objs == 0)
-		print_err("Error: Empty Map.", d);
+		print_err("Error\n: Empty Map.", d);
+	if (d->cam == NULL)
+		print_err("Error\n: No Camera.", d);
+	if (d->ambient == NULL)
+		print_err("Error\n: No Ambient.", d);
+	if (d->light == NULL)
+		print_err("Error\n: No Light.", d);
 	printf("Map init successfully.\n");
 	return (0);
 }
